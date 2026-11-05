@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kraal Curation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cutive+Mono&family=Silkscreen:wght@400;700&family=VT323&display=swap">
+<style>
+/* Layout: four "pages" like the Canva file: a dusk desktop of clickable files, a typewriter programme with two-tone headings and red date tags, sky-placeholder creative cards, and a subscribe dialog. Single deliberate retro look. */
+:root {
+  color-scheme: light;
+  --paper: #ffffff;
+  --ink: #000000;
+  --head: #323232;
+  --rust: #af5340;
+  --tag: #d2624b;
+  --purple: #401f71;
+  --purple-2: #7a52b8;
+  --win: #c3c3c3;
+  --win-hi: #ffffff;
+  --win-lo: #7d7d7d;
+  --win-dk: #1c1c1c;
+  --desk-label: #ffffff;
+  --sky-a: #6fb6ee;
+  --sky-b: #d8eefc;
+
+  --f-type: "Courier Prime", "Courier New", Courier, monospace;
+  --f-head: "Cutive Mono", "Courier New", Courier, monospace;
+  --f-pixel: "Silkscreen", "VT323", "Courier New", monospace;
+  --f-label: "VT323", "Courier New", monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--f-type); font-size: 1rem; line-height: 1.5;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='34' viewBox='0 0 11 17' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h1v1H0zM0 1h1v14H0zM1 2h1v1H1zM2 3h1v1H2zM3 4h1v1H3zM4 5h1v1H4zM5 6h1v1H5zM6 7h1v1H6zM7 8h1v1H7zM8 9h1v1H8zM9 10h1v1H9zM5 11h5v1H5zM5 12h1v1H5zM6 13h1v2H6zM7 15h1v2H7zM8 15h1v1H8zM1 14h1v1H1zM2 13h1v1H2zM3 12h1v1H3zM4 11h1v1H4zM6 11h1v1H6z' fill='%23000'/%3E%3Cpath d='M1 2h1v12H1zM2 4h1v9H2zM3 5h1v7H3zM4 6h1v5H4zM5 7h1v4H5zM6 8h1v3H6zM7 9h1v2H7zM8 10h1v1H8zM6 12h1v1H6zM7 13h1v2H7z' fill='%23fff'/%3E%3C/svg%3E") 0 0, auto;
+}
+a, button, [role="button"] { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='34' viewBox='0 0 11 17' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h1v15H0zM1 1h1v1H1zM2 2h1v1H2zM3 3h1v1H3zM4 4h1v1H4zM5 5h1v1H5zM6 6h1v1H6zM7 7h1v1H7zM8 8h1v1H8zM9 9h1v1H9zM5 10h5v1H5zM5 11h1v1H5zM6 12h1v2H6zM7 14h1v2H7zM1 13h1v1H1zM2 12h1v1H2zM3 11h1v1H3zM4 10h1v1H4z' fill='%23000'/%3E%3Cpath d='M1 2h1v11H1zM2 3h1v9H2zM3 4h1v7H3zM4 5h1v5H4zM5 6h1v4H5zM6 7h1v3H6zM7 8h1v2H7zM8 9h1v1H8z' fill='%23ffd23a'/%3E%3C/svg%3E") 0 0, pointer; }
+:focus-visible { outline: 2px dotted var(--purple); outline-offset: 3px; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+
+.gutter {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- Nav (repeated on every page, like the Canva file) ---------- */
+.nav {
+  position: relative; z-index: 3; display: grid; justify-items: center; gap: 10px;
+  padding-block: 16px 8px; text-align: center;
+}
+.nav .title {
+  font-family: var(--f-pixel); font-size: clamp(1.25rem, 2.2vw, 1.85rem); letter-spacing: .02em;
+  color: var(--purple); text-decoration: none; line-height: 1.05;
+}
+.desk .nav .title { color: #fff; text-shadow: 2px 2px 0 var(--purple); }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px clamp(18px, 3vw, 44px); }
+.nav a.lnk {
+  position: relative; font-family: var(--f-pixel); font-size: clamp(.95rem, 1.5vw, 1.32rem);
+  color: var(--purple); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px;
+}
+.desk-sub .nav a.lnk { color: #fff; }
+.nav a.lnk:hover { color: var(--rust); }
+.desk-sub .nav a.lnk:hover { color: #ffd23a; }
+.nav a.lnk[aria-current="page"]::after {
+  content: ""; position: absolute; left: 50%; top: 100%; width: 14px; height: 22px; margin-top: 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 17' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h1v15H0zM1 1h1v1H1zM2 2h1v1H2zM3 3h1v1H3zM4 4h1v1H4zM5 5h1v1H5zM6 6h1v1H6zM7 7h1v1H7zM8 8h1v1H8zM9 9h1v1H9zM5 10h5v1H5zM5 11h1v1H5zM6 12h1v2H6zM7 14h1v2H7zM1 13h1v1H1zM2 12h1v1H2zM3 11h1v1H3zM4 10h1v1H4z' fill='%23000'/%3E%3Cpath d='M1 2h1v11H1zM2 3h1v9H2zM3 4h1v7H3zM4 5h1v5H4zM5 6h1v4H5zM6 7h1v3H6zM7 8h1v2H7zM8 9h1v1H8z' fill='%23fff'/%3E%3C/svg%3E") no-repeat center / contain;
+  transform: translateX(-20%);
+}
+
+/* ---------- Desktop pages ---------- */
+.desk { position: relative; overflow: hidden; aspect-ratio: 1366 / 768; min-height: 600px; isolation: isolate; background: #2b2140; }
+.desk-sub { background: #0f2a36; }
+.desk .bg { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+.desk .bg-photo { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
+.icons { position: absolute; inset: 0; z-index: 2; }
+.ico {
+  position: absolute; left: var(--x); top: var(--y); transform: translateX(-50%);
+  display: grid; justify-items: center; gap: 6px; width: 132px; padding: 4px;
+  background: none; border: 0; color: var(--desk-label); font: inherit;
+}
+.ico .glyph { width: 64px; height: 64px; display: grid; place-items: end center; filter: drop-shadow(2px 2px 0 rgba(0,0,0,.35)); }
+.ico .glyph svg { width: 100%; height: auto; max-height: 64px; display: block; }
+.ico .lbl {
+  font-family: var(--f-label); font-size: 1.32rem; line-height: 1; text-align: center; padding: 1px 3px 2px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+  overflow-wrap: break-word; word-break: normal; max-width: 100%;
+}
+.ico:hover .lbl, .ico:focus-visible .lbl { background: #1f3fa8; text-shadow: none; outline: 1px dotted #fff; }
+.ico:active .glyph { transform: translateY(1px); }
+.ico.dark { color: #000; }
+.ico.dark .lbl { text-shadow: none; }
+
+.dialog-dock { position: absolute; left: 50%; top: 41%; transform: translateX(-50%); width: min(480px, 92%); z-index: 2; }
+
+/* ---------- Win95 chrome ---------- */
+.chrome {
+  background: var(--win); color: #000; font-family: var(--f-type);
+  border: 2px solid; border-color: var(--win-hi) var(--win-dk) var(--win-dk) var(--win-hi);
+  box-shadow: inset -1px -1px 0 var(--win-lo), inset 1px 1px 0 #e6e6e6, 4px 4px 0 rgba(0,0,0,.35);
+}
+.tb {
+  display: flex; align-items: center; gap: 6px; padding: 3px 3px 3px 6px; color: #fff;
+  background: linear-gradient(90deg, var(--purple), var(--purple-2));
+  font-family: var(--f-pixel); font-size: .78rem; user-select: none; touch-action: none;
+}
+.tb .t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tb .tb-ico { width: 16px; height: 16px; flex: none; display: grid; place-items: center; }
+.tb .tb-ico svg { width: 16px; height: auto; }
+.tbtn {
+  width: 22px; height: 20px; display: grid; place-items: center; padding: 0; flex: none;
+  background: var(--win); color: #000; font: 700 .85rem/1 var(--f-type);
+  border: 2px solid; border-color: var(--win-hi) var(--win-dk) var(--win-dk) var(--win-hi);
+}
+.tbtn:active { border-color: var(--win-dk) var(--win-hi) var(--win-hi) var(--win-dk); }
+.btn95 {
+  font: 700 .95rem var(--f-type); padding: 6px 16px; background: var(--win); color: #000;
+  border: 2px solid; border-color: var(--win-hi) var(--win-dk) var(--win-dk) var(--win-hi);
+  box-shadow: inset -1px -1px 0 var(--win-lo);
+}
+.btn95:active { border-color: var(--win-dk) var(--win-hi) var(--win-hi) var(--win-dk); box-shadow: inset 1px 1px 0 var(--win-lo); }
+.field95 {
+  font: 1rem var(--f-type); padding: 6px 8px; background: #fff; color: #000; min-width: 0;
+  border: 2px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo);
+  box-shadow: inset 1px 1px 0 var(--win-dk);
+}
+.well { background: #fff; border: 2px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); box-shadow: inset 1px 1px 0 var(--win-dk); }
+.status { display: flex; gap: 4px; padding: 3px 4px 4px; font-size: .8rem; }
+.status span { flex: 1; padding: 1px 6px; border: 1px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); }
+
+/* floating windows */
+#wm { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+.win { position: fixed; pointer-events: auto; width: min(var(--w, 460px), calc(100vw - 24px)); max-height: calc(100vh - 32px); display: flex; flex-direction: column; }
+.win .wb { padding: 10px; overflow: auto; display: grid; gap: 10px; }
+.win.inactive .tb { background: linear-gradient(90deg, #7d7d7d, #a9a9a9); }
+.doc { background: #fff; padding: 16px 18px; font-size: .98rem; line-height: 1.55; display: grid; gap: 12px; }
+.doc h3 { font-family: var(--f-head); font-size: 1.6rem; color: var(--head); text-transform: uppercase; line-height: 1; }
+.doc h3 em { font-style: normal; color: var(--rust); }
+.doc b { font-weight: 700; }
+.rows { list-style: none; margin: 0; padding: 4px; display: grid; gap: 2px; }
+.rows a, .rows button {
+  display: flex; gap: 10px; align-items: center; width: 100%; padding: 4px 6px; text-align: left;
+  background: none; border: 0; color: #000; font: inherit; text-decoration: none;
+}
+.rows a:hover, .rows button:hover, .rows a:focus-visible, .rows button:focus-visible { background: #1f3fa8; color: #fff; outline: none; }
+.rows .mini { width: 20px; height: 20px; flex: none; display: grid; place-items: center; }
+.rows .mini svg { width: 20px; height: auto; }
+.rows .when { margin-left: auto; font-size: .85rem; opacity: .8; white-space: nowrap; }
+.addr { display: flex; gap: 6px; align-items: center; font-size: .85rem; }
+.addr .field95 { flex: 1; font-size: .85rem; padding: 3px 6px; }
+.player .screen { aspect-ratio: 16 / 9; background: #000; display: grid; place-items: center; color: #9be38f; font-family: var(--f-label); font-size: 1.4rem; overflow: hidden; position: relative; }
+.player .screen .slot { position: absolute; inset: 0; opacity: .55; }
+.player .screen span { position: relative; text-shadow: 0 0 6px #3f3; }
+.player .ctrls { display: flex; gap: 6px; align-items: center; }
+.player .bar { flex: 1; height: 14px; }
+.empty-folder { padding: 28px 12px; text-align: center; color: #333; }
+
+/* ---------- Paper pages ---------- */
+.paper { background: var(--paper); position: relative; }
+.logo { position: absolute; top: 14px; left: max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 10px; text-decoration: none; color: #6b6b6b; font-family: var(--f-pixel); font-size: 1.2rem; letter-spacing: .1em; z-index: 4; }
+.logo svg { width: 34px; height: 34px; }
+.wa { position: absolute; top: 12px; right: max(16px, env(safe-area-inset-right, 0px)); z-index: 4; display: grid; justify-items: center; gap: 2px; background: none; border: 0; font: inherit; color: var(--purple); }
+.wa .cap { font-family: var(--f-pixel); font-size: .62rem; }
+.wa svg { width: 44px; height: 44px; }
+@media (max-width: 760px) {
+  .logo span { display: none; }
+  .logo, .wa { position: static; }
+  .paper-top { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
+}
+@media (min-width: 761px) { .paper-top { display: contents; } }
+
+.intro { max-width: 1280px; margin-inline: auto; padding-block: 36px 24px; display: grid; gap: 20px; }
+.intro .body { font-size: clamp(1rem, 1.5vw, 1.3rem); line-height: 1.6; display: grid; gap: 1.1em; }
+.intro .body ul { margin: 0; padding-left: 1.6em; list-style: "– "; }
+.intro .tools { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: flex-end; gap: 12px 28px; }
+.pdf-link { display: flex; align-items: center; gap: 10px; background: none; border: 0; font: 1.05rem var(--f-pixel); color: var(--purple); text-decoration: underline; text-underline-offset: 4px; padding: 0; text-align: left; }
+.pdf-link svg { width: 44px; flex: none; }
+.ico.inline { position: static; transform: none; width: 120px; color: #000; }
+.ico.inline .lbl { text-shadow: none; font-weight: 400; }
+.ico.inline:hover .lbl, .ico.inline:focus-visible .lbl { color: #fff; }
+
+/* programme slabs */
+.slab {
+  position: relative; max-width: 1366px; margin-inline: auto;
+  min-height: clamp(560px, 52vw, 720px);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); grid-template-rows: auto 1fr;
+  column-gap: clamp(24px, 4vw, 64px); row-gap: 28px; padding-block: 18px 72px;
+}
+.slab + .slab { border-top: 2px dashed #e4e4e4; }
+.slab h2 {
+  grid-column: 1 / -1; font-family: var(--f-head); text-transform: uppercase;
+  font-size: clamp(2.6rem, 7.6vw, 6.6rem); line-height: .95; letter-spacing: .02em; padding-right: 230px;
+}
+.slab h2 .w1 { display: block; color: var(--head); padding-left: clamp(0px, 6vw, 80px); }
+.slab h2 .w2 { display: block; color: var(--rust); padding-left: clamp(48px, 20vw, 260px); }
+.tag {
+  position: absolute; top: 0; right: max(16px, env(safe-area-inset-right, 0px)); width: clamp(160px, 22vw, 300px);
+  background: var(--tag); color: #000; font: 700 clamp(1.05rem, 1.8vw, 1.55rem) var(--f-type);
+  padding: clamp(48px, 7vw, 92px) 18px 12px; box-shadow: 4px 4px 0 rgba(0,0,0,.18);
+}
+.slab .txt { display: grid; align-content: start; gap: 18px; font-size: clamp(1rem, 1.45vw, 1.25rem); max-width: 36rem; min-width: 0; }
+.slab .venue { font-size: .95em; }
+.slab .entry b { display: block; }
+.slab .entry .note { font-weight: 700; letter-spacing: .04em; }
+.slab .media { min-width: 0; display: grid; align-content: center; justify-items: center; gap: 16px; }
+.slab .extras { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 24px; }
+.slab .extras .say { font-family: var(--f-pixel); color: var(--purple); font-size: .95rem; }
+@media (max-width: 760px) {
+  .slab { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-top: 0; }
+  .slab h2 { padding-right: 0; }
+  .slab h2 .w1 { padding-left: 0; }
+  .slab h2 .w2 { padding-left: 18%; }
+  .tag { position: static; width: auto; justify-self: start; grid-column: 1; padding: 22px 16px 8px; margin-top: 24px; }
+}
+
+/* frames (photo windows) */
+.frames { display: flex; gap: 0; width: 100%; justify-content: center; }
+.frames .frame { flex: 1 1 0; min-width: 0; }
+.frame { width: 100%; }
+.frame .tb { font-size: .62rem; }
+.frame .pic { aspect-ratio: var(--ar, 2 / 3); position: relative; overflow: hidden; background: var(--sky-b); }
+.frame figcaption { font-size: .85rem; padding: 4px 6px 6px; line-height: 1.25; }
+.frame.tall { max-width: 400px; }
+.frame.wide { max-width: 520px; }
+.slot { width: 100%; height: 100%; display: block; }
+.slot img, .slot svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bliss { width: min(392px, 100%); aspect-ratio: 1; border-radius: 50%; overflow: hidden; box-shadow: 6px 6px 0 rgba(64,31,113,.18); }
+
+/* ---------- Creatives ---------- */
+.creatives { padding-bottom: 72px; }
+.crew { max-width: 1240px; margin-inline: auto; padding-block: 44px 8px; display: grid; gap: 28px; }
+.crew h2 { font: 700 clamp(1.25rem, 2vw, 1.6rem) var(--f-type); text-align: center; text-transform: lowercase; }
+.cards { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 28px 32px; }
+.card { width: 205px; max-width: 100%; display: grid; gap: 8px; align-content: start; }
+.card .pic { aspect-ratio: 205 / 273; overflow: hidden; background: var(--sky-b); border: 2px solid #000; box-shadow: 4px 4px 0 #000; }
+.card b { font-family: var(--f-type); font-size: 1rem; line-height: 1.25; }
+.card span { font-family: var(--f-type); font-size: .9rem; color: #333; line-height: 1.3; }
+.card.tbc b { color: #555; }
+.thanks .cards { gap: 28px 64px; }
+.thanks .card:nth-child(even) { margin-top: 64px; }
+@media (max-width: 560px) {
+  .card { width: calc(50% - 16px); }
+  .thanks .card:nth-child(even) { margin-top: 0; }
+}
+
+/* ---------- Subscribe dialog ---------- */
+.sub-win .wb { padding: 14px; display: grid; gap: 12px; }
+.sub-win .lead { font-size: 1.15rem; line-height: 1.4; }
+.sub-win form { display: flex; flex-wrap: wrap; gap: 8px; }
+.sub-win form .field95 { flex: 1 1 200px; }
+.sub-win .msg { min-height: 1.3em; font-size: .9rem; color: var(--purple); }
+.sub-win .meta { display: grid; gap: 4px; font-size: .9rem; border-top: 1px solid var(--win-lo); padding-top: 8px; }
+
+/* ---------- Taskbar footer ---------- */
+.taskbar {
+  position: relative; display: flex; align-items: center; gap: 8px; padding-block: 4px;
+  background: var(--win); border-top: 2px solid var(--win-hi); box-shadow: inset 0 1px 0 #e6e6e6; font-family: var(--f-type); font-size: .9rem; z-index: 5;
+}
+.start { display: flex; align-items: center; gap: 6px; font-family: var(--f-pixel); font-size: .8rem; padding: 3px 10px; }
+.start svg { width: 18px; height: 18px; }
+.task-mid { flex: 1; min-width: 0; padding: 3px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); }
+.tray { display: flex; gap: 12px; padding: 3px 10px; white-space: nowrap; border: 1px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); font-variant-numeric: tabular-nums; }
+.startmenu { position: absolute; bottom: 100%; left: max(16px, env(safe-area-inset-left, 0px)); width: 240px; display: flex; }
+.startmenu .side { width: 28px; background: linear-gradient(0deg, var(--purple), var(--purple-2)); color: #fff; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--f-pixel); font-size: .8rem; padding: 8px 4px; }
+.startmenu .rows { flex: 1; padding: 4px; }
+@media (max-width: 560px) { .task-mid { display: none; } }
+
+/* ---------- Small screens: desktops become icon grids ---------- */
+@media (max-width: 760px) {
+  .desk { aspect-ratio: auto; min-height: 0; padding-bottom: 28px; }
+  .icons { position: relative; inset: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 4px; padding-top: 28px; }
+  .ico { position: static; transform: none; width: auto; }
+  .icons .ico:last-child:nth-child(3n+1) { grid-column: 2; }
+  .ico .glyph { width: 54px; height: 54px; }
+  .ico .lbl { font-size: 1.15rem; }
+  .dialog-dock { position: relative; left: auto; top: auto; transform: none; width: auto; margin-top: 28px; }
+}
+</style>
+</head>
+<body>
+<!-- ============ PAGE 1 · HOME DESKTOP ============ -->
+<section id="home" class="desk desk-home" aria-label="Home">
+  <canvas class="bg" id="bg-home" aria-hidden="true"></canvas>
+  <nav class="nav gutter" aria-label="Main">
+    <a class="title" href="#home">KRAAL CURATION</a>
+    <ul>
+      <li><a class="lnk" href="#home" aria-current="page">home</a></li>
+      <li><a class="lnk" href="#lineup">lineup</a></li>
+      <li><a class="lnk" href="#creatives">creatives</a></li>
+      <li><a class="lnk" href="#tickets">tickets</a></li>
+    </ul>
+  </nav>
+  <div class="icons gutter">
+    <button class="ico" data-win="program" style="--x:36.8%;--y:23.3%"><span class="glyph" data-g="folder"></span><span class="lbl">Program</span></button>
+    <button class="ico" data-win="explore" style="--x:50%;--y:19.5%"><span class="glyph" data-g="globe"></span><span class="lbl">Explore</span></button>
+    <button class="ico" data-win="tickets" style="--x:70.2%;--y:20.4%"><span class="glyph" data-g="magnifier"></span><span class="lbl">Tickets</span></button>
+    <button class="ico" data-win="workshops" style="--x:86.1%;--y:23.3%"><span class="glyph" data-g="picture"></span><span class="lbl">CommunityWorkshops.jpg</span></button>
+    <button class="ico" data-win="films" style="--x:23.8%;--y:37.9%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Films.pdf</span></button>
+    <button class="ico" data-win="artists" style="--x:67.5%;--y:47.7%"><span class="glyph" data-g="folder"></span><span class="lbl">Artists-in-Residency</span></button>
+    <button class="ico" data-win="museum" style="--x:49.6%;--y:48.4%"><span class="glyph" data-g="picture"></span><span class="lbl">Museum.jpg</span></button>
+    <button class="ico" data-win="theatre" style="--x:12.6%;--y:50.9%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Theatre.pdf</span></button>
+    <button class="ico" data-win="kraal" style="--x:33.9%;--y:56.1%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Kraal.pdf</span></button>
+    <button class="ico" data-win="sponsor" style="--x:44.7%;--y:71.2%"><span class="glyph" data-g="file:webp"></span><span class="lbl">Sponsor.webp</span></button>
+    <button class="ico" data-win="oral" style="--x:63.1%;--y:77.3%"><span class="glyph" data-g="film"></span><span class="lbl">Oral Stories.mp4</span></button>
+    <button class="ico" data-win="critics" style="--x:84.2%;--y:77.6%"><span class="glyph" data-g="folder"></span><span class="lbl">Young Critics Reviews</span></button>
+    <button class="ico" data-win="team" style="--x:26.7%;--y:77.1%"><span class="glyph" data-g="folder"></span><span class="lbl">Creative Team</span></button>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 · PROGRAMME ============ -->
+<section id="lineup" class="paper" aria-labelledby="lineup-title">
+  <div class="paper-top gutter">
+    <a class="logo" href="#home" aria-label="Kraal Curation home"><span class="lg" data-g="logo"></span><span>K.R.A.A.L</span></a>
+    <button class="wa" data-win="whatsapp"><span class="cap">whatsapp channel</span><span data-g="chat"></span></button>
+  </div>
+  <nav class="nav gutter" aria-label="Main">
+    <a class="title" id="lineup-title" href="#home">KRAAL CURATION</a>
+    <ul>
+      <li><a class="lnk" href="#home">home</a></li>
+      <li><a class="lnk" href="#lineup" aria-current="page">lineup</a></li>
+      <li><a class="lnk" href="#creatives">creatives</a></li>
+      <li><a class="lnk" href="#tickets">tickets</a></li>
+    </ul>
+  </nav>
+
+  <div class="intro gutter">
+    <div class="body">
+      <p>The <b>Kraal Curation</b> is an extension of the original theatre production titled <i>Kraal</i> by the 2026 Standard Bank Young Artist for Theatre, Jason Jacobs. It is a week of creative engagements with live arts, from 12 to 18 December 2026, under the theme <b>Die Grond Onthou / The Land Remembers</b>.</p>
+      <p>This is the first year. A multi-disciplinary arts event bringing together a committed team of film and theatre producers, local managers, and artists, focusing on both the celebration and investment in our trans-local talent. The curatorial team features Woudine Dirkse, Adré Links, Gladwin Van Niekerk, Devon Delmar, Cleveland Hopp, Kwei Shun-Yu, Manfred Adams and Wade Van Zyl, along with volunteers from the University of Cape Town and Kharkams.</p>
+      <div><p>The lineup includes the films:</p>
+        <ul><li>Variations on a Theme</li><li>Al Wat Ek Weet</li><li>Notes from the Underground</li></ul></div>
+      <p>In addition, a thoughtfully curated selection of short films from established African filmmakers will be showcased. A work-in-process segment offers emerging creators the chance to receive feedback directly from the curation community.</p>
+      <div><p>Three main theatre performances will engage audiences in a different language and spirit:</p>
+        <ul><li>In Wag Van</li><li>Wonde</li><li>A story-reading for young children</li></ul></div>
+      <p>A Kraal Talent Competition will spotlight emerging local artists, while a documentary titled <i>Starting from Scratch</i> will provide an insightful look into the experiences of working in sacred spaces like Kharkams. This doccie will be made available for paid viewing at a later stage in 2027.</p>
+      <p>The evening before the Talent Competition, the <b>Kraal Curation</b> will close in a communal celebration, highlighting our diverse cultures with live DJs and visual art installations; an event you won't want to miss! Kraal Curation is an invitation to listen and engage with stories from and presented in Kharkams, Namaqualand.</p>
+    </div>
+    <div class="tools">
+      <button class="pdf-link" data-win="pdf"><span data-g="globe"></span>Access and download full programme as PDF.</button>
+      <button class="ico inline" data-win="program"><span class="glyph" data-g="folder"></span><span class="lbl">Program</span></button>
+    </div>
+  </div>
+
+  <article class="slab gutter" id="s-opening">
+    <h2><span class="w1">opening</span><span class="w2">event</span></h2>
+    <p class="tag">12 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Venue: Kharkams High School (Hostel)</p>
+      <p class="entry"><b>12 Dec 26 | 15h00</b>Kraal: Inside/Outside.<br>Memory Boks: Ons Kom Vandaan.</p>
+    </div>
+    <div class="media">
+      <figure class="frame tall chrome" style="--ar: 407 / 520; margin:0"><div class="tb"><span class="t">opening.jpg</span><span class="tbtn" aria-hidden="true">×</span></div><div class="pic"><div class="slot" data-src="images/opening.jpg" data-alt="Opening event"></div></div></figure>
+    </div>
+  </article>
+
+  <article class="slab gutter" id="s-filmed">
+    <h2><span class="w1">filmed</span><span class="w2">theatre</span></h2>
+    <p class="tag">12 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Screening venue: Kharkams High School (Hostel)</p>
+      <p class="entry"><b>12 Dec 26 | 15h00</b><i>Wanne jy my naam hoor</i> by Darion Adams.</p>
+    </div>
+    <div class="media">
+      <figure class="frame wide chrome" style="--ar: 518 / 345; margin:0"><div class="tb"><span class="t">wanne-jy-my-naam-hoor.jpg</span><span class="tbtn" aria-hidden="true">×</span></div><div class="pic"><div class="slot" data-src="images/filmed-theatre.jpg" data-alt="Wanne jy my naam hoor"></div></div></figure>
+    </div>
+  </article>
+
+  <article class="slab gutter" id="s-children">
+    <h2><span class="w1">program</span><span class="w2">for children</span></h2>
+    <p class="tag">14–16 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Venue: Church Hall</p>
+      <p class="entry"><b>14 Dec 26 | 11h00</b>Clay-making workshop</p>
+      <p class="entry"><b>15 Dec 26 | 10h00</b>Arts &amp; Crafts workshop with recycled materials</p>
+      <p class="entry"><b>16 Dec 26 | 10h00</b>Movie-morning for young audiences</p>
+    </div>
+    <div class="media"><div class="bliss"><div class="slot" data-src="images/children.jpg" data-alt="Programme for children"></div></div></div>
+  </article>
+
+  <article class="slab gutter" id="s-shorts">
+    <h2><span class="w1">short</span><span class="w2">films</span></h2>
+    <p class="tag">15 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Screening venue: Kharkams Community Hall</p>
+      <p class="entry"><b>15 Dec 26 | 16h30</b>A selection of short films from established African filmmakers, curated by Cleveland Hopp. Titles announced soon.</p>
+      <div class="extras">
+        <button class="ico inline" data-win="critics"><span class="glyph" data-g="globe"></span><span class="lbl">Reviews</span></button>
+        <span class="say">young critics reviews</span>
+      </div>
+    </div>
+    <div class="media">
+      <div class="frames">
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">short-1.jpg</span></div><div class="pic"><div class="slot" data-src="images/short-1.jpg" data-alt="Short film"></div></div></figure>
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">short-2.jpg</span></div><div class="pic"><div class="slot" data-src="images/short-2.jpg" data-alt="Short film"></div></div></figure>
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">short-3.jpg</span></div><div class="pic"><div class="slot" data-src="images/short-3.jpg" data-alt="Short film"></div></div></figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="slab gutter" id="s-features">
+    <h2><span class="w1">feature</span><span class="w2">films</span></h2>
+    <p class="tag">14–16 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Screening venue: Kharkams Community Hall</p>
+      <p class="entry"><b>14 Dec 26 | 16h30</b><i>Variations on a Theme</i> explores displacement, memory, and local resilience through community-led cast performances.</p>
+      <p class="entry"><b>15 Dec 26 | 19h30</b><i>Al Wat Ek Weet</i> navigates the nuances of coming of age.</p>
+      <p class="entry"><b>16 Dec 26 | 19h00</b><i>Notes from the Underground</i> explores Indigenous knowledge and learning through southern African hip-hop culture.</p>
+    </div>
+    <div class="media">
+      <div class="frames">
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">variations.jpg</span></div><div class="pic"><div class="slot" data-src="images/variations-on-a-theme.jpg" data-alt="Variations on a Theme"></div></div><figcaption>Variations on a Theme</figcaption></figure>
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">al-wat-ek-weet.jpg</span></div><div class="pic"><div class="slot" data-src="images/al-wat-ek-weet.jpg" data-alt="Al Wat Ek Weet"></div></div><figcaption>Al Wat Ek Weet</figcaption></figure>
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">notes.jpg</span></div><div class="pic"><div class="slot" data-src="images/notes-from-the-underground.jpg" data-alt="Notes from the Underground"></div></div><figcaption>Notes from the Underground</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="slab gutter" id="s-theatre">
+    <h2><span class="w1">theatre</span><span class="w2">performances</span></h2>
+    <p class="tag">14–16 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Venue: Kharkams Community Hall</p>
+      <p class="entry"><b>14 Dec 26 | 14h30</b><i>In Wag Van</i> with Gladwin van Niekerk and Lynette du Plessis.</p>
+      <p class="entry"><b>15 Dec 26 | 14h30</b><i>Wonde</i> by Byron Klassen.</p>
+      <p class="entry"><b>16 Dec 26 | 10h00</b>Story-reading for young audiences with Miche Van Wyk.</p>
+    </div>
+    <div class="media">
+      <div class="frames">
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">in-wag-van.jpg</span></div><div class="pic"><div class="slot" data-src="images/in-wag-van.jpg" data-alt="In Wag Van"></div></div><figcaption>In Wag Van</figcaption></figure>
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">wonde.jpg</span></div><div class="pic"><div class="slot" data-src="images/wonde.jpg" data-alt="Wonde"></div></div><figcaption>Wonde</figcaption></figure>
+        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">story-reading.jpg</span></div><div class="pic"><div class="slot" data-src="images/story-reading.jpg" data-alt="Story-reading"></div></div><figcaption>Story-reading</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="slab gutter" id="s-workshops">
+    <h2><span class="w1">in-person</span><span class="w2">workshops</span></h2>
+    <p class="tag">16 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Venue: Rainbow Centre</p>
+      <p class="entry"><b>16 Dec 26 | 14h30</b>An oral storytelling workshop on heritage and the origins of Kharkams.<br><span class="note">ONLY ELDERS AGED 60+.</span></p>
+    </div>
+    <div class="media"><div class="bliss"><div class="slot" data-src="images/workshops.jpg" data-alt="Oral storytelling workshop"></div></div></div>
+  </article>
+
+  <article class="slab gutter" id="s-process">
+    <h2><span class="w1">works</span><span class="w2">in-process</span></h2>
+    <p class="tag">16 Dec 26</p>
+    <div class="txt">
+      <p class="venue">Venue: Kharkams Community Hall</p>
+      <p class="entry"><b>16 Dec 26 | 14h30</b>A Work-in-Process film.</p>
+      <div class="extras">
+        <button class="ico inline" data-win="sponsor"><span class="glyph" data-g="file:webp"></span><span class="lbl">Sponsor.webp</span></button>
+        <span class="say">our main sponsor</span>
+      </div>
+    </div>
+    <div class="media"><div class="bliss"><div class="slot" data-src="images/works-in-process.jpg" data-alt="Works in process"></div></div></div>
+  </article>
+</section>
+
+<!-- ============ PAGE 3 · CREATIVES ============ -->
+<section id="creatives" class="paper creatives" aria-labelledby="creatives-title">
+  <nav class="nav gutter" aria-label="Main">
+    <a class="title" id="creatives-title" href="#home">KRAAL CURATION</a>
+    <ul>
+      <li><a class="lnk" href="#home">home</a></li>
+      <li><a class="lnk" href="#lineup">lineup</a></li>
+      <li><a class="lnk" href="#creatives" aria-current="page">creatives</a></li>
+      <li><a class="lnk" href="#tickets">tickets</a></li>
+    </ul>
+  </nav>
+  <div id="crew"></div>
+</section>
+
+<!-- ============ PAGE 4 · SUBSCRIBE / TICKETS ============ -->
+<section id="tickets" class="desk desk-sub" aria-label="Tickets and subscribe">
+  <canvas class="bg" id="bg-sub" aria-hidden="true"></canvas>
+  <nav class="nav gutter" aria-label="Main">
+    <a class="title" href="#home">KRAAL CURATION</a>
+    <ul>
+      <li><a class="lnk" href="#home">home</a></li>
+      <li><a class="lnk" href="#lineup">lineup</a></li>
+      <li><a class="lnk" href="#creatives">creatives</a></li>
+      <li><a class="lnk" href="#tickets" aria-current="page">tickets</a></li>
+    </ul>
+  </nav>
+  <div class="icons gutter">
+    <button class="ico" data-win="explore" style="--x:15.2%;--y:23.4%"><span class="glyph" data-g="globe"></span><span class="lbl">Explore</span></button>
+    <button class="ico" data-win="tickets" style="--x:49.4%;--y:22.5%"><span class="glyph" data-g="magnifier"></span><span class="lbl">Tickets</span></button>
+    <button class="ico" data-win="museum" style="--x:91%;--y:20.4%"><span class="glyph" data-g="picture"></span><span class="lbl">Museum.jpg</span></button>
+    <button class="ico" data-win="kraal" style="--x:11.7%;--y:43.2%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Kraal.pdf</span></button>
+    <button class="ico" data-win="artists" style="--x:90%;--y:53.3%"><span class="glyph" data-g="folder"></span><span class="lbl">Artists-in-Residency</span></button>
+    <button class="ico" data-win="team" style="--x:12.4%;--y:78%"><span class="glyph" data-g="folder"></span><span class="lbl">Creative Team</span></button>
+    <button class="ico" data-win="critics" style="--x:88.5%;--y:77.6%"><span class="glyph" data-g="folder"></span><span class="lbl">Young Critics Reviews</span></button>
+  </div>
+  <div class="dialog-dock gutter">
+    <div class="chrome sub-win" role="group" aria-labelledby="sub-t">
+      <div class="tb"><span class="tb-ico" data-g="film"></span><span class="t" id="sub-t">subscribe.exe</span><span class="tbtn" aria-hidden="true">_</span><span class="tbtn" aria-hidden="true">×</span></div>
+      <div class="wb">
+        <p class="lead">Subscribe to our YouTube to watch performances.</p>
+        <form id="sub" novalidate>
+          <label for="email" class="sr" style="flex-basis:100%;font-size:.9rem">Enter your email</label>
+          <input class="field95" id="email" type="email" placeholder="Enter your email" autocomplete="email">
+          <button class="btn95" type="submit">Subscribe</button>
+        </form>
+        <p class="msg" id="msg" role="status"></p>
+        <div class="meta">
+          <p><b>Tickets:</b> details will be announced here soon.</p>
+          <p><b>YouTube &amp; WhatsApp channel:</b> links to come.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="taskbar gutter">
+  <button class="btn95 start" id="start" aria-expanded="false" aria-controls="startmenu"><span data-g="logo"></span>KRAAL</button>
+  <div class="startmenu chrome" id="startmenu" hidden>
+    <div class="side">Kraal Curation 2026</div>
+    <ul class="rows">
+      <li><a href="#home"><span class="mini" data-g="globe"></span>home</a></li>
+      <li><a href="#lineup"><span class="mini" data-g="folder"></span>lineup</a></li>
+      <li><a href="#creatives"><span class="mini" data-g="folder"></span>creatives</a></li>
+      <li><a href="#tickets"><span class="mini" data-g="magnifier"></span>tickets</a></li>
+    </ul>
+  </div>
+  <div class="task-mid">Die Grond Onthou / The Land Remembers · 12–18 Dec 2026 · Kharkams, Namaqualand</div>
+  <div class="tray"><span id="countdown"></span><span id="clock"></span></div>
+</footer>
+
+<div id="wm" aria-live="polite"></div>
+
+<script>
+/* ---------------- Pixel glyphs ---------------- */
+const PAL = {
+  k:'#15102a', l:'#8fd6ff', b:'#2d97e8', d:'#1b68b5', w:'#ffffff', g:'#a5a5a5', G:'#c3c3c3', W:'#ffffff', D:'#7b7b7b',
+  c:'#c4f0ff', h:'#4a4a4a', s:'#5aa8f0', S:'#bfe2ff', y:'#ffd23a', o:'#c98a3d', N:'#4f9a3a', p:'#2a1d4a',
+  r:'#d8342c', j:'#2f9e55', m:'#7a52b8', e:'#e8901c', f:'#d6d6d6', B:'#2f78d8', L:'#8cc4ff', n:'#3bb54a', u:'#401f71', t:'#999'
+};
+function svg(rows, extra) {
+  const H = rows.length, W = rows[0].length; let out = '';
+  rows.forEach((row, y) => {
+    let x = 0;
+    while (x < W) {
+      const ch = row[x]; let run = 1;
+      while (x + run < W && row[x + run] === ch) run++;
+      if (ch !== '.' && PAL[ch]) out += `<rect x="${x}" y="${y}" width="${run}" height="1.02" fill="${PAL[ch]}"/>`;
+      x += run;
+    }
+  });
+  return `<svg viewBox="0 0 ${W} ${H}" shape-rendering="crispEdges" aria-hidden="true" focusable="false">${out}${extra || ''}</svg>`;
+}
+function grid(w, h, fn) { const rows = []; for (let y = 0; y < h; y++) { let s = ''; for (let x = 0; x < w; x++) s += fn(x, y) || '.'; rows.push(s); } return rows; }
+const FOLDER = [
+  "................",
+  ".kkkkk..........",
+  "kllllk..........",
+  "kbbbbbkkkkkkkkk.",
+  "kllllllllllllllk",
+  "klbbbbbbbbbbbbdk",
+  "klbbbbbbbbbbbbdk",
+  "klbbbbbbbbbbbbdk",
+  "klbbbbbbbbbbbbdk",
+  "klbbbbbbbbbbbbdk",
+  "klbbbbbbbbbbbbdk",
+  "kddddddddddddddk",
+  ".kkkkkkkkkkkkkk."
+];
+const FILE = [
+  "..kkkkkkkk......",
+  "..kwwwwwwkk.....",
+  "..kwwwwwwkfk....",
+  "..kwwwwwwkkkk...",
+  "..kwwwwwwwwwk...",
+  "..kwgggggggwk...",
+  "..kwwwwwwwwwk...",
+  "..kwgggggwwwk...",
+  "..kwwwwwwwwwk...",
+  "kTTTTTTTTTTTTk..",
+  "kTTTTTTTTTTTTk..",
+  "kTTTTTTTTTTTTk..",
+  "..kwwwwwwwwwk...",
+  "..kwgggggggwk...",
+  "..kwwwwwwwwwk...",
+  "..kkkkkkkkkkk..."
+];
+const TYPES = { pdf: 'r', jpg: 'j', mp4: 'm', webp: 'e' };
+const G = {
+  folder: () => svg(FOLDER),
+  file: (t) => svg(FILE.map(r => r.replace(/T/g, TYPES[t] || 'r')),
+    `<text x="7.5" y="11.55" font-size="3.6" text-anchor="middle" fill="#fff" font-family="VT323, monospace">${t.toUpperCase()}</text>`),
+  magnifier: () => svg(grid(16, 16, (x, y) => {
+    if (x === 0 || y === 0) return 'W';
+    if (x === 15 || y === 15) return 'k';
+    if (x === 14 || y === 14) return 'D';
+    const dx = x - 6.5, dy = y - 6.5, d = Math.hypot(dx, dy);
+    if (d <= 4.9 && d > 3.8) return 'k';
+    if (d <= 3.8) return (dx < -0.4 && dy < -0.4 && d > 1.4 && d < 3) ? 'w' : 'c';
+    const t = x - y;
+    if (x >= 9 && x <= 13 && y >= 9 && y <= 13) { if (t === 0) return 'h'; if (Math.abs(t) === 1) return 'g'; }
+    return 'G';
+  })),
+  globe: () => svg(grid(16, 16, (x, y) => {
+    const dx = x - 7.5, dy = y - 7.5, d = Math.hypot(dx, dy);
+    if (d > 7.4) return '';
+    if (d > 6.4) return 'k';
+    if (dx < -2.5 && dy < -2.5 && d > 4.2) return 'w';
+    const land = (Math.sin(x * 1.3 + 0.6) + Math.cos(y * 1.1 + x * 0.45)) > 0.95;
+    if (Math.abs(dy) < 0.6 || Math.abs(Math.abs(dy) - 3.5) < 0.5 || Math.abs(dx) < 0.6 || Math.abs((dx * dx) / 12 + (dy * dy) / 49 - 1) < 0.12) return land ? 'N' : 'L';
+    return land ? 'n' : 'B';
+  })),
+  picture: () => svg(grid(16, 14, (x, y) => {
+    if (x === 0 || y === 0 || x === 15 || y === 13) return 'k';
+    if (Math.hypot(x - 11, y - 4) < 1.9) return 'y';
+    const h1 = 8.2 - 2.2 * Math.sin(x * 0.5 + 0.8), h2 = 10.6 - 1.3 * Math.sin(x * 0.75 + 2);
+    if (y >= h2) return 'N';
+    if (y >= h1) return 'o';
+    return y < 4 ? 's' : 'S';
+  })),
+  film: () => svg(grid(16, 14, (x, y) => {
+    if (x === 0 || x === 15 || y === 0 || y === 13) return 'k';
+    if (x === 1 || x === 14) return (y % 3 === 1) ? 'w' : 'k';
+    if (x === 2 || x === 13) return 'k';
+    if (x >= 6 && x <= 10 && Math.abs(y - 6.5) <= (10 - x) * 0.62 + 0.3) return 'w';
+    return 'p';
+  })),
+  chat: () => svg(grid(16, 16, (x, y) => {
+    const d = Math.hypot(x - 8, y - 7);
+    if ((x === 2 && y >= 12 && y <= 14) || (x === 3 && y >= 12 && y <= 13) || (x === 1 && y === 14)) return x === 1 || y === 14 ? 'k' : 'n';
+    if (d > 6.9) return '';
+    if (d > 6) return 'k';
+    if (y === 7 && (x === 5 || x === 8 || x === 11)) return 'w';
+    return 'n';
+  })),
+  logo: () => svg(grid(16, 16, (x, y) => {
+    const d = Math.hypot(x - 7.5, y - 7.5), a = Math.atan2(y - 7.5, x - 7.5);
+    if (d < 2.2) return 'y';
+    if (d > 4.6 && d < 7.4 && !(a > -0.45 && a < 0.45)) return ((x + y) % 3 === 0) ? 'h' : 't';
+    return '';
+  }))
+};
+function paintGlyphs(root) {
+  (root || document).querySelectorAll('[data-g]').forEach(el => {
+    if (el.dataset.done) return;
+    const [k, arg] = el.dataset.g.split(':');
+    el.innerHTML = G[k] ? G[k](arg) : '';
+    el.dataset.done = '1';
+  });
+}
+
+/* ---------------- Sky + hill placeholder (like Canva's empty image frames) ---------------- */
+let sceneId = 0;
+function scene() {
+  const id = 'sk' + (sceneId++);
+  return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5eabeb"/><stop offset=".75" stop-color="#d4edfc"/></linearGradient></defs>
+    <rect width="100" height="100" fill="url(#${id})"/>
+    <g fill="#fff"><circle cx="34" cy="34" r="8"/><circle cx="44" cy="30" r="10"/><circle cx="55" cy="34" r="8"/><rect x="26" y="34" width="37" height="8" rx="4"/></g>
+    <path d="M0 74 Q 40 58 100 70 L100 100 L0 100Z" fill="#5f9f32"/>
+    <path d="M0 84 Q 55 66 100 82 L100 100 L0 100Z" fill="#84c341"/>
+  </svg>`;
+}
+function fillSlots(root) {
+  (root || document).querySelectorAll('.slot').forEach(el => {
+    if (el.dataset.done) return; el.dataset.done = '1';
+    el.innerHTML = scene();
+    const src = el.dataset.src; if (!src) return;
+    const im = new Image();
+    im.onload = () => { el.innerHTML = ''; im.alt = el.dataset.alt || ''; el.appendChild(im); };
+    im.src = src;
+  });
+}
+
+/* ---------------- Creatives (Canva page 3) ---------------- */
+const CREW = [
+  { h: 'curation team', people: [
+    ['Woudine Dirkse', 'Curation team'], ['Adré Links', 'Curation team'], ['Gladwin Van Niekerk', 'Curation team'], ['Devon Delmar', 'Curation team'],
+    ['Cleveland Hopp', 'Curator, short films'], ['Kwei Shun-Yu', 'Curation team'], ['Manfred Adams', 'Curation team'], ['Wade Van Zyl', 'Curation team'] ] },
+  { h: 'Guest Performing Artists', people: [
+    ['Gladwin van Niekerk', 'In Wag Van · 14 Dec, 14h30'], ['Lynette du Plessis', 'In Wag Van · 14 Dec, 14h30'], ['Byron Klassen', 'Wonde · 15 Dec, 14h30'],
+    ['Miche Van Wyk', 'Story-reading · 16 Dec, 10h00'], ['Darion Adams', 'Wanne jy my naam hoor · 12 Dec, 15h00'] ] },
+  { h: 'Filmmakers (Feature Films)', people: [
+    ['Variations on a Theme', 'Filmmaker and bio to come'], ['Al Wat Ek Weet', 'Filmmaker and bio to come'], ['Notes from the Underground', 'Filmmaker and bio to come'] ] },
+  { h: 'Filmmakers (Shorts)', people: [
+    ['Cleveland Hopp', 'Curator of the short film selection'], [null, 'Filmmaker to come'], [null, 'Filmmaker to come'], [null, 'Filmmaker to come'] ] },
+  { h: 'film crew', people: [[null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come']] },
+  { h: 'theatre crew', people: [[null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come']] },
+  { h: 'community volunteers', people: [['University of Cape Town', 'Student volunteers'], ['Kharkams', 'Community volunteers']] },
+  { h: 'website designer & researcher', people: [[null, 'Bio to come']] },
+  { h: 'standard bank young artist for theatre 2026', people: [['Jason Jacobs', 'Creator of Kraal, the theatre production this curation grows from']] },
+  { h: 'special thanks page', cls: 'thanks', people: [[null, 'To be confirmed'], [null, 'To be confirmed'], [null, 'To be confirmed'], [null, 'To be confirmed']] }
+];
+const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+document.getElementById('crew').innerHTML = CREW.map(g => `
+  <section class="crew gutter ${g.cls || ''}">
+    <h2>${esc(g.h)}</h2>
+    <ul class="cards">${g.people.map(([n, r]) => `
+      <li class="card ${n ? '' : 'tbc'}">
+        <div class="pic"><div class="slot" ${n ? `data-src="images/people/${slug(n)}.jpg" data-alt="${esc(n)}"` : ''}></div></div>
+        <b>${n ? esc(n) : 'Name to come'}</b><span>${esc(r)}</span>
+      </li>`).join('')}
+    </ul>
+  </section>`).join('');
+
+/* ---------------- Windows ---------------- */
+const fileRow = (g, label, when, go) => `<li><a href="${go}" data-close><span class="mini" data-g="${g}"></span>${label}<span class="when">${when}</span></a></li>`;
+const WINS = {
+  program: { t: 'Program', g: 'folder', w: 440, body: () => `
+    <ul class="rows well">
+      ${fileRow('folder', 'opening event', '12 Dec', '#s-opening')}
+      ${fileRow('folder', 'filmed theatre', '12 Dec', '#s-filmed')}
+      ${fileRow('folder', 'program for children', '14–16 Dec', '#s-children')}
+      ${fileRow('folder', 'short films', '15 Dec', '#s-shorts')}
+      ${fileRow('folder', 'feature films', '14–16 Dec', '#s-features')}
+      ${fileRow('folder', 'theatre performances', '14–16 Dec', '#s-theatre')}
+      ${fileRow('folder', 'in-person workshops', '16 Dec', '#s-workshops')}
+      ${fileRow('folder', 'works in-process', '16 Dec', '#s-process')}
+    </ul>`, status: '8 object(s)' },
+  explore: { t: 'Explore', g: 'globe', w: 480, body: () => `
+    <div class="addr"><span>Address</span><input class="field95" id="addr" value="kraal://explore" readonly aria-label="Address"></div>
+    <div class="doc">
+      <h3>Explore <em>Kharkams</em></h3>
+      <ul class="rows">
+        ${fileRow('folder', 'Program', '→', '#lineup')}
+        ${fileRow('folder', 'Creative Team', '→', '#creatives')}
+        <li><button data-open="artists"><span class="mini" data-g="folder"></span>Artists-in-Residency<span class="when">soon</span></button></li>
+        <li><button data-open="oral"><span class="mini" data-g="film"></span>Oral Stories<span class="when">soon</span></button></li>
+        <li><button data-open="museum"><span class="mini" data-g="picture"></span>Museum<span class="when">soon</span></button></li>
+        <li><button data-open="workshops"><span class="mini" data-g="picture"></span>Community Workshops<span class="when">14–16 Dec</span></button></li>
+        <li><button data-open="critics"><span class="mini" data-g="folder"></span>Young Critics Reviews<span class="when">soon</span></button></li>
+      </ul>
+    </div>`, status: 'Done' },
+  tickets: { t: 'Tickets', g: 'magnifier', w: 400, body: () => `
+    <div class="doc">
+      <h3>tickets <em>&amp; updates</em></h3>
+      <p>Ticket details will be announced here soon.</p>
+      <p>Most events take place at the <b>Kharkams Community Hall</b>. Children's programmes run at the Church Hall.</p>
+    </div>
+    <div style="display:flex;justify-content:flex-end"><a class="btn95" href="#tickets" data-close style="text-decoration:none">Get updates</a></div>` },
+  workshops: { t: 'CommunityWorkshops.jpg', g: 'picture', w: 460, body: () => `
+    <div class="well" style="aspect-ratio:4/3;overflow:hidden"><div class="slot" data-src="images/community-workshops.jpg" data-alt="Community workshops"></div></div>
+    <ul class="rows well">
+      ${fileRow('picture', 'Clay-making workshop', '14 Dec 11h00', '#s-children')}
+      ${fileRow('picture', 'Arts & crafts, recycled materials', '15 Dec 10h00', '#s-children')}
+      ${fileRow('picture', 'Movie-morning for young audiences', '16 Dec 10h00', '#s-children')}
+      ${fileRow('picture', 'Oral storytelling (elders 60+)', '16 Dec 14h30', '#s-workshops')}
+    </ul>`, status: 'Church Hall · Rainbow Centre' },
+  films: { t: 'Films.pdf', g: 'file:pdf', w: 500, body: () => `
+    <div class="doc">
+      <h3>feature <em>films</em></h3>
+      <p><b>14 Dec 26 | 16h30</b><br><i>Variations on a Theme</i>: displacement, memory and local resilience, through community-led cast performances.</p>
+      <p><b>15 Dec 26 | 19h30</b><br><i>Al Wat Ek Weet</i>: the nuances of coming of age.</p>
+      <p><b>16 Dec 26 | 19h00</b><br><i>Notes from the Underground</i>: Indigenous knowledge and learning through southern African hip-hop culture.</p>
+      <h3>short <em>films</em></h3>
+      <p><b>15 Dec 26 | 16h30</b><br>Short films from established African filmmakers, curated by Cleveland Hopp.</p>
+      <p>Screening venue: Kharkams Community Hall</p>
+    </div>`, status: 'Page 1 of 1' },
+  artists: { t: 'Artists-in-Residency', g: 'folder', w: 400, body: () => `<div class="well empty-folder">This folder is empty for now.<br>Artists in residence will be announced soon.</div>`, status: '0 object(s)' },
+  museum: { t: 'Museum.jpg', g: 'picture', w: 460, body: () => `
+    <div class="well" style="aspect-ratio:4/3;overflow:hidden"><div class="slot" data-src="images/museum.jpg" data-alt="Museum"></div></div>
+    <p style="padding:0 2px">Museum. Opening soon.</p>`, status: 'Museum.jpg' },
+  theatre: { t: 'Theatre.pdf', g: 'file:pdf', w: 500, body: () => `
+    <div class="doc">
+      <h3>theatre <em>performances</em></h3>
+      <p><b>14 Dec 26 | 14h30</b><br><i>In Wag Van</i> with Gladwin van Niekerk and Lynette du Plessis.</p>
+      <p><b>15 Dec 26 | 14h30</b><br><i>Wonde</i> by Byron Klassen.</p>
+      <p><b>16 Dec 26 | 10h00</b><br>Story-reading for young audiences with Miche Van Wyk.</p>
+      <p>Venue: Kharkams Community Hall</p>
+      <h3>filmed <em>theatre</em></h3>
+      <p><b>12 Dec 26 | 15h00</b><br><i>Wanne jy my naam hoor</i> by Darion Adams. Kharkams High School (Hostel).</p>
+    </div>`, status: 'Page 1 of 1' },
+  kraal: { t: 'Kraal.pdf', g: 'file:pdf', w: 520, body: () => `
+    <div class="doc">
+      <h3>die grond <em>onthou</em></h3>
+      <p>The <b>Kraal Curation</b> is an extension of <i>Kraal</i>, the theatre production by Jason Jacobs, the 2026 Standard Bank Young Artist for Theatre.</p>
+      <p>A week of live arts in Kharkams, Namaqualand, from 12 to 18 December 2026, under the theme <b>Die Grond Onthou / The Land Remembers</b>.</p>
+      <p>Film, theatre, workshops, a work-in-process segment, a Kraal Talent Competition and a closing celebration with live DJs and visual art installations.</p>
+      <p><a href="#lineup" data-close>See the full lineup →</a></p>
+    </div>`, status: 'Page 1 of 1' },
+  sponsor: { t: 'Sponsor.webp', g: 'file:webp', w: 400, body: () => `
+    <div class="well" style="aspect-ratio:16/9;overflow:hidden"><div class="slot" data-src="images/sponsor.webp" data-alt="Our main sponsor"></div></div>
+    <p style="padding:0 2px">our main sponsor</p>`, status: 'Sponsor.webp' },
+  oral: { t: 'Oral Stories.mp4', g: 'film', w: 480, body: () => `
+    <div class="player" style="display:grid;gap:8px">
+      <div class="screen"><div class="slot" data-src="images/oral-stories.jpg" data-alt="Oral stories"></div><span>RECORDING COMING SOON</span></div>
+      <div class="ctrls"><button class="btn95" aria-label="Play" disabled>▶</button><button class="btn95" aria-label="Stop" disabled>■</button><div class="bar well"></div><span style="font-size:.85rem">00:00</span></div>
+      <p style="font-size:.9rem">Related: oral storytelling workshop, 16 Dec 14h30, Rainbow Centre (elders aged 60+).</p>
+    </div>` },
+  critics: { t: 'Young Critics Reviews', g: 'folder', w: 420, body: () => `<div class="well empty-folder">Reviews by young critics will appear here during the week.</div>`, status: '0 object(s)' },
+  team: { t: 'Creative Team', g: 'folder', w: 420, body: () => `
+    <ul class="rows well">
+      ${['Woudine Dirkse', 'Adré Links', 'Gladwin Van Niekerk', 'Devon Delmar', 'Cleveland Hopp', 'Kwei Shun-Yu', 'Manfred Adams', 'Wade Van Zyl'].map(n => fileRow('picture', n, 'curation', '#creatives')).join('')}
+    </ul>
+    <div style="display:flex;justify-content:flex-end"><a class="btn95" href="#creatives" data-close style="text-decoration:none">All creatives</a></div>`, status: '8 object(s)' },
+  whatsapp: { t: 'whatsapp channel', g: 'chat', w: 360, body: () => `<div class="doc"><p>The Kraal Curation WhatsApp channel link will be added here.</p></div>` },
+  pdf: { t: 'Programme.pdf', g: 'file:pdf', w: 380, body: () => `<div class="doc"><p>The full programme PDF will be available to download closer to the time.</p><p><a href="#lineup" data-close>Read the lineup on this page →</a></p></div>` }
+};
+const wm = document.getElementById('wm');
+let zTop = 60, cascade = 0;
+function focusWin(el) {
+  wm.querySelectorAll('.win').forEach(w => w.classList.toggle('inactive', w !== el));
+  el.style.zIndex = ++zTop;
+}
+function openWin(id) {
+  const def = WINS[id]; if (!def) return;
+  const existing = wm.querySelector(`.win[data-id="${id}"]`);
+  if (existing) { focusWin(existing); return; }
+  const el = document.createElement('div');
+  el.className = 'win chrome'; el.dataset.id = id; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', def.t);
+  el.style.setProperty('--w', (def.w || 440) + 'px');
+  el.innerHTML = `<div class="tb"><span class="tb-ico" data-g="${def.g}"></span><span class="t">${esc(def.t)}</span><button class="tbtn" data-x aria-label="Close ${esc(def.t)}">×</button></div>
+    <div class="wb">${def.body()}</div>${def.status ? `<div class="status"><span>${esc(def.status)}</span></div>` : ''}`;
+  wm.appendChild(el);
+  paintGlyphs(el); fillSlots(el);
+  const vw = window.innerWidth, vh = window.innerHeight, r = el.getBoundingClientRect();
+  const off = (cascade++ % 6) * 26;
+  el.style.left = Math.max(12, Math.min(vw - r.width - 12, (vw - r.width) / 2 - 60 + off)) + 'px';
+  el.style.top = Math.max(16, Math.min(vh - r.height - 16, vh * 0.14 + off)) + 'px';
+  focusWin(el);
+  el.querySelector('[data-x]').focus({ preventScroll: true });
+}
+function closeWin(el) { el.remove(); const ws = wm.querySelectorAll('.win'); if (ws.length) focusWin(ws[ws.length - 1]); else cascade = 0; }
+document.addEventListener('click', e => {
+  const opener = e.target.closest('[data-win],[data-open]');
+  if (opener) { openWin(opener.dataset.win || opener.dataset.open); return; }
+  const x = e.target.closest('[data-x]'); if (x) { closeWin(x.closest('.win')); return; }
+  const c = e.target.closest('[data-close]'); if (c) { const w = c.closest('.win'); if (w) closeWin(w); }
+});
+wm.addEventListener('pointerdown', e => {
+  const win = e.target.closest('.win'); if (!win) return;
+  focusWin(win);
+  const tb = e.target.closest('.tb'); if (!tb || e.target.closest('button')) return;
+  const sx = e.clientX, sy = e.clientY, ox = win.offsetLeft, oy = win.offsetTop;
+  tb.setPointerCapture(e.pointerId);
+  const move = ev => {
+    const nx = Math.max(-win.offsetWidth + 80, Math.min(window.innerWidth - 80, ox + ev.clientX - sx));
+    const ny = Math.max(0, Math.min(window.innerHeight - 30, oy + ev.clientY - sy));
+    win.style.left = nx + 'px'; win.style.top = ny + 'px';
+  };
+  const up = () => { tb.removeEventListener('pointermove', move); tb.removeEventListener('pointerup', up); };
+  tb.addEventListener('pointermove', move); tb.addEventListener('pointerup', up);
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const ws = [...wm.querySelectorAll('.win')].sort((a, b) => b.style.zIndex - a.style.zIndex);
+  if (ws[0]) closeWin(ws[0]);
+  const sm = document.getElementById('startmenu'); if (!sm.hidden) toggleStart(false);
+});
+
+/* ---------------- Start menu, clock, countdown ---------------- */
+const startBtn = document.getElementById('start'), startMenu = document.getElementById('startmenu');
+function toggleStart(open) { startMenu.hidden = !open; startBtn.setAttribute('aria-expanded', String(open)); }
+startBtn.addEventListener('click', e => { e.stopPropagation(); toggleStart(startMenu.hidden); });
+startMenu.addEventListener('click', e => { if (e.target.closest('a')) toggleStart(false); });
+document.addEventListener('click', e => { if (!startMenu.hidden && !e.target.closest('#startmenu')) toggleStart(false); });
+function tick() {
+  const now = new Date();
+  const fmt = new Intl.DateTimeFormat('en-ZA', { timeZone: 'Africa/Johannesburg', hour: '2-digit', minute: '2-digit', hour12: false });
+  document.getElementById('clock').textContent = fmt.format(now);
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Johannesburg', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
+  const today = Date.UTC(+parts.slice(0, 4), +parts.slice(5, 7) - 1, +parts.slice(8, 10));
+  const days = Math.round((Date.UTC(2026, 11, 12) - today) / 86400000);
+  document.getElementById('countdown').textContent = days > 1 ? `${days} days to opening` : days === 1 ? '1 day to opening' : days >= -6 ? 'On now in Kharkams' : 'Thank you, Kharkams';
+}
+tick(); setInterval(tick, 30000);
+
+/* ---------------- Subscribe ---------------- */
+document.getElementById('sub').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = document.getElementById('email').value.trim(), msg = document.getElementById('msg');
+  msg.textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Thanks! Sign-ups aren't connected yet on this draft." : 'Enter an email address like name@example.com.';
+});
+
+/* ---------------- Dithered desktop wallpapers ---------------- */
+const BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]];
+function dither(ctx, w, h, levels) {
+  const img = ctx.getImageData(0, 0, w, h), d = img.data, L = levels - 1;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const i = (y * w + x) * 4, t = (BAYER[y & 3][x & 3] + 0.5) / 16 - 0.5;
+    for (let c = 0; c < 3; c++) d[i + c] = Math.max(0, Math.min(L, Math.round(d[i + c] / 255 * L + t))) * 255 / L;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+function ridge(ctx, w, h, base, amp, seed, color, domes) {
+  ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(0, h);
+  for (let x = 0; x <= w; x++) {
+    let y = base + Math.sin(x * 0.021 + seed) * amp + Math.sin(x * 0.057 + seed * 2) * amp * 0.45 + Math.sin(x * 0.13 + seed) * amp * 0.12;
+    (domes || []).forEach(([cx, r, ht]) => { const dx = (x - cx) / r; if (Math.abs(dx) < 1) y = Math.min(y, base - ht * Math.sqrt(1 - dx * dx)); });
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(w, h); ctx.closePath(); ctx.fill();
+}
+function paintHome(cv) {
+  const w = 342, h = 192; cv.width = w; cv.height = h; const ctx = cv.getContext('2d');
+  const sky = ctx.createLinearGradient(0, 0, 0, h);
+  sky.addColorStop(0, '#b7b3d9'); sky.addColorStop(.42, '#d9b2c4'); sky.addColorStop(.62, '#f0b48a'); sky.addColorStop(.74, '#f6c46e');
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
+  const sun = ctx.createRadialGradient(214, 136, 2, 214, 136, 40);
+  sun.addColorStop(0, 'rgba(255,236,170,1)'); sun.addColorStop(.25, 'rgba(255,214,130,.7)'); sun.addColorStop(1, 'rgba(255,214,130,0)');
+  ctx.fillStyle = sun; ctx.fillRect(0, 0, w, h);
+  ridge(ctx, w, h, 132, 7, 1.3, '#8f6f93', [[70, 26, 18], [250, 34, 14]]);
+  ridge(ctx, w, h, 146, 5, 3.1, '#5e4368', [[150, 22, 14], [310, 18, 10]]);
+  ridge(ctx, w, h, 160, 4, 5.2, '#36263f', [[40, 14, 8]]);
+  ctx.fillStyle = '#231829'; ctx.fillRect(0, 172, w, h - 172);
+  // granite boulders + bushes
+  [[24, 168, 9, 5], [36, 170, 6, 4], [292, 167, 11, 6], [306, 170, 6, 4], [190, 171, 5, 3]].forEach(([x, y, rx, ry]) => { ctx.fillStyle = '#2c1f33'; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fill(); });
+  // a small stone kraal in the foreground
+  for (let i = 0; i < 26; i++) { const a = i / 26 * Math.PI * 2; if (a > -0.5 && a < 0.5) continue; ctx.fillStyle = i % 3 ? '#4a3752' : '#5b4663'; ctx.fillRect(Math.round(110 + Math.cos(a) * 18), Math.round(181 + Math.sin(a) * 5), 2, 2); }
+  dither(ctx, w, h, 6);
+}
+function paintSub(cv) {
+  const w = 342, h = 192; cv.width = w; cv.height = h; const ctx = cv.getContext('2d');
+  const sky = ctx.createLinearGradient(0, 0, 0, h);
+  sky.addColorStop(0, '#0d1f33'); sky.addColorStop(.55, '#1d5560'); sky.addColorStop(.78, '#3e8a7a');
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
+  let s = 11; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 120; i++) { const x = rnd() * w, y = rnd() * h * 0.6; ctx.fillStyle = `rgba(255,255,240,${0.35 + rnd() * 0.65})`; ctx.fillRect(x | 0, y | 0, 1, 1); }
+  ctx.fillStyle = '#f4f1d8'; ctx.beginPath(); ctx.arc(62, 38, 9, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#16304a'; ctx.beginPath(); ctx.arc(66, 35, 8, 0, Math.PI * 2); ctx.fill();
+  ridge(ctx, w, h, 140, 8, 2.2, '#173a44', [[260, 40, 16]]);
+  ridge(ctx, w, h, 156, 5, 4.4, '#0f2731', [[90, 26, 12]]);
+  ctx.fillStyle = '#0a1a21'; ctx.fillRect(0, 168, w, h - 168);
+  for (let i = 0; i < 22; i++) { ctx.fillStyle = rnd() > .5 ? '#ffd23a' : '#ffb35a'; ctx.fillRect((150 + rnd() * 120) | 0, (160 + rnd() * 9) | 0, 1, 1); }
+  dither(ctx, w, h, 6);
+}
+function wallpaper(cvId, photo, painter) {
+  const cv = document.getElementById(cvId); painter(cv);
+  const im = new Image();
+  im.onload = () => { im.className = 'bg-photo'; im.alt = ''; cv.replaceWith(im); };
+  im.src = photo;
+}
+wallpaper('bg-home', 'images/desktop-home.jpg', paintHome);
+wallpaper('bg-sub', 'images/desktop-subscribe.jpg', paintSub);
+
+paintGlyphs(); fillSlots();
+</script>
+</body>
+</html>
