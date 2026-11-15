@@ -628,13 +628,15 @@ a.btn95 { text-decoration: none; }
                 Leave "" to show "Script sales open soon".
    oralStories  Shared Google Drive folder with the oral story field recordings ("" shows "opens soon").
    elandGesange Google Drive folder with the Eland Gesange album.
+   whatsappChannel  The KRAAL WhatsApp channel (top-right "whatsapp channel" button).
    ===================================================================== */
 const LINKS = {
   webtickets: "https://www.webtickets.co.za",
   donate: "",
   script: "",
   oralStories: "",
-  elandGesange: "https://drive.google.com/drive/folders/1Ke2J3UWDhZtscpfWucLSbRIcQozQuVlQ?usp=drive_link"
+  elandGesange: "https://drive.google.com/drive/folders/1Ke2J3UWDhZtscpfWucLSbRIcQozQuVlQ?usp=drive_link",
+  whatsappChannel: "https://whatsapp.com/channel/0029VbAEPJj9MF94wiW5oL2R"
 };
 
 /* ---------------- Pixel glyphs ---------------- */
@@ -986,7 +988,11 @@ const WINS = {
     <p style="font-size:.85rem;padding:0 2px"><b>Film directors</b></p>
     <ul class="rows well">${crewRows('film directors')}</ul>
     <div style="display:flex;justify-content:flex-end"><a class="btn95" href="#creatives" data-close style="text-decoration:none">All creatives</a></div>`, status: 'Kraal Curation 2026' },
-  whatsapp: { t: 'whatsapp channel', g: 'chat', w: 360, body: () => `<div class="doc"><p>The Kraal Curation WhatsApp channel link will be added here.</p></div>` },
+  whatsapp: { t: 'whatsapp channel', g: 'chat', w: 380, body: () => `<div class="doc">
+      <h3>KRAAL <em>on whatsapp</em></h3>
+      <p>KRAAL is a home for indigenous stories &amp; community upliftment rooted in Kharkams, Kamiesberg of Southern Africa.</p>
+      <div class="tk-btns">${linkBtn('whatsappChannel', 'Follow the channel', 'default')}</div>
+    </div>`, status: 'KRAAL · WhatsApp channel' },
   pdf: { t: 'Program.pdf', g: 'file:pdf', w: 380, body: () => `<div class="doc"><p>The full program PDF will be available to download closer to the time.</p><p><a href="#lineup" data-close>Read the lineup on this page →</a></p></div>` }
 };
 
