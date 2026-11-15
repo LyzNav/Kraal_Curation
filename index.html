@@ -351,6 +351,7 @@ a.btn95 { text-decoration: none; }
 .pic-btn:focus-visible { outline: 2px dotted var(--purple); outline-offset: 3px; }
 @media (hover: none) { .card .over { display: none; } }
 @media (prefers-reduced-motion: reduce) { .card .over { transition: none; } }
+.crew-note { text-align: center; font-size: .9rem; color: #444; margin-top: -14px; }
 .later { max-width: 1240px; margin: 36px auto 0; color: #555; font-size: .9rem; text-align: center; }
 .prof { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; align-items: start; }
 .prof .ph { aspect-ratio: 205 / 273; overflow: hidden; }
@@ -782,46 +783,54 @@ function fillSlots(root) {
 /* Each person: n = name, r = role, bio = short bio (optional), link = portfolio (optional).
    Photos go in images/people/ named after the person, e.g. images/people/keisha-petersen.jpg */
 const CREW = [
-  { h: 'curation team', people: [
-    { n: 'Woudine Dirkse', r: 'Curation team' }, { n: 'Adré Links', r: 'Curation team' },
-    { n: 'Gladwin Van Niekerk', r: 'Curation team' }, { n: 'Devon Delmar', r: 'Curation team' },
-    { n: 'Cleveland Hopp', r: 'Curation team' }, { n: 'Kwei Shun-Yu', r: 'Curation team' },
-    { n: 'Manfred Adams', r: 'Curation team' }, { n: 'Wade Van Zyl', r: 'Curation team' } ] },
-  { h: 'standard bank young artist for theatre 2026', people: [
-    { n: 'Jason Jacobs', r: 'Theatre-maker · creator of Kraal', bio: 'Jason Jacobs is the 2026 Standard Bank Young Artist for Theatre and the creator of Kraal, the theatre production this curation grows from.' } ] },
+  { h: 'kraal staff members', people: [
+    { n: 'Kwei Shun-yu', r: 'Documentary Crew Producer & Curator', bio: "Kwei Shun-yu is a Chongqing-born photographer and filmmaker completing an MA in Documentary Filmmaking at the University of Cape Town. His short talking to Family (2025), about returning home to China, screened at Encounters, won Nga Maanda Awe's Underdog Award and earned FAME Shorts nominations for Best Student Film and Best Documentary Film. His latest film is Maatjie (2026)." },
+    { n: 'Rae Human', r: 'Kraal staff' }, { n: 'Adré Links', r: 'Kraal staff' },
+    { n: 'Cleveland Hopp', r: 'Kraal staff' }, { n: 'Woudine Dirkse', r: 'Kraal staff' },
+    { n: 'Manfred Adams', r: 'Kraal staff' }, { n: 'Wade van Zyl', r: 'Kraal staff' } ] },
+  { h: 'artists in focus', people: [
+    { n: 'Darion Adams', r: 'Artist in focus · Wanne jy my naam hoor · 12 Dec, 15h00', bio: 'Darion Adams is a South African dancer, choreographer, live artist, educator and cultural producer based in Manenberg, Cape Town. Their multidisciplinary practice moves between choreography, live art, film and site-responsive performance, exploring how bodies carry histories of place, memory and belonging. Drawing on the lived realities of the Cape Flats, Adams investigates identity, displacement, domestic space and the politics of visibility. They are the founder and director of The AIM Society, an arts initiative committed to community-centred creative practice and access to the arts.' },
+    { n: 'Miché van Wyk', r: 'Artist in focus · Story-reading · 16 Dec, 10h00', bio: 'Miché van Wyk is an award-winning multidisciplinary artist whose work spans playwriting, voice-over, live performance art, and theatre. She has carved a distinctive creative voice within the arts industry through her diverse artistic practice. Her work draws strong inspiration from Namaqualand, its people, languages, and stories. Her recent work includes the award-winning production Gat with Garage Dance Ensemble, Kinderlê, directed by Lee-Ann van Rooi, and ge-gebergtes, directed by Wessel Pretorius. Through her work, Miché celebrates her heritage while bringing the stories and lived experiences of her community to contemporary audiences.' },
+    { n: 'Gladwin van Niekerk', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30' },
+    { n: 'Lynette du Plessis', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30' } ] },
+  { h: 'film directors', note: 'Carissa · Variations on a Theme · Al wat ek weet', people: [
+    { n: 'Jason Jacobs', r: 'Film director · 2026 Standard Bank Young Artist for Theatre', bio: "Jason Jacobs is the 2026 Standard Bank Young Artist for Theatre and the creator of Kraal, the theatre production this curation grows from. With Devon Delmar, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by Al wat ek weet. Their VR work Uprooted premieres at IDFA in 2026." },
+    { n: 'Devon Delmar', r: 'Film director · writer', bio: "Devon Delmar is a South African filmmaker and writer. With Jason Jacobs, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by Al wat ek weet. Their VR work Uprooted premieres at IDFA in 2026." } ] },
   { h: 'guest performing artists', people: [
-    { n: 'Gladwin van Niekerk', r: 'In Wag Van · 14 Dec, 14h30' }, { n: 'Lynette du Plessis', r: 'In Wag Van · 14 Dec, 14h30' },
-    { n: 'Byron Klassen', r: 'Wonde · 15 Dec, 14h30' }, { n: 'Miche Van Wyk', r: 'Story-reading · 16 Dec, 10h00' },
-    { n: 'Darion Adams', r: 'Wanne jy my naam hoor · 12 Dec, 15h00' } ] },
+    { n: 'Byron Klassen', r: 'Wonde · 15 Dec, 14h30' } ] },
   { h: 'documentary crew', people: [
-    { n: 'Keisha Petersen', r: 'Documentary crew · volunteer', bio: "Keisha Petersen is a screen production student. Her background includes producing a multicam episode (Spotlight), a documentary (Kill your Darlings), and an SRP project (Skoenmaker se Kind). She directed Red Lace, edited three short films, and served as assistant director and producer on passion projects like Don't turn around." },
-    { n: 'Luca Smith', r: 'Documentary crew · volunteer', bio: 'Luca Smith is a filmmaker interested in finding contemporary stories in overlooked corners. Directorial credits include Horses (2026), Uglyboy (2025), Camino (2025) and the SAFTA-nominated Undercurrent (2025).' },
-    { n: 'Zenith Phaal', r: 'Documentary crew · volunteer', bio: "Zenith Phaal is an interdisciplinary filmmaker based in Cape Town. He is currently developing Boksak, a documentary archiving and preserving traditional Khoisan practices in the Cederberg, and My God Is the Sun, an experimental docufiction about woodworking artists and their relationship with the country's ecology. At UCT, he edited and did the production design on The Man Who Controls the Traffic Lights (2025), edited Horses (2026) and created the soundtrack for Ma(a)tjie (2026)." },
-    { n: 'Ahmad Johardien', r: 'Documentary crew · volunteer', bio: 'Ahmad Johardien is a filmmaker interested in bringing mythical modes of storytelling and experimentation into the contemporary. They have a background in historical studies and carpentry, which informs their work and interdisciplinary approach. Previous credits include directing Horses (2026) and The Man Who Controls the Traffic Lights (2025), which had its world premiere at the Sitges International Fantastic Film Festival.' } ] },
+    { n: 'Keisha Petersen', r: 'Documentary crew · Director', bio: "Keisha Petersen is a screen production student. She has produced a multicam episode (Spotlight), a documentary (Kill your Darlings) and a production for SRP (Skoenmaker se Kind), and directed the experimental short film Red Lace. She has also worked as an assistant director and producer on passion projects, including Don't turn around by Will Yeng, and has edited three shorts: a film, a proof of concept and a scene exercise. Afrikaans is her home language, and she is fluent in both Kaaps and Standard Afrikaans." },
+    { n: 'Luca Smith', r: 'Documentary crew · Producer/Cinematographer', bio: 'Luca Smith is a filmmaker interested in finding contemporary stories in overlooked corners. Directorial credits include Horses (2026), Uglyboy (2025), Camino (2025) and the SAFTA-nominated Undercurrent (2025).' },
+    { n: 'Zenith Phaal', r: 'Documentary crew · Producer/Cinematographer', bio: "Zenith Phaal is an interdisciplinary filmmaker based in Cape Town. He is currently developing Boksak, a documentary archiving and preserving traditional Khoisan practices in the Cederberg, and My God Is the Sun, an experimental docufiction about woodworking artists and their relationship with the country's ecology. At UCT, he edited and did the production design on The Man Who Controls the Traffic Lights (2025), edited Horses (2026) and created the soundtrack for Ma(a)tjie (2026)." },
+    { n: 'Ahmad Johardien', r: 'Documentary crew · Producer/Cinematographer', bio: 'Ahmad Johardien is a filmmaker interested in bringing mythical modes of storytelling and experimentation into the contemporary. They have a background in historical studies and carpentry, which informs their work and interdisciplinary approach. Previous credits include directing Horses (2026) and The Man Who Controls the Traffic Lights (2025), which had its world premiere at the Sitges International Fantastic Film Festival.' } ] },
   { h: 'artist photographers', people: [
     { n: 'Junaid (VJ) Mahomed', r: 'Artist photographer', link: 'https://www.icnp400.com', linkLabel: 'Portfolio: icnp400.com', bio: 'VJ Mahomed is an inquisitive human. He shows his wanderlust mainly through photographs and video, and his work is concerned with how the eye sees everyday movement, stories of upbringing, and grief. "My visuals are revised thoughts mostly, things I\'ve seen before and newly encountered, but all with intentionality emphasised." VJ aspires to preserve his art and to create the best possible entry points for people to access it.' },
     { n: 'Okuhle Sibeko', r: 'Artist photographer', link: 'https://drive.google.com/file/d/1BTZTkqFOnSbJodmKR8aJ38xDJPMnxUvU/view?usp=sharing', linkLabel: 'Portfolio (Google Drive)', bio: 'Okuhle Sibeko is a photographer originally from Randfontein, South Africa, currently pursuing a degree in Economics at the University of Cape Town. Working exclusively with analogue photography, his practice explores interpersonal relationships, from friendships to familial connections. Through his work, he seeks to strengthen, investigate and interrogate the relationships between people, places and himself. His photographic practice is informed by a parallel interest in development economics, through which he engages with the broader social and economic conditions that shape human experiences. He took part in the 2026 Cape Town Photography Festival.' } ] },
-  { h: 'community volunteers', people: [
-    { n: 'University of Cape Town', r: 'Student volunteers' }, { n: 'Kharkams', r: 'Community volunteers' } ] }
+  { h: 'partners', people: [
+    { n: 'Annemarie du Plessis', r: 'Producer' } ] },
+  { h: 'kharkams volunteers', note: 'Names of our Kharkams volunteers are coming soon.', people: [
+    { n: 'Kharkams', r: 'Community volunteers' }, { n: 'University of Cape Town', r: 'Student volunteers' } ] },
+  { h: 'young critics programme', note: 'The young critics joining us in Kharkams will be announced soon.', people: [] }
 ];
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 const excerpt = b => b ? (b.length > 170 ? b.slice(0, 170).replace(/\s+\S*$/, '') + '…' : b) : 'Bio coming soon.';
 document.getElementById('crew').innerHTML = CREW.map((g, gi) => `
   <section class="crew gutter">
-    <h2>${esc(g.h)}</h2>
-    <ul class="cards">${g.people.map((p, i) => `
+    <h2>${esc(g.h)}</h2>${g.note ? `<p class="crew-note">${esc(g.note)}</p>` : ''}
+    ${g.people.length ? `<ul class="cards">` : ''}${g.people.map((p, i) => `
       <li class="card">
         <button class="pic-btn" data-person="${gi}-${i}" aria-label="About ${esc(p.n)}">
           <span class="pic"><span class="slot" data-src="images/people/${slug(p.n)}.jpg" data-alt="${esc(p.n)}"></span><span class="over"><span>${esc(excerpt(p.bio))}<b>Read more →</b></span></span></span>
         </button>
         <b>${esc(p.n)}</b><span>${esc(p.r)}</span>
       </li>`).join('')}
-    </ul>
+    ${g.people.length ? `</ul>` : ''}
   </section>`).join('') + `<p class="later gutter">More bios and photos are added as they come in.</p>`;
 
 /* ---------------- Windows ---------------- */
 const fileRow = (g, label, when, go) => `<li><a href="${go}" data-close><span class="mini" data-g="${g}"></span>${label}<span class="when">${when}</span></a></li>`;
+const crewRows = h => { const gi = CREW.findIndex(g => g.h === h); return gi < 0 ? '' : CREW[gi].people.map((p, i) => `<li><button data-person="${gi}-${i}"><span class="mini" data-g="folder"></span>${esc(p.n)}<span class="when">${esc(p.r.split(' · ')[0])}</span></button></li>`).join(''); };
 const openRow = (g, label, when, win) => `<li><button data-open="${win}"><span class="mini" data-g="${g}"></span>${label}<span class="when">${when}</span></button></li>`;
 const linkBtn = (key, label, cls) => `<a class="btn95${cls ? ' ' + cls : ''}" data-link="${key}" href="${esc(LINKS[key] || LINKS.webtickets)}" target="_blank" rel="noopener">${label}</a>`;
 const ticketBtns = () => `<div class="tk-btns">${linkBtn('webtickets', 'Buy tickets on Webtickets', 'default')}${linkBtn('donate', 'Donate a festival pass')}</div>`;
@@ -845,7 +854,7 @@ const WINS = {
       <ul class="rows">
         ${fileRow('folder', 'Program', '→', '#lineup')}
         ${fileRow('folder', 'Creative Team', '→', '#creatives')}
-        ${openRow('folder', 'Artists In Focus', 'soon', 'artists')}
+        ${openRow('folder', 'Artists In Focus', '4 artists', 'artists')}
         ${openRow('folder', 'Oral Stories', 'recordings', 'oral')}
         ${openRow('film', 'Kraal Stories', 'slideshow', 'kraalstories')}
         ${openRow('sound', 'Eland Gesange', 'album', 'eland')}
@@ -879,8 +888,12 @@ const WINS = {
       <h3>short <em>films</em></h3>
       <p><b>15 Dec 26 | 16h30</b><br>Short films from established African filmmakers, curated by Cleveland Hopp.</p>
       <p>Screening venue: Kharkams Community Hall</p>
+      <h3>film <em>directors</em></h3>
+      <p><b>Jason Jacobs &amp; Devon Delmar</b> co-wrote and co-directed <i>Carissa</i> (Venice Orizzonti) and <i>Variations on a Theme</i> (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by <i>Al wat ek weet</i>. Their VR work <i>Uprooted</i> premieres at IDFA in 2026.</p>
+      <p>Also in the film folder: <i>One Woman One Bra</i> and <i>Notes from the Underground</i>. Director details to come.</p>
+      <p><a href="#creatives" data-close>Meet the film directors →</a></p>
     </div>`, status: 'Page 1 of 1' },
-  artists: { t: 'Artists In Focus', g: 'folder', w: 420, body: () => `<div class="well empty-folder">Profiles of our artists in focus are on their way.<br>Each artist will get their own folder here, with their background, achievements and samples of their work.</div>`, status: '0 object(s)' },
+  artists: { t: 'Artists In Focus', g: 'folder', w: 440, body: () => `<ul class="rows well">${crewRows('artists in focus')}</ul><p style="font-size:.9rem">Open a folder to read the artist's profile.</p>`, status: '4 object(s)' },
   museum: { t: 'Museum.jpg', g: 'picture', w: 460, body: () => `
     <div class="well" style="aspect-ratio:4/3;overflow:hidden">${thumb('images/museum.jpg', 'Museum', 'fill')}</div>
     <p style="padding:0 2px">Museum. Opening soon.</p>`, status: 'Museum.jpg' },
@@ -933,12 +946,13 @@ const WINS = {
   poster: { t: 'Poster.jpg', g: 'picture', w: 400, body: () => `
     ${thumb('images/poster.jpg', 'Kraal Curation poster', 'poster')}
     <p style="font-size:.9rem;padding:0 2px">The Kraal Curation poster. Click to enlarge.</p>`, status: 'Poster.jpg' },
-  critics: { t: 'Young Critics Reviews', g: 'folder', w: 420, body: () => `<div class="well empty-folder">Reviews by young critics will appear here during the week.</div>`, status: '0 object(s)' },
-  team: { t: 'Creative Team', g: 'folder', w: 420, body: () => `
-    <ul class="rows well">
-      ${['Woudine Dirkse', 'Adré Links', 'Gladwin Van Niekerk', 'Devon Delmar', 'Cleveland Hopp', 'Kwei Shun-Yu', 'Manfred Adams', 'Wade Van Zyl'].map(n => fileRow('picture', n, 'curation', '#creatives')).join('')}
-    </ul>
-    <div style="display:flex;justify-content:flex-end"><a class="btn95" href="#creatives" data-close style="text-decoration:none">All creatives</a></div>`, status: '8 object(s)' },
+  critics: { t: 'Young Critics Reviews', g: 'folder', w: 420, body: () => `<div class="well empty-folder"><b>Young Critics Programme</b><br>Reviews by the young critics will appear here during the week.</div>`, status: '0 object(s)' },
+  team: { t: 'Creative Team', g: 'folder', w: 440, body: () => `
+    <p style="font-size:.85rem;padding:0 2px"><b>Kraal staff members</b></p>
+    <ul class="rows well">${crewRows('kraal staff members')}</ul>
+    <p style="font-size:.85rem;padding:0 2px"><b>Film directors</b></p>
+    <ul class="rows well">${crewRows('film directors')}</ul>
+    <div style="display:flex;justify-content:flex-end"><a class="btn95" href="#creatives" data-close style="text-decoration:none">All creatives</a></div>`, status: 'Kraal Curation 2026' },
   whatsapp: { t: 'whatsapp channel', g: 'chat', w: 360, body: () => `<div class="doc"><p>The Kraal Curation WhatsApp channel link will be added here.</p></div>` },
   pdf: { t: 'Program.pdf', g: 'file:pdf', w: 380, body: () => `<div class="doc"><p>The full program PDF will be available to download closer to the time.</p><p><a href="#lineup" data-close>Read the lineup on this page →</a></p></div>` }
 };
