@@ -822,8 +822,8 @@ const CREW = [
   { h: 'artists in focus', people: [
     { n: 'Darion Adams', r: 'Artist in focus · Wanne jy my naam hoor · 12 Dec, 15h00', bio: 'Darion Adams is a South African dancer, choreographer, live artist, educator and cultural producer based in Manenberg, Cape Town. Their multidisciplinary practice moves between choreography, live art, film and site-responsive performance, exploring how bodies carry histories of place, memory and belonging. Drawing on the lived realities of the Cape Flats, Adams investigates identity, displacement, domestic space and the politics of visibility. They are the founder and director of The AIM Society, an arts initiative committed to community-centred creative practice and access to the arts.' },
     { n: 'Miché van Wyk', r: 'Artist in focus · Story-reading · 16 Dec, 10h00', bio: 'Miché van Wyk is an award-winning multidisciplinary artist whose work spans playwriting, voice-over, live performance art, and theatre. She has carved a distinctive creative voice within the arts industry through her diverse artistic practice. Her work draws strong inspiration from Namaqualand, its people, languages, and stories. Her recent work includes the award-winning production Gat with Garage Dance Ensemble, Kinderlê, directed by Lee-Ann van Rooi, and ge-gebergtes, directed by Wessel Pretorius. Through her work, Miché celebrates her heritage while bringing the stories and lived experiences of her community to contemporary audiences.' },
-    { n: 'Gladwin van Niekerk', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30' },
-    { n: 'Lynette du Plessis', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30' } ] },
+    { n: 'Gladwin van Niekerk', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30', bio: 'Gladwin van Niekerk is a versatile South African actor, singer and multidisciplinary artist. He gained international acclaim starring in the Venice Film Festival selection Carissa and the award-winning film Variations on a Theme. A dynamic stage performer, he has shone in acclaimed productions like In Wag Van and The Call.' },
+    { n: 'Lynette du Plessis', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30', bio: 'Lynette du Plessis is a South African performer and theatre-maker from George, Western Cape. She first gained recognition in dance, training in all contemporary forms with Jazzart Dance Theatre, Garage Dance Ensemble and Figure of 8 Dance Theatre.\n\nIn recent years Lynette has expanded into theatre and live art, building a reputation as a versatile, multidisciplinary artist. She has been under direction with artists including Jason Jacobs, Lee-Ann van Rooi, Carin Bester and Nico Scheepers.\n\nHer practice sits at the intersection of movement, acting and live art, using the body as a site for storytelling, experimentation and public engagement.' } ] },
   { h: 'film directors', note: 'Carissa · Variations on a Theme · Al wat ek weet', people: [
     { n: 'Jason Jacobs', r: 'Film director · 2026 Standard Bank Young Artist for Theatre', bio: "Jason Jacobs is the 2026 Standard Bank Young Artist for Theatre and the creator of Kraal, the theatre production this curation grows from. With Devon Delmar, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by Al wat ek weet. Their VR work Uprooted premieres at IDFA in 2026." },
     { n: 'Devon Delmar', r: 'Film director · writer', bio: "Devon Delmar is a South African filmmaker and writer. With Jason Jacobs, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by Al wat ek weet. Their VR work Uprooted premieres at IDFA in 2026." } ] },
@@ -838,14 +838,14 @@ const CREW = [
     { n: 'Junaid (VJ) Mahomed', r: 'Artist photographer', link: 'https://www.icnp400.com', linkLabel: 'Portfolio: icnp400.com', bio: 'VJ Mahomed is an inquisitive human. He shows his wanderlust mainly through photographs and video, and his work is concerned with how the eye sees everyday movement, stories of upbringing, and grief. "My visuals are revised thoughts mostly, things I\'ve seen before and newly encountered, but all with intentionality emphasised." VJ aspires to preserve his art and to create the best possible entry points for people to access it.' },
     { n: 'Okuhle Sibeko', r: 'Artist photographer', link: 'https://drive.google.com/file/d/1BTZTkqFOnSbJodmKR8aJ38xDJPMnxUvU/view?usp=sharing', linkLabel: 'Portfolio (Google Drive)', bio: 'Okuhle Sibeko is a photographer originally from Randfontein, South Africa, currently pursuing a degree in Economics at the University of Cape Town. Working exclusively with analogue photography, his practice explores interpersonal relationships, from friendships to familial connections. Through his work, he seeks to strengthen, investigate and interrogate the relationships between people, places and himself. His photographic practice is informed by a parallel interest in development economics, through which he engages with the broader social and economic conditions that shape human experiences. He took part in the 2026 Cape Town Photography Festival.' } ] },
   { h: 'partners', people: [
-    { n: 'Annemarie du Plessis', r: 'Producer' } ] },
+    { n: 'Annemarie du Plessis', r: 'Producer · Meria Productions', bio: 'Annemarie du Plessis is a producer and founder of Meria Productions. Her credits include Variations on a Theme (IFFR Tiger Award; South Africa’s 2027 Oscar submission), Carissa (Venice Orizzonti), Al wat ek weet, Emmy-nominated Koek and SAFTA-winning Die Broer Toer. She also produced the VR work Uprooted, which will premiere at IDFA DocLab in 2026.' } ] },
   { h: 'kharkams volunteers', note: 'Names of our Kharkams volunteers are coming soon.', people: [
     { n: 'Kharkams', r: 'Community volunteers' }, { n: 'University of Cape Town', r: 'Student volunteers' } ] },
   { h: 'young critics programme', note: 'The young critics joining us in Kharkams will be announced soon.', people: [] }
 ];
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
-const excerpt = b => b ? (b.length > 170 ? b.slice(0, 170).replace(/\s+\S*$/, '') + '…' : b) : 'Bio coming soon.';
+const excerpt = b => (b = b && b.replace(/\s+/g, ' ')) ? (b.length > 170 ? b.slice(0, 170).replace(/\s+\S*$/, '') + '…' : b) : 'Bio coming soon.';
 document.getElementById('crew').innerHTML = CREW.map((g, gi) => `
   <section class="crew gutter">
     <h2>${esc(g.h)}</h2>${g.note ? `<p class="crew-note">${esc(g.note)}</p>` : ''}
@@ -1002,7 +1002,7 @@ function openPerson(key) {
       <div class="doc">
         <h3>${esc(p.n)}</h3>
         <p><b>${esc(p.r)}</b></p>
-        <p>${esc(p.bio || 'Bio coming soon.')}</p>
+        ${(p.bio || 'Bio coming soon.').split(/\n\n+/).map(t => `<p>${esc(t)}</p>`).join('')}
         ${p.link ? `<p><a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.linkLabel || 'Portfolio')} →</a></p>` : ''}
       </div>
     </div>` });
