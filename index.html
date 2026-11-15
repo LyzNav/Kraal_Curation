@@ -321,6 +321,7 @@ a.btn95 { text-decoration: none; }
 .thumbs > :first-child:nth-last-child(3) { grid-column: 1 / -1; }
 .thumb { display: block; width: 100%; aspect-ratio: 1; padding: 0; overflow: hidden; background: var(--sky-b); border: 2px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); }
 .thumb .slot { pointer-events: none; }
+.thumb .slot img { object-position: 50% 22%; }
 .thumb:hover, .thumb:focus-visible { outline: 2px solid var(--select); outline-offset: 1px; }
 .thumb.tba { display: grid; place-items: center; font-family: var(--f-pixel); font-size: .8rem; color: var(--purple); background: #f1eef8; }
 .thumb.fill { aspect-ratio: auto; height: 100%; border: 0; }
@@ -470,7 +471,7 @@ a.btn95 { text-decoration: none; }
 
         <article class="lu-sec" id="s-filmed">
           <div class="thumbs">
-            <button class="thumb" data-view="images/filmed-theatre.jpg" data-cap="Wanne jy my naam hoor" aria-label="Enlarge photo: Wanne jy my naam hoor"><span class="slot" data-src="images/filmed-theatre.jpg" data-alt="Wanne jy my naam hoor"></span></button>
+            <button class="thumb" data-view="images/people/darion-adams.jpg" data-cap="Darion Adams · Wanne jy my naam hoor" aria-label="Enlarge photo: Darion Adams · Wanne jy my naam hoor"><span class="slot" data-src="images/people/darion-adams.jpg" data-alt="Darion Adams · Wanne jy my naam hoor"></span></button>
           </div>
           <div class="txt">
             <h3>Filmed theatre <span class="when">12 Dec 26</span></h3>
@@ -494,16 +495,17 @@ a.btn95 { text-decoration: none; }
 
         <article class="lu-sec" id="s-theatre">
           <div class="thumbs">
-            <button class="thumb" data-view="images/in-wag-van.jpg" data-cap="In Wag Van" aria-label="Enlarge photo: In Wag Van"><span class="slot" data-src="images/in-wag-van.jpg" data-alt="In Wag Van"></span></button>
+            <button class="thumb" data-view="images/people/gladwin-van-niekerk.jpg" data-cap="Gladwin van Niekerk · In Wag Van" aria-label="Enlarge photo: Gladwin van Niekerk · In Wag Van"><span class="slot" data-src="images/people/gladwin-van-niekerk.jpg" data-alt="Gladwin van Niekerk · In Wag Van"></span></button>
+            <button class="thumb" data-view="images/people/lynette-du-plessis.jpg" data-cap="Lynette du Plessis · In Wag Van" aria-label="Enlarge photo: Lynette du Plessis · In Wag Van"><span class="slot" data-src="images/people/lynette-du-plessis.jpg" data-alt="Lynette du Plessis · In Wag Van"></span></button>
             <button class="thumb" data-view="images/wonde.jpg" data-cap="Wonde" aria-label="Enlarge photo: Wonde"><span class="slot" data-src="images/wonde.jpg" data-alt="Wonde"></span></button>
-            <button class="thumb" data-view="images/story-reading.jpg" data-cap="Story-reading" aria-label="Enlarge photo: Story-reading"><span class="slot" data-src="images/story-reading.jpg" data-alt="Story-reading"></span></button>
+            <button class="thumb" data-view="images/people/miche-van-wyk.jpg" data-cap="Miché van Wyk · Story-reading" aria-label="Enlarge photo: Miché van Wyk · Story-reading"><span class="slot" data-src="images/people/miche-van-wyk.jpg" data-alt="Miché van Wyk · Story-reading"></span></button>
           </div>
           <div class="txt">
             <h3>Theatre performances <span class="when">14–16 Dec 26</span></h3>
             <p class="venue">Venue: Kharkams Community Hall</p>
             <p class="ent"><b>14 Dec 26 | 14h30</b><i>In Wag Van</i> with Gladwin van Niekerk and Lynette du Plessis.</p>
             <p class="ent"><b>15 Dec 26 | 14h30</b><i>Wonde</i> by Byron Klassen.</p>
-            <p class="ent"><b>16 Dec 26 | 10h00</b>Story-reading for young audiences with Miche Van Wyk.</p>
+            <p class="ent"><b>16 Dec 26 | 10h00</b>Story-reading for young audiences with Miché van Wyk.</p>
           </div>
         </article>
 
@@ -933,7 +935,7 @@ const WINS = {
       <h3>theatre <em>performances</em></h3>
       <p><b>14 Dec 26 | 14h30</b><br><i>In Wag Van</i> with Gladwin van Niekerk and Lynette du Plessis.</p>
       <p><b>15 Dec 26 | 14h30</b><br><i>Wonde</i> by Byron Klassen.</p>
-      <p><b>16 Dec 26 | 10h00</b><br>Story-reading for young audiences with Miche Van Wyk.</p>
+      <p><b>16 Dec 26 | 10h00</b><br>Story-reading for young audiences with Miché van Wyk.</p>
       <p>Venue: Kharkams Community Hall</p>
       <h3>filmed <em>theatre</em></h3>
       <p><b>12 Dec 26 | 15h00</b><br><i>Wanne jy my naam hoor</i> by Darion Adams. Kharkams High School (Hostel).</p>
