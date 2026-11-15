@@ -7,7 +7,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cutive+Mono&family=Silkscreen:wght@400;700&family=VT323&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&family=VT323&display=swap">
 <style>
 /* Layout: four "pages" like the Canva file: a dusk desktop of clickable files, a typewriter programme with two-tone headings and red date tags, sky-placeholder creative cards, and a subscribe dialog. Single deliberate retro look. */
 :root {
@@ -28,7 +28,7 @@
   --sky-b: #d8eefc;
 
   --f-type: "Courier Prime", "Courier New", Courier, monospace;
-  --f-head: "Cutive Mono", "Courier New", Courier, monospace;
+  --f-head: "Courier Prime", "Courier New", Courier, monospace;
   --f-pixel: "Silkscreen", "VT323", "Courier New", monospace;
   --f-label: "VT323", "Courier New", monospace;
 }
@@ -284,6 +284,103 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
   .ico .lbl { font-size: 1.15rem; }
   .dialog-dock { position: relative; left: auto; top: auto; transform: none; width: auto; margin-top: 28px; }
 }
+
+/* ================= v3: Jason's notes ================= */
+/* Headings everywhere follow the landing page: pixel caps in purple, typewriter body */
+.doc h3 { font-family: var(--f-pixel); font-size: .92rem; color: var(--purple); text-transform: uppercase; line-height: 1.25; letter-spacing: .02em; }
+.doc h3 em { font-style: normal; color: var(--purple-2); }
+a.btn95 { text-decoration: none; }
+.tk-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.soonnote { font-size: .9rem; background: #fff6c9; border: 1px dashed #8a6d00; padding: 4px 8px; justify-self: start; }
+
+/* Lineup: white page, everything inside scrollable windows */
+.lu { max-width: 1280px; margin-inline: auto; padding-block: 26px 64px; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 28px; align-items: start; }
+.lu > .chrome { min-width: 0; }
+.scrollbox { overflow-y: auto; overscroll-behavior: contain; }
+.scrollbox::-webkit-scrollbar { width: 16px; }
+.scrollbox::-webkit-scrollbar-track { background: repeating-conic-gradient(#c3c3c3 0 25%, #fff 0 50%) 0 0 / 2px 2px; }
+.scrollbox::-webkit-scrollbar-thumb { background: var(--win); border: 2px solid; border-color: var(--win-hi) var(--win-dk) var(--win-dk) var(--win-hi); }
+.notepad { height: min(540px, 66vh); padding: 14px 16px 18px; font-size: .92rem; line-height: 1.6; display: block; }
+.notepad p + p, .notepad p + ul, .notepad ul + p { margin-top: .85em; }
+.notepad ul { margin-bottom: 0; padding-left: 1.4em; list-style: "– "; }
+.progbox { height: min(540px, 66vh); display: block; }
+.lu-sec { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 14px; padding: 14px 14px 16px; border-bottom: 1px dashed #b5b5b5; scroll-margin-top: 8px; }
+.lu-sec:last-child { border-bottom: 0; }
+.lu-sec .txt { display: grid; gap: 5px; align-content: start; min-width: 0; }
+.lu-sec h3 { margin: 0; font-family: var(--f-pixel); font-weight: 400; font-size: .92rem; color: var(--purple); text-transform: uppercase; line-height: 1.25; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.lu-sec h3 .when { font-family: var(--f-label); font-size: 1.05rem; line-height: 1.1; color: #000; text-transform: none; background: var(--win); padding: 0 6px; border: 2px solid; border-color: var(--win-hi) var(--win-dk) var(--win-dk) var(--win-hi); }
+.lu-sec .venue { font-size: .8rem; color: #444; }
+.lu-sec .ent { font-size: .88rem; line-height: 1.45; }
+.lu-sec .ent b { display: block; font-variant-numeric: tabular-nums; }
+.lu-sec .note { font-weight: 700; color: var(--purple); }
+.thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; align-content: start; }
+.thumbs > :only-child { grid-column: 1 / -1; }
+.thumbs > :first-child:nth-last-child(3) { grid-column: 1 / -1; }
+.thumb { display: block; width: 100%; aspect-ratio: 1; padding: 0; overflow: hidden; background: var(--sky-b); border: 2px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); }
+.thumb .slot { pointer-events: none; }
+.thumb:hover, .thumb:focus-visible { outline: 2px solid var(--select); outline-offset: 1px; }
+.thumb.tba { display: grid; place-items: center; font-family: var(--f-pixel); font-size: .8rem; color: var(--purple); background: #f1eef8; }
+.thumb.fill { aspect-ratio: auto; height: 100%; border: 0; }
+.thumb.poster { aspect-ratio: 3 / 4; }
+.lu-extras { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: flex-end; gap: 12px 28px; }
+@media (max-width: 860px) {
+  .lu { grid-template-columns: minmax(0, 1fr); }
+  .notepad { height: 300px; }
+  .progbox { height: 72vh; }
+  .lu-extras { justify-content: flex-start; }
+}
+@media (max-width: 480px) { .lu-sec { grid-template-columns: 78px minmax(0, 1fr); gap: 10px; padding-inline: 10px; } }
+
+/* Photo viewer + Kraal gallery */
+.view-pic { aspect-ratio: 4 / 3; overflow: hidden; background: #000; }
+.view-pic .slot img { object-fit: contain; background: #000; }
+.gal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+
+/* Creatives gallery */
+.crew h2 { font-family: var(--f-pixel); font-weight: 400; font-size: clamp(.95rem, 1.6vw, 1.15rem); color: var(--purple); text-transform: uppercase; }
+.card { gap: 6px; }
+.pic-btn { display: block; width: 100%; padding: 0; border: 0; background: none; text-align: left; }
+.card .pic { display: block; position: relative; }
+.card .over {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px;
+  background: linear-gradient(180deg, rgba(64,31,113,.35), rgba(64,31,113,.94) 45%); color: #fff;
+  font: .76rem/1.4 var(--f-type); opacity: 0; transition: opacity .15s;
+}
+.card .over b { display: block; margin-top: 6px; font-family: var(--f-pixel); font-size: .62rem; color: #ffd23a; }
+.pic-btn:hover .over, .pic-btn:focus-visible .over { opacity: 1; }
+.pic-btn:focus-visible { outline: 2px dotted var(--purple); outline-offset: 3px; }
+@media (hover: none) { .card .over { display: none; } }
+@media (prefers-reduced-motion: reduce) { .card .over { transition: none; } }
+.later { max-width: 1240px; margin: 36px auto 0; color: #555; font-size: .9rem; text-align: center; }
+.prof { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; align-items: start; }
+.prof .ph { aspect-ratio: 205 / 273; overflow: hidden; }
+.prof .doc { font-size: .92rem; }
+@media (max-width: 520px) { .prof { grid-template-columns: minmax(0, 1fr); } .prof .ph { max-width: 180px; } }
+
+/* Kraal Stories slideshow */
+.player .screen .ks-slide { position: absolute; inset: 0; }
+.ks-slide img, .ks-slide svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.player .screen .ks-cap { position: absolute; left: 8px; bottom: 6px; font-family: var(--f-pixel); font-size: .68rem; color: #fff; text-shadow: 1px 1px 0 #000; }
+.player .bar { position: relative; }
+.player .bar .fill { position: absolute; left: 2px; top: 2px; bottom: 2px; width: 0; background: var(--select); transition: width .3s; }
+
+/* Eland Gesange */
+.amp { display: grid; gap: 10px; }
+.amp-disp { background: #000; color: #9be38f; font-family: var(--f-label); font-size: 1.1rem; line-height: 1.1; padding: 10px 12px; display: grid; gap: 4px; border: 2px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); }
+.amp-t { font-family: var(--f-pixel); font-size: 1rem; color: #b7ff9e; letter-spacing: .06em; }
+.eq { display: flex; gap: 3px; align-items: flex-end; height: 24px; margin-top: 4px; }
+.eq i { width: 8px; height: 30%; background: #3bb54a; animation: eq .9s ease-in-out infinite alternate; }
+.eq i:nth-child(3n) { animation-delay: -.3s; } .eq i:nth-child(3n+1) { animation-delay: -.6s; } .eq i:nth-child(4n) { animation-duration: .7s; }
+@keyframes eq { from { height: 15%; } to { height: 100%; } }
+@media (prefers-reduced-motion: reduce) { .eq i { animation: none; height: 60%; } }
+.amp-list iframe { display: block; width: 100%; height: 210px; border: 0; background: #fff; }
+
+.menubar { display: flex; gap: 2px; padding: 2px 4px; font-size: .9rem; }
+.menubar span { padding: 1px 8px; }
+.menubar span::first-letter { text-decoration: underline; }
+@media (min-width: 761px) { .desk-sub { min-height: 780px; } .desk-sub .dialog-dock { top: 36%; } }
+/* Tickets write-up on the last desktop */
+.sub-win .wb p { font-size: .95rem; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -305,12 +402,15 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
     <button class="ico" data-win="tickets" style="--x:70.2%;--y:20.4%"><span class="glyph" data-g="magnifier"></span><span class="lbl">Tickets</span></button>
     <button class="ico" data-win="workshops" style="--x:86.1%;--y:23.3%"><span class="glyph" data-g="picture"></span><span class="lbl">CommunityWorkshops.jpg</span></button>
     <button class="ico" data-win="films" style="--x:23.8%;--y:37.9%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Films.pdf</span></button>
-    <button class="ico" data-win="artists" style="--x:67.5%;--y:47.7%"><span class="glyph" data-g="folder"></span><span class="lbl">Artists-in-Residency</span></button>
+    <button class="ico" data-win="artists" style="--x:67.5%;--y:47.7%"><span class="glyph" data-g="folder"></span><span class="lbl">Artists In Focus</span></button>
     <button class="ico" data-win="museum" style="--x:49.6%;--y:48.4%"><span class="glyph" data-g="picture"></span><span class="lbl">Museum.jpg</span></button>
     <button class="ico" data-win="theatre" style="--x:12.6%;--y:50.9%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Theatre.pdf</span></button>
     <button class="ico" data-win="kraal" style="--x:33.9%;--y:56.1%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Kraal.pdf</span></button>
     <button class="ico" data-win="sponsor" style="--x:44.7%;--y:71.2%"><span class="glyph" data-g="file:webp"></span><span class="lbl">Sponsor.webp</span></button>
-    <button class="ico" data-win="oral" style="--x:63.1%;--y:77.3%"><span class="glyph" data-g="film"></span><span class="lbl">Oral Stories.mp4</span></button>
+    <button class="ico" data-win="oral" style="--x:63.1%;--y:77.3%"><span class="glyph" data-g="folder"></span><span class="lbl">Oral Stories</span></button>
+    <button class="ico" data-win="kraalstories" style="--x:12%;--y:24%"><span class="glyph" data-g="film"></span><span class="lbl">Kraal Stories.mp4</span></button>
+    <button class="ico" data-win="eland" style="--x:86%;--y:50%"><span class="glyph" data-g="sound"></span><span class="lbl">Eland Gesange</span></button>
+    <button class="ico" data-win="poster" style="--x:8%;--y:77%"><span class="glyph" data-g="picture"></span><span class="lbl">Poster.jpg</span></button>
     <button class="ico" data-win="critics" style="--x:84.2%;--y:77.6%"><span class="glyph" data-g="folder"></span><span class="lbl">Young Critics Reviews</span></button>
     <button class="ico" data-win="team" style="--x:26.7%;--y:77.1%"><span class="glyph" data-g="folder"></span><span class="lbl">Creative Team</span></button>
   </div>
@@ -332,139 +432,116 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
     </ul>
   </nav>
 
-  <div class="intro gutter">
-    <div class="body">
-      <p>The <b>Kraal Curation</b> is an extension of the original theatre production titled <i>Kraal</i> by the 2026 Standard Bank Young Artist for Theatre, Jason Jacobs. It is a week of creative engagements with live arts, from 12 to 18 December 2026, under the theme <b>Die Grond Onthou / The Land Remembers</b>.</p>
-      <p>This is the first year. A multi-disciplinary arts event bringing together a committed team of film and theatre producers, local managers, and artists, focusing on both the celebration and investment in our trans-local talent. The curatorial team features Woudine Dirkse, Adré Links, Gladwin Van Niekerk, Devon Delmar, Cleveland Hopp, Kwei Shun-Yu, Manfred Adams and Wade Van Zyl, along with volunteers from the University of Cape Town and Kharkams.</p>
-      <div><p>The lineup includes the films:</p>
-        <ul><li>Variations on a Theme</li><li>Al Wat Ek Weet</li><li>Notes from the Underground</li></ul></div>
-      <p>In addition, a thoughtfully curated selection of short films from established African filmmakers will be showcased. A work-in-process segment offers emerging creators the chance to receive feedback directly from the curation community.</p>
-      <div><p>Three main theatre performances will engage audiences in a different language and spirit:</p>
-        <ul><li>In Wag Van</li><li>Wonde</li><li>A story-reading for young children</li></ul></div>
-      <p>A Kraal Talent Competition will spotlight emerging local artists, while a documentary titled <i>Starting from Scratch</i> will provide an insightful look into the experiences of working in sacred spaces like Kharkams. This doccie will be made available for paid viewing at a later stage in 2027.</p>
-      <p>The evening before the Talent Competition, the <b>Kraal Curation</b> will close in a communal celebration, highlighting our diverse cultures with live DJs and visual art installations; an event you won't want to miss! Kraal Curation is an invitation to listen and engage with stories from and presented in Kharkams, Namaqualand.</p>
+  <div class="lu gutter">
+    <div class="chrome" role="group" aria-labelledby="sum-t">
+      <div class="tb"><span class="tb-ico" data-g="file:txt"></span><span class="t" id="sum-t">summary.txt</span><span class="tbtn" aria-hidden="true">_</span><span class="tbtn" aria-hidden="true">×</span></div>
+      <div class="menubar" aria-hidden="true"><span>File</span><span>Edit</span><span>Search</span><span>Help</span></div>
+      <div class="well scrollbox notepad" tabindex="0" aria-label="Summary of Kraal Curation">
+        <p><b>Kraal Curation</b> grows out of <i>Kraal</i>, the theatre production by Jason Jacobs, the 2026 Standard Bank Young Artist for Theatre. From 12 to 18 December 2026, Kharkams in Namaqualand hosts a week of live arts under the theme <b>Die Grond Onthou / The Land Remembers</b>.</p>
+        <p>This is the first edition. Film and theatre producers, local managers and artists have come together to celebrate and invest in trans-local talent. The curatorial team is Woudine Dirkse, Adré Links, Gladwin Van Niekerk, Devon Delmar, Cleveland Hopp, Kwei Shun-Yu, Manfred Adams and Wade Van Zyl, with volunteers from the University of Cape Town and Kharkams.</p>
+        <p>Three theatre performances lead the program:</p>
+        <ul><li>In Wag Van</li><li>Wonde</li><li>A story-reading for young children</li></ul>
+        <p>Workshops for children and elders, a work-in-process session where emerging creators get feedback from the curation community, and a Kraal Talent Competition for local artists complete the week.</p>
+        <p>The documentary <i>Starting from Scratch</i> looks at what it means to work in sacred spaces like Kharkams. It will be available for paid viewing in 2027.</p>
+        <p>On the evening before the Talent Competition, we close with a communal celebration of our cultures, with live DJs and visual art installations.</p>
+        <p><b>Kraal Curation is an invitation to listen to, and engage with, stories from Kharkams, presented in Kharkams.</b></p>
+      </div>
+      <div class="status"><span>Scroll to read</span><span class="fit">12–18 Dec 2026</span></div>
     </div>
-    <div class="tools">
-      <button class="pdf-link" data-win="pdf"><span data-g="globe"></span>Access and download full programme as PDF.</button>
-      <button class="ico inline" data-win="program"><span class="glyph" data-g="folder"></span><span class="lbl">Program</span></button>
+
+    <div class="chrome" role="group" aria-labelledby="prog-t">
+      <div class="tb"><span class="tb-ico" data-g="folder"></span><span class="t" id="prog-t">Program · Kraal Curation 2026</span><span class="tbtn" aria-hidden="true">_</span><span class="tbtn" aria-hidden="true">×</span></div>
+      <div class="well scrollbox progbox" tabindex="0" aria-label="Program">
+
+        <article class="lu-sec" id="s-opening">
+          <div class="thumbs">
+            <button class="thumb" data-view="images/opening.jpg" data-cap="Opening event" aria-label="Enlarge photo: Opening event"><span class="slot" data-src="images/opening.jpg" data-alt="Opening event"></span></button>
+          </div>
+          <div class="txt">
+            <h3>Opening event <span class="when">12 Dec 26</span></h3>
+            <p class="venue">Venue: Kharkams High School (Hostel)</p>
+            <p class="ent"><b>12 Dec 26 | 15h00</b>Kraal: Inside/Outside. Memory Boks: Ons Kom Vandaan.</p>
+          </div>
+        </article>
+
+        <article class="lu-sec" id="s-filmed">
+          <div class="thumbs">
+            <button class="thumb" data-view="images/filmed-theatre.jpg" data-cap="Wanne jy my naam hoor" aria-label="Enlarge photo: Wanne jy my naam hoor"><span class="slot" data-src="images/filmed-theatre.jpg" data-alt="Wanne jy my naam hoor"></span></button>
+          </div>
+          <div class="txt">
+            <h3>Filmed theatre <span class="when">12 Dec 26</span></h3>
+            <p class="venue">Venue: Kharkams High School (Hostel)</p>
+            <p class="ent"><b>12 Dec 26 | 15h00</b><i>Wanne jy my naam hoor</i> by Darion Adams.</p>
+          </div>
+        </article>
+
+        <article class="lu-sec" id="s-children">
+          <div class="thumbs">
+            <button class="thumb" data-view="images/children.jpg" data-cap="Program for children" aria-label="Enlarge photo: Program for children"><span class="slot" data-src="images/children.jpg" data-alt="Program for children"></span></button>
+          </div>
+          <div class="txt">
+            <h3>Program for children <span class="when">14–16 Dec 26</span></h3>
+            <p class="venue">Venue: Church Hall</p>
+            <p class="ent"><b>14 Dec 26 | 11h00</b>Clay-making workshop</p>
+            <p class="ent"><b>15 Dec 26 | 10h00</b>Arts &amp; crafts workshop with recycled materials</p>
+            <p class="ent"><b>16 Dec 26 | 10h00</b>Movie-morning for young audiences</p>
+          </div>
+        </article>
+
+        <article class="lu-sec" id="s-theatre">
+          <div class="thumbs">
+            <button class="thumb" data-view="images/in-wag-van.jpg" data-cap="In Wag Van" aria-label="Enlarge photo: In Wag Van"><span class="slot" data-src="images/in-wag-van.jpg" data-alt="In Wag Van"></span></button>
+            <button class="thumb" data-view="images/wonde.jpg" data-cap="Wonde" aria-label="Enlarge photo: Wonde"><span class="slot" data-src="images/wonde.jpg" data-alt="Wonde"></span></button>
+            <button class="thumb" data-view="images/story-reading.jpg" data-cap="Story-reading" aria-label="Enlarge photo: Story-reading"><span class="slot" data-src="images/story-reading.jpg" data-alt="Story-reading"></span></button>
+          </div>
+          <div class="txt">
+            <h3>Theatre performances <span class="when">14–16 Dec 26</span></h3>
+            <p class="venue">Venue: Kharkams Community Hall</p>
+            <p class="ent"><b>14 Dec 26 | 14h30</b><i>In Wag Van</i> with Gladwin van Niekerk and Lynette du Plessis.</p>
+            <p class="ent"><b>15 Dec 26 | 14h30</b><i>Wonde</i> by Byron Klassen.</p>
+            <p class="ent"><b>16 Dec 26 | 10h00</b>Story-reading for young audiences with Miche Van Wyk.</p>
+          </div>
+        </article>
+
+        <article class="lu-sec" id="s-workshops">
+          <div class="thumbs">
+            <button class="thumb" data-view="images/workshops.jpg" data-cap="Oral storytelling workshop" aria-label="Enlarge photo: Oral storytelling workshop"><span class="slot" data-src="images/workshops.jpg" data-alt="Oral storytelling workshop"></span></button>
+          </div>
+          <div class="txt">
+            <h3>In-person workshops <span class="when">16 Dec 26</span></h3>
+            <p class="venue">Venue: Rainbow Centre</p>
+            <p class="ent"><b>16 Dec 26 | 14h30</b>An oral storytelling workshop on heritage and the origins of Kharkams. <span class="note">Only elders aged 60+.</span></p>
+          </div>
+        </article>
+
+        <article class="lu-sec" id="s-process">
+          <div class="thumbs">
+            <button class="thumb" data-view="images/works-in-process.jpg" data-cap="Works in process" aria-label="Enlarge photo: Works in process"><span class="slot" data-src="images/works-in-process.jpg" data-alt="Works in process"></span></button>
+          </div>
+          <div class="txt">
+            <h3>Works in process <span class="when">16 Dec 26</span></h3>
+            <p class="venue">Venue: Kharkams Community Hall</p>
+            <p class="ent"><b>16 Dec 26 | 14h30</b>A work-in-process session with feedback from the curation community.</p>
+          </div>
+        </article>
+
+        <article class="lu-sec">
+          <div class="thumbs"><span class="thumb tba" aria-hidden="true">TBA</span></div>
+          <div class="txt">
+            <h3>Closing celebration &amp; Talent Competition <span class="when">Date TBA</span></h3>
+            <p class="ent">A communal celebration with live DJs and visual art installations, followed by the Kraal Talent Competition for emerging local artists.</p>
+          </div>
+        </article>
+      </div>
+      <div class="status"><span>Click a photo to enlarge</span><span class="fit">Kharkams, Namaqualand</span></div>
+    </div>
+
+    <div class="lu-extras">
+      <button class="pdf-link" data-win="pdf"><span data-g="globe"></span>Access and download full program as PDF.</button>
+      <button class="ico inline" data-win="critics"><span class="glyph" data-g="globe"></span><span class="lbl">Reviews</span></button>
+      <button class="ico inline" data-win="sponsor"><span class="glyph" data-g="file:webp"></span><span class="lbl">Sponsor.webp</span></button>
     </div>
   </div>
-
-  <article class="slab gutter" id="s-opening">
-    <h2><span class="w1">opening</span><span class="w2">event</span></h2>
-    <p class="tag">12 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Venue: Kharkams High School (Hostel)</p>
-      <p class="entry"><b>12 Dec 26 | 15h00</b>Kraal: Inside/Outside.<br>Memory Boks: Ons Kom Vandaan.</p>
-    </div>
-    <div class="media">
-      <figure class="frame tall chrome" style="--ar: 407 / 520; margin:0"><div class="tb"><span class="t">opening.jpg</span><span class="tbtn" aria-hidden="true">×</span></div><div class="pic"><div class="slot" data-src="images/opening.jpg" data-alt="Opening event"></div></div></figure>
-    </div>
-  </article>
-
-  <article class="slab gutter" id="s-filmed">
-    <h2><span class="w1">filmed</span><span class="w2">theatre</span></h2>
-    <p class="tag">12 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Screening venue: Kharkams High School (Hostel)</p>
-      <p class="entry"><b>12 Dec 26 | 15h00</b><i>Wanne jy my naam hoor</i> by Darion Adams.</p>
-    </div>
-    <div class="media">
-      <figure class="frame wide chrome" style="--ar: 518 / 345; margin:0"><div class="tb"><span class="t">wanne-jy-my-naam-hoor.jpg</span><span class="tbtn" aria-hidden="true">×</span></div><div class="pic"><div class="slot" data-src="images/filmed-theatre.jpg" data-alt="Wanne jy my naam hoor"></div></div></figure>
-    </div>
-  </article>
-
-  <article class="slab gutter" id="s-children">
-    <h2><span class="w1">program</span><span class="w2">for children</span></h2>
-    <p class="tag">14–16 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Venue: Church Hall</p>
-      <p class="entry"><b>14 Dec 26 | 11h00</b>Clay-making workshop</p>
-      <p class="entry"><b>15 Dec 26 | 10h00</b>Arts &amp; Crafts workshop with recycled materials</p>
-      <p class="entry"><b>16 Dec 26 | 10h00</b>Movie-morning for young audiences</p>
-    </div>
-    <div class="media"><div class="bliss"><div class="slot" data-src="images/children.jpg" data-alt="Programme for children"></div></div></div>
-  </article>
-
-  <article class="slab gutter" id="s-shorts">
-    <h2><span class="w1">short</span><span class="w2">films</span></h2>
-    <p class="tag">15 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Screening venue: Kharkams Community Hall</p>
-      <p class="entry"><b>15 Dec 26 | 16h30</b>A selection of short films from established African filmmakers, curated by Cleveland Hopp. Titles announced soon.</p>
-      <div class="extras">
-        <button class="ico inline" data-win="critics"><span class="glyph" data-g="globe"></span><span class="lbl">Reviews</span></button>
-        <span class="say">young critics reviews</span>
-      </div>
-    </div>
-    <div class="media">
-      <div class="frames">
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">short-1.jpg</span></div><div class="pic"><div class="slot" data-src="images/short-1.jpg" data-alt="Short film"></div></div></figure>
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">short-2.jpg</span></div><div class="pic"><div class="slot" data-src="images/short-2.jpg" data-alt="Short film"></div></div></figure>
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">short-3.jpg</span></div><div class="pic"><div class="slot" data-src="images/short-3.jpg" data-alt="Short film"></div></div></figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="slab gutter" id="s-features">
-    <h2><span class="w1">feature</span><span class="w2">films</span></h2>
-    <p class="tag">14–16 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Screening venue: Kharkams Community Hall</p>
-      <p class="entry"><b>14 Dec 26 | 16h30</b><i>Variations on a Theme</i> explores displacement, memory, and local resilience through community-led cast performances.</p>
-      <p class="entry"><b>15 Dec 26 | 19h30</b><i>Al Wat Ek Weet</i> navigates the nuances of coming of age.</p>
-      <p class="entry"><b>16 Dec 26 | 19h00</b><i>Notes from the Underground</i> explores Indigenous knowledge and learning through southern African hip-hop culture.</p>
-    </div>
-    <div class="media">
-      <div class="frames">
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">variations.jpg</span></div><div class="pic"><div class="slot" data-src="images/variations-on-a-theme.jpg" data-alt="Variations on a Theme"></div></div><figcaption>Variations on a Theme</figcaption></figure>
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">al-wat-ek-weet.jpg</span></div><div class="pic"><div class="slot" data-src="images/al-wat-ek-weet.jpg" data-alt="Al Wat Ek Weet"></div></div><figcaption>Al Wat Ek Weet</figcaption></figure>
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">notes.jpg</span></div><div class="pic"><div class="slot" data-src="images/notes-from-the-underground.jpg" data-alt="Notes from the Underground"></div></div><figcaption>Notes from the Underground</figcaption></figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="slab gutter" id="s-theatre">
-    <h2><span class="w1">theatre</span><span class="w2">performances</span></h2>
-    <p class="tag">14–16 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Venue: Kharkams Community Hall</p>
-      <p class="entry"><b>14 Dec 26 | 14h30</b><i>In Wag Van</i> with Gladwin van Niekerk and Lynette du Plessis.</p>
-      <p class="entry"><b>15 Dec 26 | 14h30</b><i>Wonde</i> by Byron Klassen.</p>
-      <p class="entry"><b>16 Dec 26 | 10h00</b>Story-reading for young audiences with Miche Van Wyk.</p>
-    </div>
-    <div class="media">
-      <div class="frames">
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">in-wag-van.jpg</span></div><div class="pic"><div class="slot" data-src="images/in-wag-van.jpg" data-alt="In Wag Van"></div></div><figcaption>In Wag Van</figcaption></figure>
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">wonde.jpg</span></div><div class="pic"><div class="slot" data-src="images/wonde.jpg" data-alt="Wonde"></div></div><figcaption>Wonde</figcaption></figure>
-        <figure class="frame chrome" style="margin:0"><div class="tb"><span class="t">story-reading.jpg</span></div><div class="pic"><div class="slot" data-src="images/story-reading.jpg" data-alt="Story-reading"></div></div><figcaption>Story-reading</figcaption></figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="slab gutter" id="s-workshops">
-    <h2><span class="w1">in-person</span><span class="w2">workshops</span></h2>
-    <p class="tag">16 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Venue: Rainbow Centre</p>
-      <p class="entry"><b>16 Dec 26 | 14h30</b>An oral storytelling workshop on heritage and the origins of Kharkams.<br><span class="note">ONLY ELDERS AGED 60+.</span></p>
-    </div>
-    <div class="media"><div class="bliss"><div class="slot" data-src="images/workshops.jpg" data-alt="Oral storytelling workshop"></div></div></div>
-  </article>
-
-  <article class="slab gutter" id="s-process">
-    <h2><span class="w1">works</span><span class="w2">in-process</span></h2>
-    <p class="tag">16 Dec 26</p>
-    <div class="txt">
-      <p class="venue">Venue: Kharkams Community Hall</p>
-      <p class="entry"><b>16 Dec 26 | 14h30</b>A Work-in-Process film.</p>
-      <div class="extras">
-        <button class="ico inline" data-win="sponsor"><span class="glyph" data-g="file:webp"></span><span class="lbl">Sponsor.webp</span></button>
-        <span class="say">our main sponsor</span>
-      </div>
-    </div>
-    <div class="media"><div class="bliss"><div class="slot" data-src="images/works-in-process.jpg" data-alt="Works in process"></div></div></div>
-  </article>
 </section>
 
 <!-- ============ PAGE 3 · CREATIVES ============ -->
@@ -498,26 +575,23 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
     <button class="ico" data-win="tickets" style="--x:49.4%;--y:22.5%"><span class="glyph" data-g="magnifier"></span><span class="lbl">Tickets</span></button>
     <button class="ico" data-win="museum" style="--x:91%;--y:20.4%"><span class="glyph" data-g="picture"></span><span class="lbl">Museum.jpg</span></button>
     <button class="ico" data-win="kraal" style="--x:11.7%;--y:43.2%"><span class="glyph" data-g="file:pdf"></span><span class="lbl">Kraal.pdf</span></button>
-    <button class="ico" data-win="artists" style="--x:90%;--y:53.3%"><span class="glyph" data-g="folder"></span><span class="lbl">Artists-in-Residency</span></button>
+    <button class="ico" data-win="artists" style="--x:90%;--y:53.3%"><span class="glyph" data-g="folder"></span><span class="lbl">Artists In Focus</span></button>
     <button class="ico" data-win="team" style="--x:12.4%;--y:78%"><span class="glyph" data-g="folder"></span><span class="lbl">Creative Team</span></button>
     <button class="ico" data-win="critics" style="--x:88.5%;--y:77.6%"><span class="glyph" data-g="folder"></span><span class="lbl">Young Critics Reviews</span></button>
   </div>
   <div class="dialog-dock gutter">
     <div class="chrome sub-win" role="group" aria-labelledby="sub-t">
-      <div class="tb"><span class="tb-ico" data-g="film"></span><span class="t" id="sub-t">subscribe.exe</span><span class="tbtn" aria-hidden="true">_</span><span class="tbtn" aria-hidden="true">×</span></div>
+      <div class="tb"><span class="tb-ico" data-g="magnifier"></span><span class="t" id="sub-t">tickets.txt</span><span class="tbtn" aria-hidden="true">_</span><span class="tbtn" aria-hidden="true">×</span></div>
       <div class="wb">
-        <p class="lead">Subscribe to our YouTube to watch performances.</p>
-        <form id="sub" novalidate>
-          <label for="email" class="sr" style="flex-basis:100%;font-size:.9rem">Enter your email</label>
-          <input class="field95" id="email" type="email" placeholder="Enter your email" autocomplete="email">
-          <button class="btn95" type="submit">Subscribe</button>
-        </form>
-        <p class="msg" id="msg" role="status"></p>
-        <div class="meta">
-          <p><b>Tickets:</b> details will be announced here soon.</p>
-          <p><b>YouTube &amp; WhatsApp channel:</b> links to come.</p>
+        <p class="lead">Tickets for Kraal Curation are sold through Webtickets.</p>
+        <p>Book single shows or a festival pass for the week of 12–18 December 2026 in Kharkams, Namaqualand.</p>
+        <p><b>Give a pass, share the stories.</b> You can also buy or donate a festival pass for a member of the Kharkams community, so that someone from the town where these stories live gets a seat at every performance, workshop and celebration.</p>
+        <div class="tk-btns">
+          <a class="btn95 default" data-link="webtickets" href="https://www.webtickets.co.za" target="_blank" rel="noopener">Buy tickets on Webtickets</a>
+          <a class="btn95" data-link="donate" href="https://www.webtickets.co.za" target="_blank" rel="noopener">Donate a festival pass</a>
         </div>
       </div>
+      <div class="status"><span>Tickets via Webtickets</span><span class="fit">12–18 Dec 2026</span></div>
     </div>
   </div>
 </section>
@@ -540,6 +614,23 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
 <div id="wm" aria-live="polite"></div>
 
 <script>
+/* =====================================================================
+   LINKS YOU CAN CHANGE
+   webtickets   Your Webtickets event page (replace with the event link once it exists).
+   donate       Link for donating a festival pass. Leave "" to use the Webtickets link.
+   script       Where people buy the Kraal script (e.g. a Payhip, Gumroad, PayFast or SnapScan link).
+                Leave "" to show "Script sales open soon".
+   oralStories  Shared Google Drive folder with the oral story field recordings ("" shows "opens soon").
+   elandGesange Google Drive folder with the Eland Gesange album.
+   ===================================================================== */
+const LINKS = {
+  webtickets: "https://www.webtickets.co.za",
+  donate: "",
+  script: "",
+  oralStories: "",
+  elandGesange: "https://drive.google.com/drive/folders/1Ke2J3UWDhZtscpfWucLSbRIcQozQuVlQ?usp=drive_link"
+};
+
 /* ---------------- Pixel glyphs ---------------- */
 const PAL = {
   k:'#15102a', l:'#8fd6ff', b:'#2d97e8', d:'#1b68b5', w:'#ffffff', g:'#a5a5a5', G:'#c3c3c3', W:'#ffffff', D:'#7b7b7b',
@@ -593,7 +684,7 @@ const FILE = [
   "..kwwwwwwwwwk...",
   "..kkkkkkkkkkk..."
 ];
-const TYPES = { pdf: 'r', jpg: 'j', mp4: 'm', webp: 'e' };
+const TYPES = { pdf: 'r', jpg: 'j', mp4: 'm', webp: 'e', txt: 'u' };
 const G = {
   folder: () => svg(FOLDER),
   file: (t) => svg(FILE.map(r => r.replace(/T/g, TYPES[t] || 'r')),
@@ -641,6 +732,13 @@ const G = {
     if (y === 7 && (x === 5 || x === 8 || x === 11)) return 'w';
     return 'n';
   })),
+  sound: () => svg(grid(16, 14, (x, y) => {
+    if (x >= 1 && x <= 3 && y >= 5 && y <= 8) return (x === 1 || y === 5 || y === 8) ? 'k' : 'g';
+    if (x >= 4 && x <= 7) { const h = (x - 3) * 1.3; if (Math.abs(y - 6.5) <= h + .5) return Math.abs(y - 6.5) > h - .6 ? 'k' : 'G'; }
+    const d = Math.hypot(x - 7, y - 6.5);
+    if (x >= 9 && ((d > 2.6 && d < 3.6) || (d > 5 && d < 6)) && Math.abs(y - 6.5) < (x - 6.5)) return 'm';
+    return '';
+  })),
   logo: () => svg(grid(16, 16, (x, y) => {
     const d = Math.hypot(x - 7.5, y - 7.5), a = Math.atan2(y - 7.5, x - 7.5);
     if (d < 2.2) return 'y';
@@ -681,74 +779,91 @@ function fillSlots(root) {
 }
 
 /* ---------------- Creatives (Canva page 3) ---------------- */
+/* Each person: n = name, r = role, bio = short bio (optional), link = portfolio (optional).
+   Photos go in images/people/ named after the person, e.g. images/people/keisha-petersen.jpg */
 const CREW = [
   { h: 'curation team', people: [
-    ['Woudine Dirkse', 'Curation team'], ['Adré Links', 'Curation team'], ['Gladwin Van Niekerk', 'Curation team'], ['Devon Delmar', 'Curation team'],
-    ['Cleveland Hopp', 'Curator, short films'], ['Kwei Shun-Yu', 'Curation team'], ['Manfred Adams', 'Curation team'], ['Wade Van Zyl', 'Curation team'] ] },
-  { h: 'Guest Performing Artists', people: [
-    ['Gladwin van Niekerk', 'In Wag Van · 14 Dec, 14h30'], ['Lynette du Plessis', 'In Wag Van · 14 Dec, 14h30'], ['Byron Klassen', 'Wonde · 15 Dec, 14h30'],
-    ['Miche Van Wyk', 'Story-reading · 16 Dec, 10h00'], ['Darion Adams', 'Wanne jy my naam hoor · 12 Dec, 15h00'] ] },
-  { h: 'Filmmakers (Feature Films)', people: [
-    ['Variations on a Theme', 'Filmmaker and bio to come'], ['Al Wat Ek Weet', 'Filmmaker and bio to come'], ['Notes from the Underground', 'Filmmaker and bio to come'] ] },
-  { h: 'Filmmakers (Shorts)', people: [
-    ['Cleveland Hopp', 'Curator of the short film selection'], [null, 'Filmmaker to come'], [null, 'Filmmaker to come'], [null, 'Filmmaker to come'] ] },
-  { h: 'film crew', people: [[null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come']] },
-  { h: 'theatre crew', people: [[null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come'], [null, 'Bio to come']] },
-  { h: 'community volunteers', people: [['University of Cape Town', 'Student volunteers'], ['Kharkams', 'Community volunteers']] },
-  { h: 'website designer & researcher', people: [[null, 'Bio to come']] },
-  { h: 'standard bank young artist for theatre 2026', people: [['Jason Jacobs', 'Creator of Kraal, the theatre production this curation grows from']] },
-  { h: 'special thanks page', cls: 'thanks', people: [[null, 'To be confirmed'], [null, 'To be confirmed'], [null, 'To be confirmed'], [null, 'To be confirmed']] }
+    { n: 'Woudine Dirkse', r: 'Curation team' }, { n: 'Adré Links', r: 'Curation team' },
+    { n: 'Gladwin Van Niekerk', r: 'Curation team' }, { n: 'Devon Delmar', r: 'Curation team' },
+    { n: 'Cleveland Hopp', r: 'Curation team' }, { n: 'Kwei Shun-Yu', r: 'Curation team' },
+    { n: 'Manfred Adams', r: 'Curation team' }, { n: 'Wade Van Zyl', r: 'Curation team' } ] },
+  { h: 'standard bank young artist for theatre 2026', people: [
+    { n: 'Jason Jacobs', r: 'Theatre-maker · creator of Kraal', bio: 'Jason Jacobs is the 2026 Standard Bank Young Artist for Theatre and the creator of Kraal, the theatre production this curation grows from.' } ] },
+  { h: 'guest performing artists', people: [
+    { n: 'Gladwin van Niekerk', r: 'In Wag Van · 14 Dec, 14h30' }, { n: 'Lynette du Plessis', r: 'In Wag Van · 14 Dec, 14h30' },
+    { n: 'Byron Klassen', r: 'Wonde · 15 Dec, 14h30' }, { n: 'Miche Van Wyk', r: 'Story-reading · 16 Dec, 10h00' },
+    { n: 'Darion Adams', r: 'Wanne jy my naam hoor · 12 Dec, 15h00' } ] },
+  { h: 'documentary crew', people: [
+    { n: 'Keisha Petersen', r: 'Documentary crew · volunteer', bio: "Keisha Petersen is a screen production student. Her background includes producing a multicam episode (Spotlight), a documentary (Kill your Darlings), and an SRP project (Skoenmaker se Kind). She directed Red Lace, edited three short films, and served as assistant director and producer on passion projects like Don't turn around." },
+    { n: 'Luca Smith', r: 'Documentary crew · volunteer', bio: 'Luca Smith is a filmmaker interested in finding contemporary stories in overlooked corners. Directorial credits include Horses (2026), Uglyboy (2025), Camino (2025) and the SAFTA-nominated Undercurrent (2025).' },
+    { n: 'Zenith Phaal', r: 'Documentary crew · volunteer', bio: "Zenith Phaal is an interdisciplinary filmmaker based in Cape Town. He is currently developing Boksak, a documentary archiving and preserving traditional Khoisan practices in the Cederberg, and My God Is the Sun, an experimental docufiction about woodworking artists and their relationship with the country's ecology. At UCT, he edited and did the production design on The Man Who Controls the Traffic Lights (2025), edited Horses (2026) and created the soundtrack for Ma(a)tjie (2026)." },
+    { n: 'Ahmad Johardien', r: 'Documentary crew · volunteer', bio: 'Ahmad Johardien is a filmmaker interested in bringing mythical modes of storytelling and experimentation into the contemporary. They have a background in historical studies and carpentry, which informs their work and interdisciplinary approach. Previous credits include directing Horses (2026) and The Man Who Controls the Traffic Lights (2025), which had its world premiere at the Sitges International Fantastic Film Festival.' } ] },
+  { h: 'artist photographers', people: [
+    { n: 'Junaid (VJ) Mahomed', r: 'Artist photographer', link: 'https://www.icnp400.com', linkLabel: 'Portfolio: icnp400.com', bio: 'VJ Mahomed is an inquisitive human. He shows his wanderlust mainly through photographs and video, and his work is concerned with how the eye sees everyday movement, stories of upbringing, and grief. "My visuals are revised thoughts mostly, things I\'ve seen before and newly encountered, but all with intentionality emphasised." VJ aspires to preserve his art and to create the best possible entry points for people to access it.' },
+    { n: 'Okuhle Sibeko', r: 'Artist photographer', link: 'https://drive.google.com/file/d/1BTZTkqFOnSbJodmKR8aJ38xDJPMnxUvU/view?usp=sharing', linkLabel: 'Portfolio (Google Drive)', bio: 'Okuhle Sibeko is a photographer originally from Randfontein, South Africa, currently pursuing a degree in Economics at the University of Cape Town. Working exclusively with analogue photography, his practice explores interpersonal relationships, from friendships to familial connections. Through his work, he seeks to strengthen, investigate and interrogate the relationships between people, places and himself. His photographic practice is informed by a parallel interest in development economics, through which he engages with the broader social and economic conditions that shape human experiences. He took part in the 2026 Cape Town Photography Festival.' } ] },
+  { h: 'community volunteers', people: [
+    { n: 'University of Cape Town', r: 'Student volunteers' }, { n: 'Kharkams', r: 'Community volunteers' } ] }
 ];
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
-document.getElementById('crew').innerHTML = CREW.map(g => `
-  <section class="crew gutter ${g.cls || ''}">
+const excerpt = b => b ? (b.length > 170 ? b.slice(0, 170).replace(/\s+\S*$/, '') + '…' : b) : 'Bio coming soon.';
+document.getElementById('crew').innerHTML = CREW.map((g, gi) => `
+  <section class="crew gutter">
     <h2>${esc(g.h)}</h2>
-    <ul class="cards">${g.people.map(([n, r]) => `
-      <li class="card ${n ? '' : 'tbc'}">
-        <div class="pic"><div class="slot" ${n ? `data-src="images/people/${slug(n)}.jpg" data-alt="${esc(n)}"` : ''}></div></div>
-        <b>${n ? esc(n) : 'Name to come'}</b><span>${esc(r)}</span>
+    <ul class="cards">${g.people.map((p, i) => `
+      <li class="card">
+        <button class="pic-btn" data-person="${gi}-${i}" aria-label="About ${esc(p.n)}">
+          <span class="pic"><span class="slot" data-src="images/people/${slug(p.n)}.jpg" data-alt="${esc(p.n)}"></span><span class="over"><span>${esc(excerpt(p.bio))}<b>Read more →</b></span></span></span>
+        </button>
+        <b>${esc(p.n)}</b><span>${esc(p.r)}</span>
       </li>`).join('')}
     </ul>
-  </section>`).join('');
+  </section>`).join('') + `<p class="later gutter">More bios and photos are added as they come in.</p>`;
 
 /* ---------------- Windows ---------------- */
 const fileRow = (g, label, when, go) => `<li><a href="${go}" data-close><span class="mini" data-g="${g}"></span>${label}<span class="when">${when}</span></a></li>`;
+const openRow = (g, label, when, win) => `<li><button data-open="${win}"><span class="mini" data-g="${g}"></span>${label}<span class="when">${when}</span></button></li>`;
+const linkBtn = (key, label, cls) => `<a class="btn95${cls ? ' ' + cls : ''}" data-link="${key}" href="${esc(LINKS[key] || LINKS.webtickets)}" target="_blank" rel="noopener">${label}</a>`;
+const ticketBtns = () => `<div class="tk-btns">${linkBtn('webtickets', 'Buy tickets on Webtickets', 'default')}${linkBtn('donate', 'Donate a festival pass')}</div>`;
+const thumb = (src, cap, cls) => `<button class="thumb${cls ? ' ' + cls : ''}" data-view="${esc(src)}" data-cap="${esc(cap)}" aria-label="Enlarge photo: ${esc(cap)}"><span class="slot" data-src="${esc(src)}" data-alt="${esc(cap)}"></span></button>`;
+const driveId = u => ((u || '').match(/folders\/([\w-]+)/) || [])[1];
+
 const WINS = {
   program: { t: 'Program', g: 'folder', w: 440, body: () => `
     <ul class="rows well">
       ${fileRow('folder', 'opening event', '12 Dec', '#s-opening')}
       ${fileRow('folder', 'filmed theatre', '12 Dec', '#s-filmed')}
       ${fileRow('folder', 'program for children', '14–16 Dec', '#s-children')}
-      ${fileRow('folder', 'short films', '15 Dec', '#s-shorts')}
-      ${fileRow('folder', 'feature films', '14–16 Dec', '#s-features')}
       ${fileRow('folder', 'theatre performances', '14–16 Dec', '#s-theatre')}
       ${fileRow('folder', 'in-person workshops', '16 Dec', '#s-workshops')}
-      ${fileRow('folder', 'works in-process', '16 Dec', '#s-process')}
-    </ul>`, status: '8 object(s)' },
+      ${fileRow('folder', 'works in process', '16 Dec', '#s-process')}
+    </ul>`, status: '6 object(s)' },
   explore: { t: 'Explore', g: 'globe', w: 480, body: () => `
     <div class="addr"><span>Address</span><input class="field95" id="addr" value="kraal://explore" readonly aria-label="Address"></div>
     <div class="doc">
-      <h3>Explore <em>Kharkams</em></h3>
+      <h3>explore <em>kharkams</em></h3>
       <ul class="rows">
         ${fileRow('folder', 'Program', '→', '#lineup')}
         ${fileRow('folder', 'Creative Team', '→', '#creatives')}
-        <li><button data-open="artists"><span class="mini" data-g="folder"></span>Artists-in-Residency<span class="when">soon</span></button></li>
-        <li><button data-open="oral"><span class="mini" data-g="film"></span>Oral Stories<span class="when">soon</span></button></li>
-        <li><button data-open="museum"><span class="mini" data-g="picture"></span>Museum<span class="when">soon</span></button></li>
-        <li><button data-open="workshops"><span class="mini" data-g="picture"></span>Community Workshops<span class="when">14–16 Dec</span></button></li>
-        <li><button data-open="critics"><span class="mini" data-g="folder"></span>Young Critics Reviews<span class="when">soon</span></button></li>
+        ${openRow('folder', 'Artists In Focus', 'soon', 'artists')}
+        ${openRow('folder', 'Oral Stories', 'recordings', 'oral')}
+        ${openRow('film', 'Kraal Stories', 'slideshow', 'kraalstories')}
+        ${openRow('sound', 'Eland Gesange', 'album', 'eland')}
+        ${openRow('picture', 'Museum', 'soon', 'museum')}
+        ${openRow('picture', 'Community Workshops', '14–16 Dec', 'workshops')}
+        ${openRow('picture', 'Poster', 'soon', 'poster')}
+        ${openRow('folder', 'Young Critics Reviews', 'soon', 'critics')}
       </ul>
     </div>`, status: 'Done' },
-  tickets: { t: 'Tickets', g: 'magnifier', w: 400, body: () => `
+  tickets: { t: 'Tickets', g: 'magnifier', w: 430, body: () => `
     <div class="doc">
-      <h3>tickets <em>&amp; updates</em></h3>
-      <p>Ticket details will be announced here soon.</p>
-      <p>Most events take place at the <b>Kharkams Community Hall</b>. Children's programmes run at the Church Hall.</p>
+      <h3>tickets <em>&amp; passes</em></h3>
+      <p>Tickets are sold through <b>Webtickets</b>. Book single shows or a festival pass for 12–18 December 2026.</p>
+      <p><b>Give a pass, share the stories.</b> Buy or donate a festival pass for a member of the Kharkams community.</p>
     </div>
-    <div style="display:flex;justify-content:flex-end"><a class="btn95" href="#tickets" data-close style="text-decoration:none">Get updates</a></div>` },
+    ${ticketBtns()}`, status: 'Tickets via Webtickets' },
   workshops: { t: 'CommunityWorkshops.jpg', g: 'picture', w: 460, body: () => `
-    <div class="well" style="aspect-ratio:4/3;overflow:hidden"><div class="slot" data-src="images/community-workshops.jpg" data-alt="Community workshops"></div></div>
+    <div class="well" style="aspect-ratio:4/3;overflow:hidden">${thumb('images/community-workshops.jpg', 'Community workshops', 'fill')}</div>
     <ul class="rows well">
       ${fileRow('picture', 'Clay-making workshop', '14 Dec 11h00', '#s-children')}
       ${fileRow('picture', 'Arts & crafts, recycled materials', '15 Dec 10h00', '#s-children')}
@@ -765,9 +880,9 @@ const WINS = {
       <p><b>15 Dec 26 | 16h30</b><br>Short films from established African filmmakers, curated by Cleveland Hopp.</p>
       <p>Screening venue: Kharkams Community Hall</p>
     </div>`, status: 'Page 1 of 1' },
-  artists: { t: 'Artists-in-Residency', g: 'folder', w: 400, body: () => `<div class="well empty-folder">This folder is empty for now.<br>Artists in residence will be announced soon.</div>`, status: '0 object(s)' },
+  artists: { t: 'Artists In Focus', g: 'folder', w: 420, body: () => `<div class="well empty-folder">Profiles of our artists in focus are on their way.<br>Each artist will get their own folder here, with their background, achievements and samples of their work.</div>`, status: '0 object(s)' },
   museum: { t: 'Museum.jpg', g: 'picture', w: 460, body: () => `
-    <div class="well" style="aspect-ratio:4/3;overflow:hidden"><div class="slot" data-src="images/museum.jpg" data-alt="Museum"></div></div>
+    <div class="well" style="aspect-ratio:4/3;overflow:hidden">${thumb('images/museum.jpg', 'Museum', 'fill')}</div>
     <p style="padding:0 2px">Museum. Opening soon.</p>`, status: 'Museum.jpg' },
   theatre: { t: 'Theatre.pdf', g: 'file:pdf', w: 500, body: () => `
     <div class="doc">
@@ -779,23 +894,45 @@ const WINS = {
       <h3>filmed <em>theatre</em></h3>
       <p><b>12 Dec 26 | 15h00</b><br><i>Wanne jy my naam hoor</i> by Darion Adams. Kharkams High School (Hostel).</p>
     </div>`, status: 'Page 1 of 1' },
-  kraal: { t: 'Kraal.pdf', g: 'file:pdf', w: 520, body: () => `
+  kraal: { t: 'Kraal.pdf', g: 'file:pdf', w: 540, body: () => `
     <div class="doc">
-      <h3>die grond <em>onthou</em></h3>
-      <p>The <b>Kraal Curation</b> is an extension of <i>Kraal</i>, the theatre production by Jason Jacobs, the 2026 Standard Bank Young Artist for Theatre.</p>
-      <p>A week of live arts in Kharkams, Namaqualand, from 12 to 18 December 2026, under the theme <b>Die Grond Onthou / The Land Remembers</b>.</p>
-      <p>Film, theatre, workshops, a work-in-process segment, a Kraal Talent Competition and a closing celebration with live DJs and visual art installations.</p>
-      <p><a href="#lineup" data-close>See the full lineup →</a></p>
-    </div>`, status: 'Page 1 of 1' },
+      <h3>kraal <em>by jason jacobs</em></h3>
+      <p><i>Kraal</i> is the theatre production by Jason Jacobs, the 2026 Standard Bank Young Artist for Theatre, that Kraal Curation grows from.</p>
+      <h3>the <em>script</em></h3>
+      <p>Own a copy of the script for <i>Kraal</i>.</p>
+      ${LINKS.script ? linkBtn('script', 'Buy the script', 'default') : '<p class="soonnote"><b>Script sales open soon.</b></p>'}
+      <h3>photo <em>gallery</em></h3>
+      <p><i>Kraal</i> at the National Arts Festival, Makhanda. Click a photo to enlarge.</p>
+      <div class="gal">${[1, 2, 3, 4, 5, 6].map(n => thumb(`images/kraal-naf/0${n}.jpg`, `Kraal at the National Arts Festival, Makhanda (${n})`)).join('')}</div>
+    </div>`, status: 'Kraal · NAF Makhanda' },
   sponsor: { t: 'Sponsor.webp', g: 'file:webp', w: 400, body: () => `
-    <div class="well" style="aspect-ratio:16/9;overflow:hidden"><div class="slot" data-src="images/sponsor.webp" data-alt="Our main sponsor"></div></div>
+    <div class="well" style="aspect-ratio:16/9;overflow:hidden">${thumb('images/sponsor.webp', 'Our main sponsor', 'fill')}</div>
     <p style="padding:0 2px">our main sponsor</p>`, status: 'Sponsor.webp' },
-  oral: { t: 'Oral Stories.mp4', g: 'film', w: 480, body: () => `
+  oral: { t: 'Oral Stories', g: 'folder', w: 440, body: () => `
+    <div class="well empty-folder">Field recordings of the heritage and origin stories shared by Kharkams elders. New recordings are added as we go.</div>
+    ${LINKS.oralStories ? `<div class="tk-btns">${linkBtn('oralStories', 'Open the recordings folder', 'default')}</div>` : '<p class="soonnote"><b>The recordings folder opens soon.</b></p>'}
+    <p style="font-size:.9rem">Related: oral storytelling workshop, 16 Dec 14h30, Rainbow Centre (elders aged 60+).</p>`, status: 'Field recordings' },
+  kraalstories: { t: 'Kraal Stories.mp4', g: 'film', w: 560, init: initSlideshow, body: () => `
     <div class="player" style="display:grid;gap:8px">
-      <div class="screen"><div class="slot" data-src="images/oral-stories.jpg" data-alt="Oral stories"></div><span>RECORDING COMING SOON</span></div>
-      <div class="ctrls"><button class="btn95" aria-label="Play" disabled>▶</button><button class="btn95" aria-label="Stop" disabled>■</button><div class="bar well"></div><span style="font-size:.85rem">00:00</span></div>
-      <p style="font-size:.9rem">Related: oral storytelling workshop, 16 Dec 14h30, Rainbow Centre (elders aged 60+).</p>
+      <div class="screen"><div class="ks-slide"></div><span class="ks-cap">KRAAL STORIES</span></div>
+      <div class="ctrls">
+        <button class="btn95" data-ks="prev" aria-label="Previous photo">◀◀</button>
+        <button class="btn95" data-ks="play" aria-label="Pause">❚❚</button>
+        <button class="btn95" data-ks="next" aria-label="Next photo">▶▶</button>
+        <div class="bar well"><i class="fill"></i></div><span class="ks-n" style="font-size:.85rem">0 / 0</span>
+      </div>
+      <p style="font-size:.9rem">A slideshow of our photos from Kraal.</p>
     </div>` },
+  eland: { t: 'Eland Gesange', g: 'sound', w: 520, body: () => `
+    <div class="amp">
+      <div class="amp-disp"><span class="amp-t">ELAND GESANGE</span><span>Original score for Kraal</span><span class="eq" aria-hidden="true">${'<i></i>'.repeat(14)}</span></div>
+      <p style="font-size:.9rem">The original score for <i>Kraal</i>, recorded on different devices. Pick a track to listen.</p>
+      ${driveId(LINKS.elandGesange) ? `<div class="well amp-list"><iframe src="https://drive.google.com/embeddedfolderview?id=${driveId(LINKS.elandGesange)}#list" title="Eland Gesange tracks" loading="lazy"></iframe></div>` : ''}
+      <div class="tk-btns">${linkBtn('elandGesange', 'Listen on Google Drive', 'default')}</div>
+    </div>`, status: 'Eland Gesange · album' },
+  poster: { t: 'Poster.jpg', g: 'picture', w: 400, body: () => `
+    ${thumb('images/poster.jpg', 'Kraal Curation poster', 'poster')}
+    <p style="font-size:.9rem;padding:0 2px">The Kraal Curation poster. Click to enlarge.</p>`, status: 'Poster.jpg' },
   critics: { t: 'Young Critics Reviews', g: 'folder', w: 420, body: () => `<div class="well empty-folder">Reviews by young critics will appear here during the week.</div>`, status: '0 object(s)' },
   team: { t: 'Creative Team', g: 'folder', w: 420, body: () => `
     <ul class="rows well">
@@ -803,16 +940,68 @@ const WINS = {
     </ul>
     <div style="display:flex;justify-content:flex-end"><a class="btn95" href="#creatives" data-close style="text-decoration:none">All creatives</a></div>`, status: '8 object(s)' },
   whatsapp: { t: 'whatsapp channel', g: 'chat', w: 360, body: () => `<div class="doc"><p>The Kraal Curation WhatsApp channel link will be added here.</p></div>` },
-  pdf: { t: 'Programme.pdf', g: 'file:pdf', w: 380, body: () => `<div class="doc"><p>The full programme PDF will be available to download closer to the time.</p><p><a href="#lineup" data-close>Read the lineup on this page →</a></p></div>` }
+  pdf: { t: 'Program.pdf', g: 'file:pdf', w: 380, body: () => `<div class="doc"><p>The full program PDF will be available to download closer to the time.</p><p><a href="#lineup" data-close>Read the lineup on this page →</a></p></div>` }
 };
+
+function openViewer(src, cap) {
+  openWin('view:' + src, { t: src.split('/').pop(), g: 'picture', w: 760, status: cap || src, body: () => `
+    <div class="view-pic well"><div class="slot" data-src="${esc(src)}" data-alt="${esc(cap)}"></div></div>
+    ${cap ? `<p style="font-size:.9rem;padding:0 2px">${esc(cap)}</p>` : ''}` });
+}
+function openPerson(key) {
+  const [g, i] = key.split('-').map(Number), p = CREW[g] && CREW[g].people[i];
+  if (!p) return;
+  openWin('person:' + key, { t: p.n, g: 'picture', w: 600, status: p.r, body: () => `
+    <div class="prof">
+      <div class="ph well"><div class="slot" data-src="images/people/${slug(p.n)}.jpg" data-alt="${esc(p.n)}"></div></div>
+      <div class="doc">
+        <h3>${esc(p.n)}</h3>
+        <p><b>${esc(p.r)}</b></p>
+        <p>${esc(p.bio || 'Bio coming soon.')}</p>
+        ${p.link ? `<p><a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.linkLabel || 'Portfolio')} →</a></p>` : ''}
+      </div>
+    </div>` });
+}
+
+/* Kraal Stories slideshow: shows images/slideshow/01.jpg, 02.jpg … (up to 40) in order */
+function initSlideshow(el) {
+  const box = el.querySelector('.ks-slide'), n = el.querySelector('.ks-n'), fill = el.querySelector('.fill'), playBtn = el.querySelector('[data-ks="play"]');
+  let list = [], i = 0, timer = null;
+  const show = () => {
+    if (!list.length) return;
+    i = (i + list.length) % list.length;
+    const s = list[i];
+    box.innerHTML = s.src ? `<img src="${esc(s.src)}" alt="Kraal Stories photo ${i + 1}">` : scene();
+    n.textContent = `${i + 1} / ${list.length}`;
+    fill.style.width = `calc(${((i + 1) / list.length) * 100}% - 4px)`;
+  };
+  const play = () => { if (timer) return; timer = setInterval(() => { i++; show(); }, 3000); playBtn.textContent = '❚❚'; playBtn.setAttribute('aria-label', 'Pause'); };
+  const pause = () => { clearInterval(timer); timer = null; playBtn.textContent = '▶'; playBtn.setAttribute('aria-label', 'Play'); };
+  el.addEventListener('click', e => {
+    const b = e.target.closest('[data-ks]'); if (!b) return;
+    if (b.dataset.ks === 'play') timer ? pause() : play();
+    if (b.dataset.ks === 'next') { i++; show(); }
+    if (b.dataset.ks === 'prev') { i--; show(); }
+  });
+  el._stop = pause;
+  const srcs = Array.from({ length: 40 }, (_, k) => `images/slideshow/${String(k + 1).padStart(2, '0')}.jpg`);
+  Promise.all(srcs.map(src => new Promise(r => { const im = new Image(); im.onload = () => r(src); im.onerror = () => r(null); im.src = src; })))
+    .then(res => {
+      list = res.filter(Boolean).map(src => ({ src }));
+      if (!list.length) list = [{}, {}, {}, {}];
+      i = 0; show();
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) play(); else pause();
+    });
+}
+
 const wm = document.getElementById('wm');
 let zTop = 60, cascade = 0;
 function focusWin(el) {
   wm.querySelectorAll('.win').forEach(w => w.classList.toggle('inactive', w !== el));
   el.style.zIndex = ++zTop;
 }
-function openWin(id) {
-  const def = WINS[id]; if (!def) return;
+function openWin(id, dyn) {
+  const def = dyn || WINS[id]; if (!def) return;
   const existing = wm.querySelector(`.win[data-id="${id}"]`);
   if (existing) { focusWin(existing); return; }
   const el = document.createElement('div');
@@ -822,6 +1011,7 @@ function openWin(id) {
     <div class="wb">${def.body()}</div>${def.status ? `<div class="status"><span>${esc(def.status)}</span></div>` : ''}`;
   wm.appendChild(el);
   paintGlyphs(el); fillSlots(el);
+  if (def.init) def.init(el);
   const vw = window.innerWidth, vh = window.innerHeight, r = el.getBoundingClientRect();
   const off = (cascade++ % 6) * 26;
   el.style.left = Math.max(12, Math.min(vw - r.width - 12, (vw - r.width) / 2 - 60 + off)) + 'px';
@@ -829,8 +1019,10 @@ function openWin(id) {
   focusWin(el);
   el.querySelector('[data-x]').focus({ preventScroll: true });
 }
-function closeWin(el) { el.remove(); const ws = wm.querySelectorAll('.win'); if (ws.length) focusWin(ws[ws.length - 1]); else cascade = 0; }
+function closeWin(el) { if (el._stop) el._stop(); el.remove(); const ws = wm.querySelectorAll('.win'); if (ws.length) focusWin(ws[ws.length - 1]); else cascade = 0; }
 document.addEventListener('click', e => {
+  const v = e.target.closest('[data-view]'); if (v) { openViewer(v.dataset.view, v.dataset.cap || ''); return; }
+  const pp = e.target.closest('[data-person]'); if (pp) { openPerson(pp.dataset.person); return; }
   const opener = e.target.closest('[data-win],[data-open]');
   if (opener) { openWin(opener.dataset.win || opener.dataset.open); return; }
   const x = e.target.closest('[data-x]'); if (x) { closeWin(x.closest('.win')); return; }
@@ -874,12 +1066,8 @@ function tick() {
 }
 tick(); setInterval(tick, 30000);
 
-/* ---------------- Subscribe ---------------- */
-document.getElementById('sub').addEventListener('submit', e => {
-  e.preventDefault();
-  const v = document.getElementById('email').value.trim(), msg = document.getElementById('msg');
-  msg.textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Thanks! Sign-ups aren't connected yet on this draft." : 'Enter an email address like name@example.com.';
-});
+/* ---------------- Ticket links ---------------- */
+document.querySelectorAll('[data-link]').forEach(a => { a.href = LINKS[a.dataset.link] || LINKS.webtickets; });
 
 /* ---------------- Dithered desktop wallpapers ---------------- */
 const BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]];
