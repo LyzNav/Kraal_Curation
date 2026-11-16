@@ -175,12 +175,14 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
 .paper { background: var(--paper); position: relative; }
 .logo { position: absolute; top: 14px; left: max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 10px; text-decoration: none; color: #6b6b6b; font-family: var(--f-pixel); font-size: 1.2rem; letter-spacing: .1em; z-index: 4; }
 .logo svg { width: 36px; height: 36px; }
-.wa { position: absolute; top: 12px; right: max(16px, env(safe-area-inset-right, 0px)); z-index: 4; display: grid; justify-items: center; gap: 2px; background: none; border: 0; font: inherit; color: var(--purple); }
+.socials { position: absolute; top: 12px; right: max(16px, env(safe-area-inset-right, 0px)); z-index: 4; display: flex; align-items: flex-start; gap: 14px; }
+a.wa { text-decoration: none; }
+.wa { display: grid; justify-items: center; gap: 2px; background: none; border: 0; font: inherit; color: var(--purple); }
 .wa .cap { font-family: var(--f-pixel); font-size: .62rem; }
 .wa svg { width: 44px; height: 44px; }
 @media (max-width: 760px) {
   .logo span { display: none; }
-  .logo, .wa { position: static; }
+  .logo, .socials { position: static; }
   .paper-top { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
 }
 @media (min-width: 761px) { .paper-top { display: contents; } }
@@ -434,7 +436,11 @@ a.btn95 { text-decoration: none; }
 <section id="lineup" class="paper" aria-labelledby="lineup-title">
   <div class="paper-top gutter">
     <a class="logo" href="#home" aria-label="Kraal Curation home"><span class="lg" data-g="ks"></span><span>K.R.A.A.L</span></a>
-    <button class="wa" data-win="whatsapp"><span class="cap">whatsapp channel</span><span data-g="chat"></span></button>
+    <div class="socials">
+      <button class="wa" data-win="whatsapp"><span class="cap">whatsapp channel</span><span data-g="chat"></span></button>
+      <a class="wa" data-social="youtube" href="#" target="_blank" rel="noopener" hidden><span class="cap">youtube</span><span data-g="film"></span></a>
+      <a class="wa" data-social="instagram" href="#" target="_blank" rel="noopener" hidden><span class="cap">instagram</span><span data-g="camera"></span></a>
+    </div>
   </div>
   <nav class="nav gutter" aria-label="Main">
     <a class="title" id="lineup-title" href="#home">KRAAL CURATION</a>
@@ -643,6 +649,8 @@ a.btn95 { text-decoration: none; }
    museum       Google Drive folder for the museum (it can hold subfolders). Upload as you go: the site only shows
                 it from 19 December 2026.
    whatsappChannel  The KRAAL WhatsApp channel (top-right "whatsapp channel" button).
+   youtube      The KRAAL YouTube channel. Its button next to "whatsapp channel" appears once this is filled in.
+   instagram    The KRAAL Instagram page. Its button next to "whatsapp channel" appears once this is filled in.
    ===================================================================== */
 const LINKS = {
   webtickets: "https://www.webtickets.co.za",
@@ -652,7 +660,9 @@ const LINKS = {
   kraalGallery: "https://drive.google.com/drive/folders/191R44QediGTZWM29QUYbQ-RYLJqLkLAT",
   youngCritics: "",
   museum: "",
-  whatsappChannel: "https://whatsapp.com/channel/0029VbAEPJj9MF94wiW5oL2R"
+  whatsappChannel: "https://whatsapp.com/channel/0029VbAEPJj9MF94wiW5oL2R",
+  youtube: "",
+  instagram: ""
 };
 
 /* ---------------- Pixel glyphs ---------------- */
@@ -749,6 +759,16 @@ const G = {
     if (x >= 6 && x <= 10 && Math.abs(y - 6.5) <= (10 - x) * 0.62 + 0.3) return 'w';
     return 'p';
   })),
+  camera: () => svg(grid(16, 14, (x, y) => {
+    const d = Math.hypot(x - 7.5, y - 8);
+    if (y < 2) return (x >= 4 && x <= 8) ? (y === 0 || x === 4 || x === 8 ? 'k' : 'm') : '';
+    if (x === 0 || x === 15 || y === 2 || y === 13) return 'k';
+    if (d < 1.6) return (x < 7.5 && y < 8) ? 'l' : 'b';
+    if (d < 3.2) return 'd';
+    if (d < 4.1) return 'k';
+    if (y === 4 && x >= 12 && x <= 13) return 'y';
+    return 'm';
+  })),
   chat: () => svg(grid(16, 16, (x, y) => {
     const d = Math.hypot(x - 8, y - 7);
     if ((x === 2 && y >= 12 && y <= 14) || (x === 3 && y >= 12 && y <= 13) || (x === 1 && y === 14)) return x === 1 || y === 14 ? 'k' : 'n';
@@ -835,7 +855,7 @@ function fillSlots(root) {
    img = photo address (optional; only needed when the photo is not in images/people/).
    Photos go in images/people/ named after the person, e.g. images/people/keisha-petersen.jpg */
 /* Cleveland Hopp: bio and headshot from www.clevelandhopp.work */
-const CLEVELAND = { img: 'https://clevelandhopp.work/Cleveland_Hopp_Bio_Picture.jpg', link: 'https://www.clevelandhopp.work', linkLabel: 'Website: clevelandhopp.work', bio: "Cleveland Hopp is a filmmaker and activist from Malmesbury, South Africa, with an Honours degree in Film Theory & Practice from the University of Cape Town and a distinction in documentary studies. He believes film is a tool for healing, justice, and for honouring those who came before. His work lives at the intersection of queer identity, African Indigenous storytelling, and rural community life, amplifying overlooked voices, including his own.\n\nHis debut documentary, Onthou vi Fredo?, pays tribute to murdered drag queen Alfredo April. It won Best Documentary and Best LGBTQ+ Representation at the FAME Inclusive Lens Awards and screened at Giornate degli Autori during the 82nd Venice Film Festival. As part of the SAFTA award-winning collective Kraal, he contributed to Carissa, nominated for the Venice Horizons Award, and Variations on a Theme, winner of the Tiger Award at International Film Festival Rotterdam 2026." };
+const CLEVELAND = { img: 'https://clevelandhopp.work/Cleveland_Hopp_Bio_Picture.jpg', bio: "Cleveland Hopp is a filmmaker and activist from Malmesbury, South Africa, with an Honours degree in Film Theory & Practice from the University of Cape Town and a distinction in documentary studies. He believes film is a tool for healing, justice, and for honouring those who came before. His work lives at the intersection of queer identity, African Indigenous storytelling, and rural community life, amplifying overlooked voices, including his own.\n\nHis debut documentary, Onthou vi Fredo?, pays tribute to murdered drag queen Alfredo April. It won Best Documentary and Best LGBTQ+ Representation at the FAME Inclusive Lens Awards and screened at Giornate degli Autori during the 82nd Venice Film Festival. As part of the SAFTA award-winning collective Kraal, he contributed to Carissa, nominated for the Venice Horizons Award, and Variations on a Theme, winner of the Tiger Award at International Film Festival Rotterdam 2026." };
 const CREW = [
   { h: 'kraal staff members', people: [
     { n: 'Kwei Shun-yu', r: 'Documentary Crew Producer & Curator', bio: "Kwei Shun-yu is a Chongqing-born photographer and filmmaker completing an MA in Documentary Filmmaking at the University of Cape Town. His short talking to Family (2025), about returning home to China, screened at Encounters, won Nga Maanda Awe's Underdog Award and earned FAME Shorts nominations for Best Student Film and Best Documentary Film. His latest film is Maatjie (2026)." },
@@ -1137,6 +1157,7 @@ tick(); setInterval(tick, 30000);
 
 /* ---------------- Ticket links ---------------- */
 document.querySelectorAll('[data-link]').forEach(a => { a.href = LINKS[a.dataset.link] || LINKS.webtickets; });
+document.querySelectorAll('[data-social]').forEach(a => { const u = LINKS[a.dataset.social]; if (u) { a.href = u; a.hidden = false; } });
 
 /* ---------------- Dithered desktop wallpapers ---------------- */
 const BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]];
