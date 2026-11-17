@@ -475,7 +475,7 @@ a.btn95 { text-decoration: none; }
 
         <article class="lu-sec" id="s-opening">
           <div class="thumbs">
-            <button class="thumb" data-view="images/opening.jpg" data-cap="Opening event" aria-label="Enlarge photo: Opening event"><span class="slot" data-src="images/opening.jpg" data-alt="Opening event"></span></button>
+            <button class="thumb" data-view="images/carissa.jpg" data-fb="images/poster.jpg" data-cap="Opening event" aria-label="Enlarge photo: Opening event"><span class="slot" data-src="images/carissa.jpg" data-fb="images/poster.jpg" data-alt="Opening event"></span></button>
           </div>
           <div class="txt">
             <h3>Opening event <span class="when">12 Dec 26</span></h3>
@@ -497,7 +497,7 @@ a.btn95 { text-decoration: none; }
 
         <article class="lu-sec" id="s-children">
           <div class="thumbs">
-            <button class="thumb" data-view="images/children.jpg" data-cap="Program for children" aria-label="Enlarge photo: Program for children"><span class="slot" data-src="images/children.jpg" data-alt="Program for children"></span></button>
+            <button class="thumb" data-view="images/people/miche-van-wyk.jpg" data-fb="images/poster.jpg" data-cap="Program for children" aria-label="Enlarge photo: Program for children"><span class="slot" data-src="images/people/miche-van-wyk.jpg" data-fb="images/poster.jpg" data-alt="Program for children"></span></button>
           </div>
           <div class="txt">
             <h3>Program for children <span class="when">14–16 Dec 26</span></h3>
@@ -524,7 +524,7 @@ a.btn95 { text-decoration: none; }
 
         <article class="lu-sec" id="s-workshops">
           <div class="thumbs">
-            <button class="thumb" data-view="images/workshops.jpg" data-cap="Oral storytelling workshop" aria-label="Enlarge photo: Oral storytelling workshop"><span class="slot" data-src="images/workshops.jpg" data-alt="Oral storytelling workshop"></span></button>
+            <button class="thumb" data-view="images/workshops.jpg" data-fb="images/poster.jpg" data-cap="Oral storytelling workshop" aria-label="Enlarge photo: Oral storytelling workshop"><span class="slot" data-src="images/workshops.jpg" data-fb="images/poster.jpg" data-alt="Oral storytelling workshop"></span></button>
           </div>
           <div class="txt">
             <h3>In-person workshops <span class="when">16 Dec 26</span></h3>
@@ -535,7 +535,7 @@ a.btn95 { text-decoration: none; }
 
         <article class="lu-sec" id="s-process">
           <div class="thumbs">
-            <button class="thumb" data-view="images/works-in-process.jpg" data-cap="Works in process" aria-label="Enlarge photo: Works in process"><span class="slot" data-src="images/works-in-process.jpg" data-alt="Works in process"></span></button>
+            <button class="thumb" data-view="images/works-in-process.jpg" data-fb="images/poster.jpg" data-cap="Works in process" aria-label="Enlarge photo: Works in process"><span class="slot" data-src="images/works-in-process.jpg" data-fb="images/poster.jpg" data-alt="Works in process"></span></button>
           </div>
           <div class="txt">
             <h3>Works in process <span class="when">16 Dec 26</span></h3>
@@ -606,8 +606,8 @@ a.btn95 { text-decoration: none; }
         <p>Book single shows or a festival pass for the week of 12–18 December 2026 in Kharkams, Namaqualand.</p>
         <p><b>Give a pass, share the stories.</b> You can also buy or donate a festival pass for a member of the Kharkams community, so that someone from the town where these stories live gets a seat at every performance, workshop and celebration.</p>
         <div class="tk-btns">
-          <a class="btn95 default" data-link="webtickets" href="https://www.webtickets.co.za" target="_blank" rel="noopener">Buy tickets on Webtickets</a>
-          <a class="btn95" data-link="donate" href="https://www.webtickets.co.za" target="_blank" rel="noopener">Donate a festival pass</a>
+          <a class="btn95 default" data-link="webtickets" href="https://www.webtickets.co.za/v2/event.aspx?itemid=1607745473" target="_blank" rel="noopener">Buy tickets on Webtickets</a>
+          <a class="btn95" data-link="donate" href="https://www.webtickets.co.za/v2/event.aspx?itemid=1607745473" target="_blank" rel="noopener">Donate a festival pass</a>
         </div>
       </div>
       <div class="status"><span>Tickets via Webtickets</span><span class="fit">12–18 Dec 2026</span></div>
@@ -653,7 +653,7 @@ a.btn95 { text-decoration: none; }
    instagram    The KRAAL Instagram page. Its button next to "whatsapp channel" appears once this is filled in.
    ===================================================================== */
 const LINKS = {
-  webtickets: "https://www.webtickets.co.za",
+  webtickets: "https://www.webtickets.co.za/v2/event.aspx?itemid=1607745473",
   donate: "",
   script: "",
   oralStories: "",
@@ -846,6 +846,8 @@ function fillSlots(root) {
     const src = el.dataset.src; if (!src) return;
     const im = new Image();
     im.onload = () => { el.innerHTML = ''; im.alt = el.dataset.alt || ''; el.appendChild(im); };
+    const fb = el.dataset.fb;
+    im.onerror = () => { if (fb && !im.dataset.tried) { im.dataset.tried = '1'; im.src = fb; } };
     im.src = src;
   });
 }
@@ -869,9 +871,11 @@ const CREW = [
     { n: 'Gladwin van Niekerk', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30', bio: 'Gladwin van Niekerk is a versatile South African actor, singer and multidisciplinary artist. He gained international acclaim starring in the Venice Film Festival selection Carissa and the award-winning film Variations on a Theme. A dynamic stage performer, he has shone in acclaimed productions like In Wag Van and The Call.' },
     { n: 'Lynette du Plessis', r: 'Artist in focus · In Wag Van · 14 Dec, 14h30', bio: 'Lynette du Plessis is a South African performer and theatre-maker from George, Western Cape. She first gained recognition in dance, training in all contemporary forms with Jazzart Dance Theatre, Garage Dance Ensemble and Figure of 8 Dance Theatre.\n\nIn recent years Lynette has expanded into theatre and live art, building a reputation as a versatile, multidisciplinary artist. She has been under direction with artists including Jason Jacobs, Lee-Ann van Rooi, Carin Bester and Nico Scheepers.\n\nHer practice sits at the intersection of movement, acting and live art, using the body as a site for storytelling, experimentation and public engagement.' },
     { n: 'Cleveland Hopp', r: 'Artist in focus · Short films · 15 Dec, 16h30', ...CLEVELAND } ] },
-  { h: 'film directors', note: 'Carissa · Variations on a Theme · Al wat ek weet', people: [
-    { n: 'Jason Jacobs', r: 'Film director · 2026 Standard Bank Young Artist for Theatre', bio: "Jason Jacobs is the 2026 Standard Bank Young Artist for Theatre and the creator of Kraal, the theatre production this curation grows from. With Devon Delmar, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by Al wat ek weet. Their VR work Uprooted premieres at IDFA in 2026." },
-    { n: 'Devon Delmar', r: 'Film director · writer', bio: "Devon Delmar is a South African filmmaker and writer. With Jason Jacobs, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by Al wat ek weet. Their VR work Uprooted premieres at IDFA in 2026." } ] },
+  { h: 'film directors', note: 'Carissa · Variations on a Theme · Notes from the Underground', people: [
+    { n: 'Jason Jacobs', r: 'Film director · 2026 Standard Bank Young Artist for Theatre', bio: "Jason Jacobs is the 2026 Standard Bank Young Artist for Theatre and the creator of Kraal, the theatre production this curation grows from. With Devon Delmar, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry). Their VR work Uprooted premieres at IDFA in 2026." },
+    { n: 'Devon Delmar', r: 'Film director · writer', bio: "Devon Delmar is a South African filmmaker and writer. With Jason Jacobs, he co-wrote and co-directed Carissa (Venice Orizzonti) and Variations on a Theme (Tiger Award, IFFR; South Africa's 2027 Oscar entry). Their VR work Uprooted premieres at IDFA in 2026." },
+    { n: 'Adrian van Wyk', r: 'Film director · Notes from the Underground' },
+    { n: 'Chris Kets', r: 'Film director · Notes from the Underground' } ] },
   { h: 'documentary crew', people: [
     { n: 'Keisha Petersen', r: 'Documentary crew · Director', bio: "Keisha Petersen is a screen production student. She has produced a multicam episode (Spotlight), a documentary (Kill your Darlings) and a production for SRP (Skoenmaker se Kind), and directed the experimental short film Red Lace. She has also worked as an assistant director and producer on passion projects, including Don't turn around by Will Yeng, and has edited three shorts: a film, a proof of concept and a scene exercise. Afrikaans is her home language, and she is fluent in both Kaaps and Standard Afrikaans." },
     { n: 'Luca Smith', r: 'Documentary crew · Producer/Cinematographer', bio: 'Luca Smith is a filmmaker interested in finding contemporary stories in overlooked corners. Directorial credits include Horses (2026), Uglyboy (2025), Camino (2025) and the SAFTA-nominated Undercurrent (2025).' },
@@ -881,7 +885,7 @@ const CREW = [
     { n: 'Junaid (VJ) Mahomed', r: 'Artist photographer', link: 'https://www.icnp400.com', linkLabel: 'Portfolio: icnp400.com', bio: 'VJ Mahomed is an inquisitive human. He shows his wanderlust mainly through photographs and video, and his work is concerned with how the eye sees everyday movement, stories of upbringing, and grief. "My visuals are revised thoughts mostly, things I\'ve seen before and newly encountered, but all with intentionality emphasised." VJ aspires to preserve his art and to create the best possible entry points for people to access it.' },
     { n: 'Okuhle Sibeko', r: 'Artist photographer', link: 'https://drive.google.com/file/d/1BTZTkqFOnSbJodmKR8aJ38xDJPMnxUvU/view?usp=sharing', linkLabel: 'Portfolio (Google Drive)', bio: 'Okuhle Sibeko is a photographer originally from Randfontein, South Africa, currently pursuing a degree in Economics at the University of Cape Town. Working exclusively with analogue photography, his practice explores interpersonal relationships, from friendships to familial connections. Through his work, he seeks to strengthen, investigate and interrogate the relationships between people, places and himself. His photographic practice is informed by a parallel interest in development economics, through which he engages with the broader social and economic conditions that shape human experiences. He took part in the 2026 Cape Town Photography Festival.' } ] },
   { h: 'partners', people: [
-    { n: 'Annemarie du Plessis', r: 'Producer · Meria Productions', bio: 'Annemarie du Plessis is a producer and founder of Meria Productions. Her credits include Variations on a Theme (IFFR Tiger Award; South Africa’s 2027 Oscar submission), Carissa (Venice Orizzonti), Al wat ek weet, Emmy-nominated Koek and SAFTA-winning Die Broer Toer. She also produced the VR work Uprooted, which will premiere at IDFA DocLab in 2026.' } ] },
+    { n: 'Annemarie du Plessis', r: 'Producer · Meria Productions', bio: 'Annemarie du Plessis is a producer and founder of Meria Productions. Her credits include Variations on a Theme (IFFR Tiger Award; South Africa’s 2027 Oscar submission), Carissa (Venice Orizzonti), Emmy-nominated Koek and SAFTA-winning Die Broer Toer. She also produced the VR work Uprooted, which will premiere at IDFA DocLab in 2026.' } ] },
   { h: 'young critics programme', note: 'The young critics joining us in Kharkams will be announced soon.', people: [] }
 ];
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -953,15 +957,13 @@ const WINS = {
     <div class="doc">
       <h3>feature <em>films</em></h3>
       <p><b>14 Dec 26 | 16h30</b><br><i>Variations on a Theme</i> by Jason Jacobs &amp; Devon Delmar: displacement, memory and local resilience, through community-led cast performances.</p>
-      <p><b>15 Dec 26 | 19h30</b><br><i>Al Wat Ek Weet</i> by Jason Jacobs &amp; Devon Delmar: the nuances of coming of age.</p>
-      <p><b>16 Dec 26 | 19h00</b><br><i>Notes from the Underground</i>: Indigenous knowledge and learning through southern African hip-hop culture.</p>
+      <p><b>16 Dec 26 | 19h00</b><br><i>Notes from the Underground</i> by Adrian van Wyk &amp; Chris Kets: Indigenous knowledge and learning through southern African hip-hop culture.</p>
       <h3>short <em>films</em></h3>
       <p><b>15 Dec 26 | 16h30</b><br>Short films from established African filmmakers, curated by Cleveland Hopp.</p>
       <p>Screening venue: Kharkams Community Hall</p>
       <h3>meet the <em>directors</em></h3>
-      <p><b>Jason Jacobs &amp; Devon Delmar</b> co-wrote and co-directed <i>Carissa</i> (Venice Orizzonti) and <i>Variations on a Theme</i> (Tiger Award, IFFR; South Africa's 2027 Oscar entry), followed by <i>Al wat ek weet</i>. Their VR work <i>Uprooted</i> premieres at IDFA in 2026.</p>
-      <p><b><i>Notes from the Underground</i></b>: director details to come.</p>
-      <p><b><i>One Woman One Bra</i></b>: director details to come.</p>
+      <p><b>Jason Jacobs &amp; Devon Delmar</b> co-wrote and co-directed <i>Carissa</i> (Venice Orizzonti) and <i>Variations on a Theme</i> (Tiger Award, IFFR; South Africa's 2027 Oscar entry). Their VR work <i>Uprooted</i> premieres at IDFA in 2026.</p>
+      <p><b>Adrian van Wyk &amp; Chris Kets</b> directed <i>Notes from the Underground</i>. Their profiles are on the creatives page.</p>
       <p><b>Short films</b>: curated by Cleveland Hopp. Filmmaker details to come.</p>
       <p><a href="#creatives" data-close>Meet the film directors →</a></p>
     </div>`, status: 'Page 1 of 1' },
@@ -1032,9 +1034,9 @@ const WINS = {
   pdf: { t: 'Program.pdf', g: 'file:pdf', w: 380, body: () => `<div class="doc"><p>The full program PDF will be available to download closer to the time.</p><p><a href="#lineup" data-close>Read the lineup on this page →</a></p></div>` }
 };
 
-function openViewer(src, cap) {
+function openViewer(src, cap, fb) {
   openWin('view:' + src, { t: src.split('/').pop(), g: 'picture', w: 760, status: cap || src, body: () => `
-    <div class="view-pic well"><div class="slot" data-src="${esc(src)}" data-alt="${esc(cap)}"></div></div>
+    <div class="view-pic well"><div class="slot" data-src="${esc(src)}" data-alt="${esc(cap)}" data-fb="${esc(fb || '')}"></div></div>
     ${cap ? `<p style="font-size:.9rem;padding:0 2px">${esc(cap)}</p>` : ''}` });
 }
 function openPerson(key) {
@@ -1110,7 +1112,7 @@ function openWin(id, dyn) {
 }
 function closeWin(el) { if (el._stop) el._stop(); el.remove(); const ws = wm.querySelectorAll('.win'); if (ws.length) focusWin(ws[ws.length - 1]); else cascade = 0; }
 document.addEventListener('click', e => {
-  const v = e.target.closest('[data-view]'); if (v) { openViewer(v.dataset.view, v.dataset.cap || ''); return; }
+  const v = e.target.closest('[data-view]'); if (v) { openViewer(v.dataset.view, v.dataset.cap || '', v.dataset.fb || ''); return; }
   const pp = e.target.closest('[data-person]'); if (pp) { openPerson(pp.dataset.person); return; }
   const opener = e.target.closest('[data-win],[data-open]');
   if (opener) { openWin(opener.dataset.win || opener.dataset.open); return; }
