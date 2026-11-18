@@ -329,6 +329,8 @@ a.btn95 { text-decoration: none; }
 .thumb { display: block; width: 100%; aspect-ratio: 1; padding: 0; overflow: hidden; background: var(--sky-b); border: 2px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); }
 .thumb .slot { pointer-events: none; }
 .thumb .slot img { object-position: 50% 22%; }
+/* Crop Adrian van Wyk's photo to show only the left person */
+.slot img[src*="13ldk-Hw-icoeTble7DSpG-jZZh0iwsNC"] { object-position: left center; }
 .thumb:hover, .thumb:focus-visible { outline: 2px solid var(--select); outline-offset: 1px; }
 .thumb.tba { display: grid; place-items: center; font-family: var(--f-pixel); font-size: .8rem; color: var(--purple); background: #f1eef8; }
 .thumb.fill { aspect-ratio: auto; height: 100%; border: 0; }
