@@ -907,7 +907,7 @@ document.getElementById('crew').innerHTML = CREW.map((g, gi) => `
         <b>${esc(p.n)}</b><span>${esc(p.r)}</span>
       </li>`).join('')}
     ${g.people.length ? `</ul>` : ''}
-  </section>`).join('') + `<p class="later gutter">More bios and photos are added as they come in.</p>`;
+  </section>`).join('');
 
 /* ---------------- Windows ---------------- */
 const fileRow = (g, label, when, go) => `<li><a href="${go}" data-close><span class="mini" data-g="${g}"></span>${label}<span class="when">${when}</span></a></li>`;
