@@ -175,11 +175,11 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
 .paper { background: var(--paper); position: relative; }
 .logo { position: absolute; top: 14px; left: max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 10px; text-decoration: none; color: #6b6b6b; font-family: var(--f-pixel); font-size: 1.2rem; letter-spacing: .1em; z-index: 4; }
 .logo svg { width: 36px; height: 36px; }
-.socials { position: absolute; top: 12px; right: max(16px, env(safe-area-inset-right, 0px)); z-index: 4; display: flex; align-items: flex-start; gap: 14px; }
+.socials { position: absolute; top: 12px; right: max(16px, env(safe-area-inset-right, 0px)); z-index: 4; display: flex; align-items: flex-start; gap: 8px; }
 a.wa { text-decoration: none; }
-.wa { display: grid; justify-items: center; gap: 2px; background: none; border: 0; font: inherit; color: var(--purple); }
-.wa .cap { font-family: var(--f-pixel); font-size: .62rem; }
-.wa svg { width: 44px; height: 44px; }
+.wa { display: grid; justify-items: center; align-content: center; gap: 2px; inline-size: 4rem; min-block-size: 44px; padding: 0; background: none; border: 0; font: inherit; color: var(--purple); }
+.wa .cap { font-family: var(--f-pixel); font-size: .56rem; }
+.wa svg { display: block; width: 30px; height: 30px; }
 .paper-top { display: contents; }
 @media (max-width: 980px) {
   .logo, .socials { position: static; }
@@ -443,9 +443,38 @@ a.btn95 { text-decoration: none; }
   <div class="paper-top gutter">
     <a class="logo" href="#home" aria-label="Kraal Curation home"><span class="lg" data-g="ks"></span><span>K.R.A.A.L</span></a>
     <div class="socials">
-      <button class="wa" data-win="whatsapp"><span class="cap">whatsapp channel</span><span data-g="chat"></span></button>
-      <a class="wa" data-social="youtube" href="#" target="_blank" rel="noopener" hidden><span class="cap">youtube</span><span data-g="film"></span></a>
-      <a class="wa" data-social="instagram" href="#" target="_blank" rel="noopener" hidden><span class="cap">instagram</span><span data-g="camera"></span></a>
+      <button class="wa" data-win="whatsapp" aria-label="whatsapp channel">
+        <span class="cap">whatsapp</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="#25d366" d="M12 1.5a10.5 10.5 0 0 0-9.1 15.75L1.5 22.5l5.39-1.42A10.5 10.5 0 1 0 12 1.5Z" />
+          <path fill="#fff" transform="translate(4.08 4.08) scale(.66)" d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02Z" />
+        </svg>
+      </button>
+      <a class="wa" data-social="youtube" href="#" target="_blank" rel="noopener" hidden>
+        <span class="cap">youtube</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <rect x=".5" y="4" width="23" height="16" rx="4.5" fill="#ff0033" />
+          <path fill="#fff" d="m9.6 8.4 6.2 3.6-6.2 3.6Z" />
+        </svg>
+      </a>
+      <a class="wa" data-social="instagram" href="#" target="_blank" rel="noopener" hidden>
+        <span class="cap">instagram</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="instagram-social-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ffdc80" />
+              <stop offset="25%" stop-color="#fcaf45" />
+              <stop offset="52%" stop-color="#f77737" />
+              <stop offset="73%" stop-color="#e1306c" />
+              <stop offset="100%" stop-color="#833ab4" />
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="22" height="22" rx="5" fill="url(#instagram-social-gradient)" />
+          <rect x="5.5" y="5.5" width="13" height="13" rx="3.5" fill="none" stroke="#fff" stroke-width="1.6" />
+          <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6" />
+          <circle cx="16" cy="8" r=".9" fill="#fff" />
+        </svg>
+      </a>
     </div>
   </div>
   <nav class="nav gutter" aria-label="Main">
