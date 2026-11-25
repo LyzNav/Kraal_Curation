@@ -258,6 +258,10 @@ a.wa { text-decoration: none; }
 .thanks .card:nth-child(even) { margin-top: 64px; }
 @media (max-width: 560px) {
   .card { width: calc(50% - 16px); }
+  .documentary-crew .card > span {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
   .thanks .card:nth-child(even) { margin-top: 0; }
 }
 
@@ -896,7 +900,7 @@ const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').repla
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 const excerpt = b => (b = b && b.replace(/\s+/g, ' ')) ? (b.length > 170 ? b.slice(0, 170).replace(/\s+\S*$/, '') + '…' : b) : 'Bio coming soon.';
 document.getElementById('crew').innerHTML = CREW.map((g, gi) => `
-  <section class="crew gutter">
+  <section class="crew gutter${g.h === 'documentary crew' ? ' documentary-crew' : ''}">
     <h2>${esc(g.h)}</h2>${g.note ? `<p class="crew-note">${esc(g.note)}</p>` : ''}
     ${g.people.length ? `<ul class="cards">` : ''}${g.people.map((p, i) => `
       <li class="card">
