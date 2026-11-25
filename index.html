@@ -180,12 +180,12 @@ a.wa { text-decoration: none; }
 .wa { display: grid; justify-items: center; gap: 2px; background: none; border: 0; font: inherit; color: var(--purple); }
 .wa .cap { font-family: var(--f-pixel); font-size: .62rem; }
 .wa svg { width: 44px; height: 44px; }
-@media (max-width: 760px) {
-  .logo span { display: none; }
+.paper-top { display: contents; }
+@media (max-width: 980px) {
   .logo, .socials { position: static; }
   .paper-top { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
 }
-@media (min-width: 761px) { .paper-top { display: contents; } }
+@media (max-width: 760px) { .logo span { display: none; } }
 
 .intro { max-width: 1280px; margin-inline: auto; padding-block: 36px 24px; display: grid; gap: 20px; }
 .intro .body { font-size: clamp(1rem, 1.5vw, 1.3rem); line-height: 1.6; display: grid; gap: 1.1em; }
@@ -670,7 +670,7 @@ const LINKS = {
   museum: "",
   whatsappChannel: "https://whatsapp.com/channel/0029VbAEPJj9MF94wiW5oL2R",
   youtube: "https://www.youtube.com/@KraalStories",
-  instagram: ""
+  instagram: "https://www.instagram.com/kraalstories/"
 };
 
 /* ---------------- Pixel glyphs ---------------- */
