@@ -40,10 +40,13 @@
   --f-label: "VT323", "Courier New", monospace;
 }
 * { box-sizing: border-box; }
-body { margin: 0; }
+body { margin: 0; padding-bottom: var(--site-taskbar-height); }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
+html {
+  --site-taskbar-height: calc(68px + env(safe-area-inset-bottom, 0px));
+  scroll-behavior: smooth; scroll-padding-bottom: var(--site-taskbar-height);
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   background: var(--paper); color: var(--ink);
@@ -153,8 +156,8 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
 .status span { flex: 1; padding: 1px 6px; border: 1px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo); }
 
 /* floating windows */
-#wm { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
-.win { position: fixed; pointer-events: auto; width: min(var(--w, 460px), calc(100vw - 24px)); max-height: calc(100vh - 32px); display: flex; flex-direction: column; }
+#wm { position: fixed; inset: 0 0 var(--site-taskbar-height); pointer-events: none; z-index: 50; }
+.win { position: absolute; pointer-events: auto; width: min(var(--w, 460px), calc(100% - 24px)); max-height: calc(100% - 32px); display: flex; flex-direction: column; }
 .win .wb { padding: 10px; overflow: auto; display: grid; gap: 10px; }
 .win.inactive .tb { background: linear-gradient(90deg, #7d7d7d, #a9a9a9); }
 .doc { background: #fff; padding: 16px 18px; font-size: .98rem; line-height: 1.55; display: grid; gap: 12px; }
@@ -283,7 +286,7 @@ a.wa { text-decoration: none; }
 
 /* Home desktop taskbar */
 .home-taskbar {
-  position: sticky; bottom: 0; z-index: 6; display: grid; grid-template-columns: auto minmax(0, 1fr);
+  position: fixed; inset-inline: 0; bottom: 0; z-index: 51; display: grid; grid-template-columns: auto minmax(0, 1fr);
   align-items: stretch; gap: 7px; padding: 5px max(8px, env(safe-area-inset-right, 0px)) max(5px, env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
   border-top: 2px solid #8c719d; background: #2d203b; box-shadow: 0 -3px 0 #241830, inset 0 1px 0 #4c385b;
 }
@@ -312,7 +315,6 @@ a.wa { text-decoration: none; }
   background: #483455; border-color: #766084 #2f223d #2f223d #766084;
 }
 .home-task-group:last-child > a > svg { width: 23px; height: 23px; }
-.home-desktop .ico { scroll-margin-bottom: 72px; }
 
 /* ---------- Taskbar footer ---------- */
 .site-copyright { padding-block: 6px max(6px, env(safe-area-inset-bottom, 0px)); text-align: center; font-size: .75rem; }
@@ -498,7 +500,7 @@ a.btn95 { text-decoration: none; }
     <button class="ico" data-win="team" style="--x:26.7%;--y:77.1%"><span class="glyph" data-g="folder"></span><span class="lbl">Creative Team</span></button>
   </div>
 </section>
-<nav class="home-taskbar" id="home-taskbar" aria-label="Home taskbar">
+<nav class="home-taskbar" id="home-taskbar" aria-label="Site taskbar">
   <a class="home-task-home" href="#home"><span data-g="ks" aria-hidden="true"></span>Home</a>
   <div class="home-task-track">
     <div class="home-task-group" role="group" aria-label="Site pages">
@@ -1253,7 +1255,7 @@ function openWin(id, dyn) {
   wm.appendChild(el);
   paintGlyphs(el); fillSlots(el);
   if (def.init) def.init(el);
-  const vw = window.innerWidth, vh = window.innerHeight, r = el.getBoundingClientRect();
+  const vw = wm.clientWidth, vh = wm.clientHeight, r = el.getBoundingClientRect();
   const off = (cascade++ % 6) * 26;
   el.style.left = Math.max(12, Math.min(vw - r.width - 12, (vw - r.width) / 2 - 60 + off)) + 'px';
   el.style.top = Math.max(16, Math.min(vh - r.height - 16, vh * 0.14 + off)) + 'px';
@@ -1277,7 +1279,7 @@ wm.addEventListener('pointerdown', e => {
   tb.setPointerCapture(e.pointerId);
   const move = ev => {
     const nx = Math.max(-win.offsetWidth + 80, Math.min(window.innerWidth - 80, ox + ev.clientX - sx));
-    const ny = Math.max(0, Math.min(window.innerHeight - 30, oy + ev.clientY - sy));
+    const ny = Math.max(0, Math.min(wm.clientHeight - win.offsetHeight, oy + ev.clientY - sy));
     win.style.left = nx + 'px'; win.style.top = ny + 'px';
   };
   const up = () => { tb.removeEventListener('pointermove', move); tb.removeEventListener('pointerup', up); };
@@ -1574,6 +1576,18 @@ wallpaper('bg-sub', 'images/desktop-subscribe.jpg', paintSub);
 
 paintGlyphs(); fillSlots();
 const homeTaskbar = document.getElementById('home-taskbar');
+function updateTaskbarSpace() {
+  const height = Math.ceil(homeTaskbar.getBoundingClientRect().height);
+  document.documentElement.style.setProperty('--site-taskbar-height', height + 'px');
+}
+updateTaskbarSpace();
+new ResizeObserver(updateTaskbarSpace).observe(homeTaskbar, { box: 'border-box' });
+new ResizeObserver(() => {
+  for (const win of wm.querySelectorAll('.win')) {
+    const top = Math.min(win.offsetTop, Math.max(0, wm.clientHeight - win.offsetHeight));
+    if (top !== win.offsetTop) win.style.top = top + 'px';
+  }
+}).observe(wm);
 const taskbarRoutes = new Map(Array.from(homeTaskbar.querySelectorAll('[data-task-window]'), link => [link.hash, link.dataset.taskWindow]));
 let windowFromTaskbar;
 function followTaskbarLink() {
