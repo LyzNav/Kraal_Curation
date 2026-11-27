@@ -143,6 +143,16 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
   box-shadow: inset -1px -1px 0 var(--win-lo);
 }
 .btn95:active { border-color: var(--win-dk) var(--win-hi) var(--win-hi) var(--win-dk); box-shadow: inset 1px 1px 0 var(--win-lo); }
+.home-music.btn95 {
+  display: inline-flex; align-items: center; gap: 7px; min-height: 44px;
+  padding: 4px 9px; font-size: .84rem;
+}
+.home-music svg { display: block; width: 20px; height: 20px; }
+.home-music-dock { display: grid; justify-items: center; gap: 3px; }
+.music-note { color: var(--purple); font-size: .75rem; }
+.music-note button { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; }
+@media (min-width: 761px) { .home-music-dock { position: absolute; top: 16px; left: max(16px, env(safe-area-inset-left, 0px)); justify-items: start; } }
+.music-frame { display: block; width: 100%; min-height: 200px; aspect-ratio: 16 / 9; border: 0; background: #000; }
 .field95 {
   font: 1rem var(--f-type); padding: 6px 8px; background: #fff; color: #000; min-width: 0;
   border: 2px solid; border-color: var(--win-lo) var(--win-hi) var(--win-hi) var(--win-lo);
@@ -446,6 +456,12 @@ a.btn95 { text-decoration: none; }
       <li><a class="lnk" href="#creatives">creatives</a></li>
       <li><a class="lnk" href="#tickets">tickets</a></li>
     </ul>
+    <div class="home-music-dock">
+      <button type="button" class="btn95 home-music" data-win="skipskop" aria-haspopup="dialog" aria-describedby="skipskop-notice">
+        <span data-g="sound" aria-hidden="true"></span>Play Skipskop
+      </button>
+      <p class="music-note" id="skipskop-notice">On YouTube · playing accepts the <button type="button" data-win="skipskopPrivacy" aria-haspopup="dialog">terms &amp; privacy</button>.</p>
+    </div>
   </nav>
   <div class="icons gutter">
     <button class="ico" data-win="program" style="--x:36.8%;--y:23.3%"><span class="glyph" data-g="folder"></span><span class="lbl">Program</span></button>
@@ -979,6 +995,15 @@ const thumb = (src, cap, cls) => `<button class="thumb${cls ? ' ' + cls : ''}" d
 const driveId = u => ((u || '').match(/folders\/([\w-]+)/) || [])[1];
 
 const WINS = {
+  skipskopPrivacy: { t: 'Music playback terms & privacy', g: 'file:txt', w: 430, body: () => `
+    <div class="doc">
+      <p>By playing this recording, you agree to the <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube Terms of Service</a> and this playback privacy notice.</p>
+      <p>This player uses YouTube services. When it opens, your browser connects to YouTube to load the recording. YouTube can receive connection and playback information, use device storage, and show ads under the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+      <p>Kraal Curation does not receive YouTube account or playback data through this player.</p>
+    </div>`, status: 'YouTube playback' },
+  skipskop: { t: 'So Long Skipskop', g: 'sound', w: 520, body: () => `
+    <iframe class="music-frame" src="https://www.youtube-nocookie.com/embed/BSWjzJvgtd4?autoplay=1&amp;playsinline=1" title="David Kramer — So Long Skipskop" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    <div class="tk-btns"><button type="button" class="btn95" data-open="skipskopPrivacy">Terms &amp; privacy</button><a class="btn95" href="https://www.youtube.com/watch?v=BSWjzJvgtd4" target="_blank" rel="noopener">Listen on YouTube</a></div>`, status: 'David Kramer · Klassic Kramer' },
   program: { t: 'Program', g: 'folder', w: 440, body: () => `
     <ul class="rows well">
       ${fileRow('folder', 'opening event', '12 Dec', '#s-opening')}
