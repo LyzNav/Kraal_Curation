@@ -292,6 +292,7 @@ a.wa { text-decoration: none; }
 /* ---------- Small screens: desktops become icon grids ---------- */
 @media (max-width: 760px) {
   .desk { aspect-ratio: auto; min-height: 0; padding-bottom: 28px; }
+  #bg-home { object-position: 25% center; }
   .icons { position: relative; inset: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 4px; padding-top: 28px; }
   .ico { position: static; transform: none; width: auto; }
   .icons .ico:last-child:nth-child(3n+1) { grid-column: 2; }
@@ -1218,6 +1219,163 @@ function ridge(ctx, w, h, base, amp, seed, color, domes) {
   }
   ctx.lineTo(w, h); ctx.closePath(); ctx.fill();
 }
+const CAMPFIRE_COLORS = { r: '#cf4935', o: '#ff8b36', y: '#ffd35f', w: '#fff1bd' };
+const CAMPFIRE_FRAMES = [
+  [
+    '.............',
+    '........y....',
+    '.....r.......',
+    '.....o.......',
+    '....ro.......',
+    '....ror......',
+    '....roor.....',
+    '...rooor.....',
+    '...rooyor....',
+    '..rrooyor....',
+    '..rooyyoor...',
+    '..rooyyyoor..',
+    '..rooywyor...',
+    '...roywyor...',
+    '...royyyor...',
+    '...rooooor...',
+    '....rrrrr....'
+  ],
+  [
+    '.........o...',
+    '.............',
+    '.......r.....',
+    '......ro.....',
+    '......oor....',
+    '.....roor....',
+    '....rroor....',
+    '....rooyor...',
+    '...rooyyor...',
+    '..rrooyyor...',
+    '..rooyyyor...',
+    '..roywyyor...',
+    '..roywyoor...',
+    '...royyor....',
+    '...rooyoor...',
+    '...rooooor...',
+    '....rrrrr....'
+  ],
+  [
+    '.............',
+    '...o.........',
+    '........r....',
+    '........or...',
+    '.......ror...',
+    '......roor...',
+    '......roor...',
+    '....rrooyor..',
+    '....rooyyor..',
+    '...rooyyyor..',
+    '...roywyyor..',
+    '..rooywyyor..',
+    '..rooywyoor..',
+    '...royyyor...',
+    '...rooyoor...',
+    '...rooooor...',
+    '....rrrrr....'
+  ],
+  [
+    '..r..........',
+    '.............',
+    '........y....',
+    '....r........',
+    '....or.......',
+    '....oor.r....',
+    '...rooror....',
+    '...roooyor...',
+    '...rooyyor...',
+    '..rooyyyor...',
+    '..roywyyor...',
+    '..roywyyor...',
+    '..rooywyoor..',
+    '...royyyor...',
+    '...rooyoor...',
+    '...rooooor...',
+    '....rrrrr....'
+  ],
+  [
+    '.............',
+    '.............',
+    '......o......',
+    '....r........',
+    '...ro........',
+    '...oor.......',
+    '...roor......',
+    '...rooor.....',
+    '..rooyoor....',
+    '..rooyyoor...',
+    '..roywyoor...',
+    '..roywyyor...',
+    '...roywyoor..',
+    '...royyyor...',
+    '...rooyoor...',
+    '...rooooor...',
+    '....rrrrr....'
+  ]
+];
+const HOME_KRAAL = { x: 110, y: 181 };
+
+function animateCampfire(cv, ctx) {
+  const { x, y } = HOME_KRAAL;
+  const left = x - 3, top = y - 17;
+  const width = CAMPFIRE_FRAMES[0][0].length, height = CAMPFIRE_FRAMES[0].length;
+  ctx.fillStyle = '#543038';
+  ctx.fillRect(x - 7, y - 2, 20, 4);
+  ctx.fillStyle = '#793927';
+  ctx.fillRect(x - 4, y - 2, 15, 2);
+  ctx.fillStyle = '#d85b32';
+  ctx.fillRect(x - 1, y, 9, 1);
+  const background = ctx.getImageData(left, top, width, height);
+
+  let frame = 0;
+  function drawFrame() {
+    ctx.putImageData(background, left, top);
+    CAMPFIRE_FRAMES[frame].forEach((row, dy) => {
+      for (let dx = 0; dx < row.length; dx++) {
+        const color = CAMPFIRE_COLORS[row[dx]];
+        if (!color) continue;
+        ctx.fillStyle = color;
+        ctx.fillRect(left + dx, top + dy, 1, 1);
+      }
+    });
+  }
+  drawFrame();
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let inView = false;
+  let timer;
+  function updateAnimation() {
+    clearInterval(timer);
+    if (reducedMotion.matches) {
+      frame = 0;
+      drawFrame();
+    } else if (inView && !document.hidden) {
+      timer = setInterval(() => {
+        frame = (frame + 1) % CAMPFIRE_FRAMES.length;
+        drawFrame();
+      }, 140);
+    }
+  }
+  const observer = new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    updateAnimation();
+  });
+  observer.observe(cv);
+  reducedMotion.addEventListener('change', updateAnimation);
+  document.addEventListener('visibilitychange', updateAnimation);
+
+  return () => {
+    clearInterval(timer);
+    observer.disconnect();
+    reducedMotion.removeEventListener('change', updateAnimation);
+    document.removeEventListener('visibilitychange', updateAnimation);
+  };
+}
+
 function paintHome(cv) {
   const w = 342, h = 192; cv.width = w; cv.height = h; const ctx = cv.getContext('2d');
   const sky = ctx.createLinearGradient(0, 0, 0, h);
@@ -1233,8 +1391,9 @@ function paintHome(cv) {
   // granite boulders + bushes
   [[24, 168, 9, 5], [36, 170, 6, 4], [292, 167, 11, 6], [306, 170, 6, 4], [190, 171, 5, 3]].forEach(([x, y, rx, ry]) => { ctx.fillStyle = '#2c1f33'; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fill(); });
   // a small stone kraal in the foreground
-  for (let i = 0; i < 26; i++) { const a = i / 26 * Math.PI * 2; if (a > -0.5 && a < 0.5) continue; ctx.fillStyle = i % 3 ? '#4a3752' : '#5b4663'; ctx.fillRect(Math.round(110 + Math.cos(a) * 18), Math.round(181 + Math.sin(a) * 5), 2, 2); }
+  for (let i = 0; i < 26; i++) { const a = i / 26 * Math.PI * 2; if (a > -0.5 && a < 0.5) continue; ctx.fillStyle = i % 3 ? '#4a3752' : '#5b4663'; ctx.fillRect(Math.round(HOME_KRAAL.x + Math.cos(a) * 18), Math.round(HOME_KRAAL.y + Math.sin(a) * 5), 2, 2); }
   dither(ctx, w, h, 6);
+  return animateCampfire(cv, ctx);
 }
 function paintSub(cv) {
   const w = 342, h = 192; cv.width = w; cv.height = h; const ctx = cv.getContext('2d');
@@ -1252,9 +1411,13 @@ function paintSub(cv) {
   dither(ctx, w, h, 6);
 }
 function wallpaper(cvId, photo, painter) {
-  const cv = document.getElementById(cvId); painter(cv);
+  const cv = document.getElementById(cvId);
+  const stopPainting = painter(cv);
   const im = new Image();
-  im.onload = () => { im.className = 'bg-photo'; im.alt = ''; cv.replaceWith(im); };
+  im.onload = () => {
+    stopPainting?.();
+    im.className = 'bg-photo'; im.alt = ''; cv.replaceWith(im);
+  };
   im.src = photo;
 }
 wallpaper('bg-home', 'images/desktop-home.jpg', paintHome);
