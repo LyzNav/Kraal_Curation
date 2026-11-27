@@ -90,11 +90,13 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
 .desk .bg { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
 .desk .bg-photo { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
 .home-kraal {
-  position: absolute; z-index: -1; left: 73.65%; bottom: 5.2%;
-  width: clamp(80px, 8.5vw, 136px); height: auto; transform: translateX(-50%); pointer-events: none;
+  --kraal-width: clamp(240px, 25.5vw, 408px);
+  position: absolute; z-index: -1; left: 36%;
+  bottom: calc(5.73% - var(--kraal-width) / 29);
+  width: var(--kraal-width); height: auto; pointer-events: none;
 }
 #home .bg-photo + .home-kraal { display: none; }
-@media (max-width: 849px) { .home-kraal { left: 54.5%; width: 68px; } }
+@media (max-width: 849px) { .home-kraal { --kraal-width: 204px; } }
 .icons { position: absolute; inset: 0; z-index: 2; }
 .ico {
   position: absolute; left: var(--x); top: var(--y); transform: translateX(-50%);
@@ -298,10 +300,11 @@ a.wa { text-decoration: none; }
 /* ---------- Small screens: desktops become icon grids ---------- */
 @media (max-width: 760px) {
   .desk { aspect-ratio: auto; min-height: 0; padding-bottom: 28px; }
-  #bg-home { object-position: 25% center; }
+  #home { padding-bottom: 100px; }
+  #bg-home { object-position: var(--home-fire-crop, 25%) center; }
   .home-kraal {
-    left: auto; right: max(12px, 4%, env(safe-area-inset-right, 0px));
-    width: clamp(48px, 13vw, 78px); transform: none;
+    --kraal-width: clamp(144px, 39vw, 234px);
+    left: var(--home-kraal-x, auto); right: max(12px, 4%, env(safe-area-inset-right, 0px));
   }
   .icons { position: relative; inset: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 4px; padding-top: 28px; }
   .ico { position: static; transform: none; width: auto; }
@@ -310,6 +313,7 @@ a.wa { text-decoration: none; }
   .ico .lbl { font-size: 1.15rem; }
   .dialog-dock { position: relative; left: auto; top: auto; transform: none; width: auto; margin-top: 28px; }
 }
+@media (max-width: 350px) { #home { padding-bottom: 130px; } }
 
 /* ================= v3: Jason's notes ================= */
 /* Headings everywhere follow the landing page: pixel caps in purple, typewriter body */
@@ -1345,6 +1349,26 @@ const CAMPFIRE_FRAMES = [
 ];
 const HOME_KRAAL = { x: 110, y: 181 };
 
+function positionHomeKraal(cv) {
+  const home = cv.parentElement;
+  const kraal = home.querySelector('.home-kraal');
+  const observer = new ResizeObserver(() => {
+    const { width, height } = home.getBoundingClientRect();
+    const scale = Math.max(width / cv.width, height / cv.height);
+    const defaultOffset = (width - cv.width * scale) * .25;
+    const fireRight = (HOME_KRAAL.x + 10) * scale;
+    const gap = 10;
+    const rightInset = Math.max(12, width * .04);
+    const maxLeft = width - kraal.getBoundingClientRect().width - rightInset;
+    const left = Math.min(defaultOffset + fireRight + gap, maxLeft);
+    home.style.setProperty('--home-fire-crop', `${left - fireRight - gap}px`);
+    home.style.setProperty('--home-kraal-x', `${left}px`);
+  });
+  observer.observe(home);
+  observer.observe(kraal);
+  return () => observer.disconnect();
+}
+
 function animateCampfire(cv, ctx) {
   const { x, y } = HOME_KRAAL;
   const left = x - 3, top = y - 17;
@@ -1428,7 +1452,12 @@ function paintHome(cv) {
   // a small stone kraal in the foreground
   for (let i = 0; i < 26; i++) { const a = i / 26 * Math.PI * 2; if (a > -0.5 && a < 0.5) continue; ctx.fillStyle = i % 3 ? '#4a3752' : '#5b4663'; ctx.fillRect(Math.round(HOME_KRAAL.x + Math.cos(a) * 18), Math.round(HOME_KRAAL.y + Math.sin(a) * 5), 2, 2); }
   dither(ctx, w, h, 6, .58);
-  return animateCampfire(cv, ctx);
+  const stopCampfire = animateCampfire(cv, ctx);
+  const stopPositioning = positionHomeKraal(cv);
+  return () => {
+    stopCampfire();
+    stopPositioning();
+  };
 }
 function paintSub(cv) {
   const w = 342, h = 192; cv.width = w; cv.height = h; const ctx = cv.getContext('2d');
