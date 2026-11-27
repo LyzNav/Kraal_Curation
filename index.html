@@ -281,6 +281,39 @@ a.wa { text-decoration: none; }
 .sub-win .msg { min-height: 1.3em; font-size: .9rem; color: var(--purple); }
 .sub-win .meta { display: grid; gap: 4px; font-size: .9rem; border-top: 1px solid var(--win-lo); padding-top: 8px; }
 
+/* Home desktop taskbar */
+.home-taskbar {
+  position: sticky; bottom: 0; z-index: 6; display: grid; grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch; gap: 7px; padding: 5px max(8px, env(safe-area-inset-right, 0px)) max(5px, env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+  border-top: 2px solid #8c719d; background: #2d203b; box-shadow: 0 -3px 0 #241830, inset 0 1px 0 #4c385b;
+}
+.home-taskbar a { text-decoration: none; white-space: nowrap; }
+.home-taskbar a:focus-visible { outline: 2px solid #f7c777; outline-offset: -3px; }
+.home-taskbar svg { display: block; width: 21px; height: 21px; }
+.home-taskbar .home-task-home {
+  display: flex; align-items: center; gap: 7px; min-height: 46px; padding-inline: 10px;
+  border: 2px solid; border-color: #ffe2aa #926044 #926044 #ffe2aa;
+  background: #f2c187; color: #352238; font: .67rem var(--f-pixel);
+  box-shadow: inset -1px -1px 0 #c88c64;
+}
+.home-taskbar .home-task-home:hover { background: #ffd39c; }
+.home-task-track {
+  display: flex; align-items: stretch; gap: 6px; min-width: 0; overflow-x: auto;
+  overscroll-behavior-inline: contain; scrollbar-width: thin; scrollbar-color: #806595 #261a33;
+}
+.home-task-group { display: flex; flex: none; align-items: stretch; gap: 1px; }
+.home-task-group + .home-task-group { padding-inline-start: 6px; border-inline-start: 1px solid #624e71; }
+.home-taskbar .home-task-link {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-width: 44px; min-height: 46px; padding: 3px 5px; border: 1px solid transparent;
+  color: #f6eaff; font: .64rem/1.2 var(--f-type);
+}
+.home-taskbar .home-task-link:hover, .home-taskbar .home-task-link:focus-visible {
+  background: #483455; border-color: #766084 #2f223d #2f223d #766084;
+}
+.home-task-group:last-child > a > svg { width: 23px; height: 23px; }
+.home-desktop .ico { scroll-margin-bottom: 72px; }
+
 /* ---------- Taskbar footer ---------- */
 .site-copyright { padding-block: 6px max(6px, env(safe-area-inset-bottom, 0px)); text-align: center; font-size: .75rem; }
 .taskbar {
@@ -424,6 +457,7 @@ a.btn95 { text-decoration: none; }
 </head>
 <body>
 <!-- ============ PAGE 1 · HOME DESKTOP ============ -->
+<div class="home-desktop">
 <section id="home" class="desk desk-home" aria-label="Home">
   <canvas class="bg" id="bg-home" aria-hidden="true"></canvas>
   <svg class="home-kraal" viewBox="0 0 29 19" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
@@ -464,6 +498,57 @@ a.btn95 { text-decoration: none; }
     <button class="ico" data-win="team" style="--x:26.7%;--y:77.1%"><span class="glyph" data-g="folder"></span><span class="lbl">Creative Team</span></button>
   </div>
 </section>
+<nav class="home-taskbar" id="home-taskbar" aria-label="Home taskbar">
+  <a class="home-task-home" href="#home"><span data-g="ks" aria-hidden="true"></span>Home</a>
+  <div class="home-task-track">
+    <div class="home-task-group" role="group" aria-label="Site pages">
+      <a class="home-task-link" href="#lineup"><span data-g="folder" aria-hidden="true"></span><span>Lineup</span></a>
+      <a class="home-task-link" href="#creatives"><span data-g="picture" aria-hidden="true"></span><span>Creatives</span></a>
+      <a class="home-task-link" href="#tickets"><span data-g="magnifier" aria-hidden="true"></span><span>Tickets</span></a>
+    </div>
+    <div class="home-task-group" role="group" aria-label="Desktop shortcuts">
+      <a class="home-task-link" href="#app-program" data-task-window="program" aria-haspopup="dialog" aria-label="Program" title="Program"><span data-g="folder" aria-hidden="true"></span><span>Program</span></a>
+      <a class="home-task-link" href="#app-explore" data-task-window="explore" aria-haspopup="dialog" aria-label="Explore" title="Explore"><span data-g="globe" aria-hidden="true"></span><span>Explore</span></a>
+      <a class="home-task-link" href="#app-tickets" data-task-window="tickets" aria-haspopup="dialog" aria-label="Ticket options" title="Ticket options"><span data-g="magnifier" aria-hidden="true"></span><span>Ticket desk</span></a>
+      <a class="home-task-link" href="#app-films" data-task-window="films" aria-haspopup="dialog" aria-label="Films.pdf" title="Films.pdf"><span data-g="file:pdf" aria-hidden="true"></span><span>Films</span></a>
+      <a class="home-task-link" href="#app-artists" data-task-window="artists" aria-haspopup="dialog" aria-label="Artists In Focus" title="Artists In Focus"><span data-g="folder" aria-hidden="true"></span><span>Artists</span></a>
+      <a class="home-task-link" href="#app-museum" data-task-window="museum" aria-haspopup="dialog" aria-label="Museum" title="Museum"><span data-g="folder" aria-hidden="true"></span><span>Museum</span></a>
+      <a class="home-task-link" href="#app-theatre" data-task-window="theatre" aria-haspopup="dialog" aria-label="Theatre.pdf" title="Theatre.pdf"><span data-g="file:pdf" aria-hidden="true"></span><span>Theatre</span></a>
+      <a class="home-task-link" href="#app-kraal" data-task-window="kraal" aria-haspopup="dialog" aria-label="Kraal.pdf" title="Kraal.pdf"><span data-g="file:pdf" aria-hidden="true"></span><span>Kraal PDF</span></a>
+      <a class="home-task-link" href="#app-sponsor" data-task-window="sponsor" aria-haspopup="dialog" aria-label="Sponsor.webp" title="Sponsor.webp"><span data-g="file:webp" aria-hidden="true"></span><span>Sponsor</span></a>
+      <a class="home-task-link" href="#app-oral" data-task-window="oral" aria-haspopup="dialog" aria-label="Oral Stories" title="Oral Stories"><span data-g="folder" aria-hidden="true"></span><span>Oral Stories</span></a>
+      <a class="home-task-link" href="#app-poster" data-task-window="poster" aria-haspopup="dialog" aria-label="Poster.jpg" title="Poster.jpg"><span data-g="picture" aria-hidden="true"></span><span>Poster</span></a>
+      <a class="home-task-link" href="#app-critics" data-task-window="critics" aria-haspopup="dialog" aria-label="Young Critics Reviews" title="Young Critics Reviews"><span data-g="folder" aria-hidden="true"></span><span>Reviews</span></a>
+      <a class="home-task-link" href="#app-team" data-task-window="team" aria-haspopup="dialog" aria-label="Creative Team" title="Creative Team"><span data-g="folder" aria-hidden="true"></span><span>Team</span></a>
+      <a class="home-task-link" href="#app-kraalstories" data-task-window="kraalstories" aria-haspopup="dialog" aria-label="Kraal Stories" title="Kraal Stories"><span data-g="film" aria-hidden="true"></span><span>Kraal Stories</span></a>
+    </div>
+    <div class="home-task-group" role="group" aria-label="Social links">
+      <a class="home-task-link" href="https://whatsapp.com/channel/0029VbAEPJj9MF94wiW5oL2R" data-link="whatsappChannel" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 15 15" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+          <path fill="#25d366" d="M5 1h5v1h2v1h1v2h1v5h-1v2h-1v1h-2v1H5v-1H4v1H1v-2h1v-2H1V5h1V3h1V2h2z" />
+          <path fill="#fff" d="M4 4h2v1h1v2H6v1h1v1h1v1h1V9h2v1h1v2H9v-1H7v-1H6V9H5V7H4z" />
+        </svg></a>
+      <a class="home-task-link" href="https://www.youtube.com/@KraalStories" data-social="youtube" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 15 15" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+          <path fill="#ff0033" d="M2 2h11v1h1v1h1v7h-1v1h-1v1H2v-1H1v-1H0V4h1V3h1z" />
+          <path fill="#fff" d="M5 4h1v1h2v1h2v1h1v1h-1v1H8v1H6v1H5z" />
+        </svg></a>
+      <a class="home-task-link" href="https://www.instagram.com/kraalstories/" data-social="instagram" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 15 15" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="instagram-taskbar-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ffdc80" />
+              <stop offset="25%" stop-color="#fcaf45" />
+              <stop offset="52%" stop-color="#f77737" />
+              <stop offset="73%" stop-color="#e1306c" />
+              <stop offset="100%" stop-color="#833ab4" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#instagram-taskbar-gradient)" d="M3 1h9v1h1v1h1v9h-1v1h-1v1H3v-1H2v-1H1V3h1V2h1z" />
+          <path fill="#fff" fill-rule="evenodd" d="M5 3h5v1h1v1h1v5h-1v1h-1v1H5v-1H4v-1H3V5h1V4h1z M5 4v1H4v5h1v1h5v-1h1V5h-1V4z M6 6h3v3H6z M7 7h1v1H7z" />
+          <rect x="9" y="5" width="1" height="1" fill="#fff" />
+        </svg></a>
+    </div>
+  </div>
+</nav>
+</div>
 
 <!-- ============ PAGE 2 · PROGRAMME ============ -->
 <section id="lineup" class="paper" aria-labelledby="lineup-title">
@@ -1488,6 +1573,25 @@ wallpaper('bg-home', 'images/desktop-home.jpg', paintHome);
 wallpaper('bg-sub', 'images/desktop-subscribe.jpg', paintSub);
 
 paintGlyphs(); fillSlots();
+const homeTaskbar = document.getElementById('home-taskbar');
+const taskbarRoutes = new Map(Array.from(homeTaskbar.querySelectorAll('[data-task-window]'), link => [link.hash, link.dataset.taskWindow]));
+let windowFromTaskbar;
+function followTaskbarLink() {
+  const id = taskbarRoutes.get(location.hash);
+  if (windowFromTaskbar?.isConnected && windowFromTaskbar.dataset.id !== id) closeWin(windowFromTaskbar);
+  windowFromTaskbar = null;
+  if (!id) return;
+  openWin(id);
+  windowFromTaskbar = wm.querySelector(`.win[data-id="${id}"]`);
+}
+homeTaskbar.addEventListener('click', event => {
+  const link = event.target.closest('a[data-task-window]');
+  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.hash !== location.hash) return;
+  event.preventDefault();
+  followTaskbarLink();
+});
+window.addEventListener('hashchange', followTaskbarLink);
+followTaskbarLink();
 </script>
 </body>
 </html>
