@@ -316,6 +316,11 @@ a.wa { text-decoration: none; }
 }
 .home-task-group:last-child > a > svg { width: 23px; height: 23px; }
 
+.home-taskbar.has-soundtrack { grid-template-columns: auto minmax(0, 1fr) auto; }
+.home-taskbar .soundtrack-toggle { min-width: 44px; padding: 0 8px; }
+.home-taskbar .soundtrack-toggle svg { margin-inline: auto; }
+.home-taskbar .soundtrack-toggle:focus-visible { outline: 2px solid #401f71; outline-offset: -4px; }
+
 /* ---------- Taskbar footer ---------- */
 .site-copyright { padding-block: 6px max(6px, env(safe-area-inset-bottom, 0px)); text-align: center; font-size: .75rem; }
 .taskbar {
@@ -549,6 +554,7 @@ a.btn95 { text-decoration: none; }
         </svg></a>
     </div>
   </div>
+  <button class="btn95 soundtrack-toggle" id="soundtrack-toggle" type="button" aria-label="Pause soundtrack" title="Pause soundtrack" hidden><span data-g="sound" aria-hidden="true"></span></button>
 </nav>
 </div>
 
@@ -801,6 +807,7 @@ a.btn95 { text-decoration: none; }
    whatsappChannel  The KRAAL WhatsApp channel (top-right "whatsapp channel" button).
    youtube      The KRAAL YouTube channel. Its button next to "whatsapp channel" appears once this is filled in.
    instagram    The KRAAL Instagram page. Its button next to "whatsapp channel" appears once this is filled in.
+   soundtrack   Direct audio file for background playback from 2:15. Leave empty until the file is published.
    ===================================================================== */
 const LINKS = {
   webtickets: "https://www.webtickets.co.za/v2/event.aspx?itemid=1607745473",
@@ -812,7 +819,8 @@ const LINKS = {
   museum: "",
   whatsappChannel: "https://whatsapp.com/channel/0029VbAEPJj9MF94wiW5oL2R",
   youtube: "https://www.youtube.com/@KraalStories",
-  instagram: "https://www.instagram.com/kraalstories/"
+  instagram: "https://www.instagram.com/kraalstories/",
+  soundtrack: ""
 };
 
 /* ---------------- Pixel glyphs ---------------- */
@@ -1576,6 +1584,55 @@ wallpaper('bg-sub', 'images/desktop-subscribe.jpg', paintSub);
 
 paintGlyphs(); fillSlots();
 const homeTaskbar = document.getElementById('home-taskbar');
+
+if (LINKS.soundtrack) {
+  const soundtrackStart = 135;
+  const soundtrack = new Audio();
+  const soundtrackToggle = document.getElementById('soundtrack-toggle');
+
+  function trySoundtrack(event) {
+    if (event && (!event.isTrusted || (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' '))) return;
+    soundtrack.play().catch(() => {});
+  }
+  function stopSoundtrackRetry() {
+    document.removeEventListener('click', trySoundtrack, true);
+    document.removeEventListener('keydown', trySoundtrack, true);
+  }
+  function updateSoundtrackToggle() {
+    const label = soundtrack.paused || soundtrack.ended ? 'Resume soundtrack' : 'Pause soundtrack';
+    soundtrackToggle.setAttribute('aria-label', label);
+    soundtrackToggle.title = label;
+  }
+
+  soundtrack.addEventListener('playing', () => {
+    stopSoundtrackRetry();
+    updateSoundtrackToggle();
+    homeTaskbar.classList.add('has-soundtrack');
+    soundtrackToggle.hidden = false;
+  });
+  soundtrack.addEventListener('pause', updateSoundtrackToggle);
+  soundtrack.addEventListener('ended', updateSoundtrackToggle);
+  soundtrack.addEventListener('error', stopSoundtrackRetry);
+  soundtrack.addEventListener('loadedmetadata', () => {
+    if (soundtrack.duration > soundtrackStart) return;
+    stopSoundtrackRetry();
+    soundtrack.pause();
+  }, { once: true });
+  soundtrackToggle.addEventListener('click', () => {
+    if (!soundtrack.paused && !soundtrack.ended) {
+      soundtrack.pause();
+      return;
+    }
+    if (soundtrack.ended) soundtrack.currentTime = soundtrackStart;
+    trySoundtrack();
+  });
+
+  document.addEventListener('click', trySoundtrack, true);
+  document.addEventListener('keydown', trySoundtrack, true);
+  soundtrack.src = LINKS.soundtrack;
+  soundtrack.currentTime = soundtrackStart;
+  trySoundtrack();
+}
 function updateTaskbarSpace() {
   const height = Math.ceil(homeTaskbar.getBoundingClientRect().height);
   document.documentElement.style.setProperty('--site-taskbar-height', height + 'px');
