@@ -807,7 +807,7 @@ a.btn95 { text-decoration: none; }
    whatsappChannel  The KRAAL WhatsApp channel (top-right "whatsapp channel" button).
    youtube      The KRAAL YouTube channel. Its button next to "whatsapp channel" appears once this is filled in.
    instagram    The KRAAL Instagram page. Its button next to "whatsapp channel" appears once this is filled in.
-   soundtrack   Direct audio file for background playback from 2:15. Leave empty until the file is published.
+   soundtrack   Audio-only excerpt from 2:17.5–2:19.4 in Garth Erasmus’s Stories We Told Ourselves.
    ===================================================================== */
 const LINKS = {
   webtickets: "https://www.webtickets.co.za/v2/event.aspx?itemid=1607745473",
@@ -820,7 +820,7 @@ const LINKS = {
   whatsappChannel: "https://whatsapp.com/channel/0029VbAEPJj9MF94wiW5oL2R",
   youtube: "https://www.youtube.com/@KraalStories",
   instagram: "https://www.instagram.com/kraalstories/",
-  soundtrack: ""
+  soundtrack: "kraal-ululation.mp3"
 };
 
 /* ---------------- Pixel glyphs ---------------- */
@@ -1586,8 +1586,7 @@ paintGlyphs(); fillSlots();
 const homeTaskbar = document.getElementById('home-taskbar');
 
 if (LINKS.soundtrack) {
-  const soundtrackStart = 135;
-  const soundtrack = new Audio();
+  const soundtrack = new Audio(LINKS.soundtrack);
   const soundtrackToggle = document.getElementById('soundtrack-toggle');
 
   function trySoundtrack(event) {
@@ -1599,7 +1598,8 @@ if (LINKS.soundtrack) {
     document.removeEventListener('keydown', trySoundtrack, true);
   }
   function updateSoundtrackToggle() {
-    const label = soundtrack.paused || soundtrack.ended ? 'Resume soundtrack' : 'Pause soundtrack';
+    let label = soundtrack.paused ? 'Resume soundtrack' : 'Pause soundtrack';
+    if (soundtrack.ended) label = 'Replay soundtrack';
     soundtrackToggle.setAttribute('aria-label', label);
     soundtrackToggle.title = label;
   }
@@ -1613,24 +1613,17 @@ if (LINKS.soundtrack) {
   soundtrack.addEventListener('pause', updateSoundtrackToggle);
   soundtrack.addEventListener('ended', updateSoundtrackToggle);
   soundtrack.addEventListener('error', stopSoundtrackRetry);
-  soundtrack.addEventListener('loadedmetadata', () => {
-    if (soundtrack.duration > soundtrackStart) return;
-    stopSoundtrackRetry();
-    soundtrack.pause();
-  }, { once: true });
   soundtrackToggle.addEventListener('click', () => {
     if (!soundtrack.paused && !soundtrack.ended) {
       soundtrack.pause();
       return;
     }
-    if (soundtrack.ended) soundtrack.currentTime = soundtrackStart;
+    if (soundtrack.ended) soundtrack.currentTime = 0;
     trySoundtrack();
   });
 
   document.addEventListener('click', trySoundtrack, true);
   document.addEventListener('keydown', trySoundtrack, true);
-  soundtrack.src = LINKS.soundtrack;
-  soundtrack.currentTime = soundtrackStart;
   trySoundtrack();
 }
 function updateTaskbarSpace() {
