@@ -463,8 +463,12 @@ a.btn95 { text-decoration: none; }
 </style>
 </head>
 <body>
-<!-- Garth Erasmus, Stories We Told Ourselves, 2:17.5–2:19.4 -->
-<audio id="site-soundtrack" src="kraal-ululation.mp3" preload="auto" autoplay loop hidden></audio>
+<audio id="site-soundtrack" src="audio/campfire.mp3" preload="auto" loop hidden></audio>
+<script>
+const soundtrack = document.getElementById('site-soundtrack');
+soundtrack.volume = 0.6;
+soundtrack.autoplay = true;
+</script>
 <!-- ============ PAGE 1 · HOME DESKTOP ============ -->
 <div class="home-desktop">
 <section id="home" class="desk desk-home" aria-label="Home">
@@ -1585,7 +1589,6 @@ wallpaper('bg-sub', 'images/desktop-subscribe.jpg', paintSub);
 paintGlyphs(); fillSlots();
 const homeTaskbar = document.getElementById('home-taskbar');
 
-const soundtrack = document.getElementById('site-soundtrack');
 const soundtrackToggle = document.getElementById('soundtrack-toggle');
 const soundtrackRetryEvents = ['pointerdown', 'touchend', 'keydown', 'click'];
 
